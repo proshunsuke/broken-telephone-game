@@ -12,7 +12,8 @@ window.onload = function(){
     var insertpagename = "<li class='active' id='paint'><a href='/paint'>Paint</a></li>";
     $('#nav-ul').append(insertpagename);
 
-    socket = io.connect('http://'+location.host+'/');
+    socket = io.connect();
+    // socket = io.connect('http://'+location.host+'/');
     user = document.getElementById('yourname').getAttribute('value');
 
 
@@ -281,39 +282,39 @@ $(function() {
     // picker.linkTo($("#color"));
 
     $('#back1').click(function(e) {
-             $('canvas').css({'background-color':'#FFFFFF','background-image':'none'});
+        $('canvas').css({'background-color':'#FFFFFF','background-image':'none'});
     });
     $('#back2').click(function(e) {
-             $('canvas').css({'background-color':'#000000','background-image':'none'});
+        $('canvas').css({'background-color':'#000000','background-image':'none'});
     });
     $('#back3').click(function(e) {
-             $('canvas').css('background-image','url(back.gif)');
+        $('canvas').css('background-image','url(back.gif)');
     });
 
     $("#slider").slider({
-         min: 1,
+        min: 1,
         max: 100, // ブラシの最大サイズ
-         value : 10,  // 最初のブラシサイズ
-         slide : function(evt, ui){
-             brushSize = ui.value; // ブラシサイズを設定
-        $("#bw").val(brushSize);
-         }
-     });
+        value : 10,  // 最初のブラシサイズ
+        slide : function(evt, ui){
+            brushSize = ui.value; // ブラシサイズを設定
+            $("#bw").val(brushSize);
+        }
+    });
 
     $('#slider2').slider({
-         min: 1,
+        min: 1,
         max: 100,
-         value : 100,  // 初期値（不透明）
-         slide : function(evt, ui){
-             alpha = ui.value;
-        $('#alpha').val(alpha);
-        if(alpha == 100){
-            alphaSize = 1;
-        }else if(alpha <= 9){
-            alphaSize = '0.0' + alpha;
-        }else if(alpha >= 10){
-            alphaSize = '0.' + alpha;
-         }
+        value : 100,  // 初期値（不透明）
+        slide : function(evt, ui){
+            alpha = ui.value;
+            $('#alpha').val(alpha);
+            if(alpha == 100){
+                alphaSize = 1;
+            }else if(alpha <= 9){
+                alphaSize = '0.0' + alpha;
+            }else if(alpha >= 10){
+                alphaSize = '0.' + alpha;
+            }
          }
      });
 
