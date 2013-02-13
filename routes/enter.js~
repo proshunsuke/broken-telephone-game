@@ -1,0 +1,4 @@
+exports.draw = function(req, res){
+    res.render('draw', { title: 'お絵かき伝言ゲーム',
+                         username: req.body.username});
+};

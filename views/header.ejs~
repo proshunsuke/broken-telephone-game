@@ -1,0 +1,17 @@
+<header>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/"><%=title%></a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/abount">Abount</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/paint">paint</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>

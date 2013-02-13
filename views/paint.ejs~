@@ -1,0 +1,199 @@
+<link rel="stylesheet" href="stylesheets/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
+<!-- <link rel="stylesheet" href="stylesheets/farbtastic/farbtastic.css" type="text/css" media="all"> -->
+<link rel="stylesheet" href="stylesheets/paint.css" type="text/css" media="all">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="javascripts/jquery-ui-1.10.0.custom.min.js"></script>
+<!-- <script type="text/javascript" src="javascripts/farbtastic/farbtastic.js"></script> -->
+<script type="text/javascript" src="javascripts/rgbcolor.js"></script>
+<script type="text/javascript" src="javascripts/paint.js"></script>
+
+<div class="container">
+  <div class="row">
+    <ul class="thumbnails">
+      <li class="span8">
+        <span class="badge" id="mode">待機中</span>
+        <span class="badge badge-success" id="yourname" value="<%= username %>">あなたは <%= username %> さんです</span>
+        <span class="badge badge-success" id="drawing">誰も描いていません</span>
+        <span class="badge badge-warning" id="finishtime">終了予定：</span>
+          <div class="progress progress-striped active">
+            <div class="bar" style="width: 0%;" data-rate="0"></div>
+          </div>
+        <div class="thumbnail">
+          <div id="canvasbox">
+            <canvas id="canvasArea" width="600" height="400">お使いのブラウザはHTML5のCanvas要素に対応していません。</canvas>
+
+            <!-- <div id="button"> -->
+            <!--   <input type="radio" name="brush" id="brush1" checked="checked"/><\!-- <label for="brush1"> -\-><\!-- <img src="pen1.gif" alt="ブラシ" title="ブラシ"> -\->ブラシ<\!-- </label> -\-> -->
+            <!--   <\!-- 　<input type="radio" name="brush" id="brush2" /><label for="brush2"><img src="pen2.gif" alt="ぼかし１" title="ぼかし１"></label> -\-> -->
+            <!--   <\!-- 　<input type="radio" name="brush" id="brush3" /><label for="brush3"><img src="pen3.gif" alt="ぼかし２" title="ぼかし２"></label> -\-> -->
+            <!--   <\!-- 　<input type="radio" name="brush" id="brush4" /><label for="brush4"><img src="pen4.gif" alt="パステル" title="パステル"></label> -\-> -->
+            <!--   <\!-- 　<input type="radio" name="brush" id="miter" /><label for="miter"><img src="penm.gif" alt="角ペン" title="角ペン"></label> -\-> -->
+            <!--   <input type="radio" name="brush" id="eraser" /><\!-- <label for="eraser"> -\-><\!-- <img src="pen0.gif" alt="消しゴム" title="消しゴム"> -\->消しゴム<\!-- </label> -\-> -->
+            <!--   <input type="radio" name="brush" id="spuit" /><\!-- <label for="spuit"> -\-><\!-- <img src="spuit.gif" alt="スポイト" title="スポイト"> -\->スポイト<\!-- </label> -\-> -->
+            <!-- </div> -->
+
+            <!-- <div id="bwbox"> -->
+            <!--   ブラシ幅&nbsp;<input type="text" id="bw" value="10" readonly="readonly" /> -->
+            <!--   <div id="slider"></div> -->
+            <!-- </div> -->
+            <!-- <div id="bwbox"> -->
+            <!--   透明度　&nbsp;<input type="text" id="alpha" value="100" readonly="readonly" /> -->
+            <!--   <div id="slider2"></div> -->
+            <!-- </div> -->
+
+            <div id="button">
+              <a class="btn" id="undo">戻る</a>
+              <a class="btn" id="restore">復元</a>
+              <a class="btn" id="clear">消去</a>
+              <a class="btn" id="save">画像で保存</a>
+              <a class="btn btn-primary" id="startdraw">描き始める</a>
+              <a class="btn" id="start">ゲーム開始</a>
+            </div>
+
+
+          </div>
+        </div>
+      </li>
+
+
+      <li class="span2">
+        <span class="label label-warning">ペイントツール</span>
+        <div id="toolArea" class="thumbnail alert alert-info">
+          <div id="colorlist">
+            <!-- <div id="button"> -->
+            <!--   <input type="button" id="back1" value="白背景" /> -->
+            <!--   <input type="button" id="back2" value="黒背景" /> -->
+            <!--   <input type="button" id="back3" value="透明" /> -->
+            <!-- </div> -->
+
+            <div id="button">
+              <input type="radio" name="brush" id="brush1" checked="checked"/>ブラシ
+              <input type="radio" name="brush" id="eraser" />消しゴム</br>
+              <input type="radio" name="brush" id="spuit" />スポイト</br>
+            </div>
+          </div>
+        </div>
+
+                <span class="label label-warning">カラー</span>
+        <div id="colorArea" class="thumbnail alert alert-info">
+          <div id="newcolor" style="background-color:#000000"></div>
+          <table border="1" bordercolor="#FFFFFF" width="100%" style="table-layout: fixed;">
+            <tr>
+              <!-- 黒 -->
+              <td id="colorlist"  style="background-color:#FFFFFF"></td>
+              <td id="colorlist"  style="background-color:#999999"></td>
+              <td id="colorlist"  style="background-color:#666666"></td>
+              <td id="colorlist"  style="background-color:#333333"></td>
+              <td id="colorlist"  style="background-color:#000000"></td>
+            </tr>
+            <tr>
+              <!-- 水青 -->
+              <td id="colorlist"  style="background-color:#C0FFFF"></td>
+              <td id="colorlist"  style="background-color:#61CCFF"></td>
+              <td id="colorlist"  style="background-color:#0099FF"></td>
+              <td id="colorlist"  style="background-color:#004CA3"></td>
+              <td id="colorlist"  style="background-color:#000047"></td>
+
+            </tr>
+            <tr>
+              <!-- 緑 -->
+              <td id="colorlist"  style="background-color:#A0FFA0"></td>
+              <td id="colorlist"  style="background-color:#50B250"></td>
+              <td id="colorlist"  style="background-color:#006600"></td>
+              <td id="colorlist"  style="background-color:#004700"></td>
+              <td id="colorlist"  style="background-color:#002600"></td>
+            </tr>
+            <tr>
+              <!-- 黄緑 -->
+              <td id="colorlist"  style="background-color:#A0FFA0"></td>
+              <td id="colorlist"  style="background-color:#50FF50"></td>
+              <td id="colorlist"  style="background-color:#00FF00"></td>
+              <td id="colorlist"  style="background-color:#009B00"></td>
+              <td id="colorlist"  style="background-color:#003700"></td>
+
+            </tr>
+            <tr>
+              <!-- 黄色 -->
+              <td id="colorlist"  style="background-color:#FFFFA0"></td>
+              <td id="colorlist"  style="background-color:#FFFF4E"></td>
+              <td id="colorlist"  style="background-color:#FFFF00"></td>
+              <td id="colorlist"  style="background-color:#A5A500"></td>
+              <td id="colorlist"  style="background-color:#494900"></td>
+
+            </tr>
+            <tr>
+              <!-- オレンジ -->
+              <td id="colorlist"  style="background-color:#FFB986"></td>
+              <td id="colorlist"  style="background-color:#FF8F43"></td>
+              <td id="colorlist"  style="background-color:#FF6600"></td>
+              <td id="colorlist"  style="background-color:#BB4B00"></td>
+              <td id="colorlist"  style="background-color:#562300"></td>
+
+            </tr>
+            <tr>
+              <!-- 赤 -->
+              <td id="colorlist"  style="background-color:#FFB9FF"></td>
+              <td id="colorlist"  style="background-color:#FF5C80"></td>
+              <td id="colorlist"  style="background-color:#FF0000"></td>
+              <td id="colorlist"  style="background-color:#BD0000"></td>
+              <td id="colorlist"  style="background-color:#7C0000"></td>
+
+            </tr>
+            <tr>
+              <!-- 紫 -->
+              <td id="colorlist"  style="background-color:#FFC0FF"></td>
+              <td id="colorlist"  style="background-color:#CC60CC"></td>
+              <td id="colorlist"  style="background-color:#990099"></td>
+              <td id="colorlist"  style="background-color:#520052"></td>
+              <td id="colorlist"  style="background-color:#290029"></td>
+
+            </tr>
+            <tr>
+              <!-- 青 -->
+              <td id="colorlist"  style="background-color:#D0D0FF"></td>
+              <td id="colorlist"  style="background-color:#6969FF"></td>
+              <td id="colorlist"  style="background-color:#0000FF"></td>
+              <td id="colorlist"  style="background-color:#00009F"></td>
+              <td id="colorlist"  style="background-color:#00003F"></td>
+            </tr>
+
+          </table>
+
+        </div>
+
+
+        <!-- <div id="colorpick"> -->
+        <!--   <input type="text" id="color" name="color" value="#123456" readonly="readonly" /> -->
+
+        <!--   Color Picker -->
+        <!--   <div id="colorpicker"></div> -->
+        <!-- </div> -->
+
+
+        <span class="label label-warning">ライン</span>
+        <div id="toolArea" class="thumbnail alert alert-info">
+          <div id="bwbox">
+            ブラシ幅&nbsp;<input type="text" id="bw" value="10" readonly="readonly" /></br></br>
+            <div id="slider">
+            </div>
+          </div>
+          <div id="bwbox">
+            透明度　&nbsp;<input type="text" id="alpha" value="100" readonly="readonly" /></br></br>
+            <div id="slider2"></div>
+          </div>
+        </div>
+
+      </li>
+      <li class="span2">
+        <span class="label label-success" id="userslist">ログイン中のユーザ</span>
+        <!-- <div id="yourname" value="<%= username %>"></div> -->
+        <div id="usernameArea" class="thumbnail alert alert-info">
+        </div>
+        <!-- <a class="btn" onmousedown="saveimg()">キャンバスを画像化</a> -->
+        <a class="btn" id="host" onmousedown="beHost()">ホストになる</a>
+        <a class="btn btn-warning" id="newgame">NEWGAME</a>
+      </li>
+      </ul>
+  </div>
+</div>
+<div id="image_png"></div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css"><link/>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="/javascripts/draw.js"></script>
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/"><%= title %></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/abount">Abount</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="header">
+        <!-- <div class="hero-unit"> -->
+        <!--   <h1><%= title %></h1> -->
+        <!-- </div> -->
+      </div>
+      <div class="row">
+        <div class="span9">
+          <ul class="thumbnails">
+            <li class="span6">
+              <div class="thumbnail">
+                  <canvas id="space" style="background:white;border:5px solid black"
+                          width="400" height="400">
+                  </canvas>
+                  <table class="table-bordered">
+                    <thead>
+                      <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div style="border:2px; background:#000000; padding: 15px;" onmousedown="changeColor('black');"></div></td>
+                        <td><div style="background:#FF0000; padding: 15px;" onmousedown="changeColor('red');"></div></td>
+                        <td><div style="background:#FFFF00; padding: 15px;" onmousedown="changeColor('yellow');"></div></td>
+                        <td><div style="background:#0000FF; padding: 15px;" onmousedown="changeColor('blue');"></div></td>
+                        <td><div style="background:#FFFFFF; border:1px #000000 solid; padding: 15px;" onmousedown="changeColor('white');"></div></td>
+
+                        <td><div style="border:1px #000000 solid; padding: 7px;" onmousedown="changeSize(1)">1px</div></td>
+                        <td><div style="border:1px #000000 solid; padding: 7px;" onmousedown="changeSize(6)">6px</div></td>
+                        <td><div style="border:1px #000000 solid; padding: 7px" onmousedown="changeSize(9)">9px</div></td>
+                        <td><div style="border:1px #000000 solid; padding: 7px" onmousedown="changeSize(30)">30px</div></td>
+                        <td><div style="border:1px #000000 solid; padding: 7px" onmousedown="changeSize(60)">60px</div></td>
+                        <td><div style="border:1px #000000 solid; padding: 7px" onmousedown="changeSize(100)">100px</div></td>
+
+                        <td><div style="border:1px solid; padding: 7px" onmousedown="allClear()">AllClear</div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+            </li>
+            <li class="span3">
+              <div id="usernameArea" class="thumbnail">
+                <ul></ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="span3">
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+    </div>
+
+  </body>
+</html>
