@@ -67,6 +67,13 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var users = [];
 
 var socket = require('socket.io').listen(server);
+
+// assuming io is the Socket.IO server object
+socket.configure(function () {
+  socket.set("transports", ["xhr-polling"]);
+  socket.set("polling duration", 10);
+});
+
 socket.on('connection',function(client){
     // var client_id = client.id;
     // console.log(client_id);
