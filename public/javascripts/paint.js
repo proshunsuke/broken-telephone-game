@@ -12,8 +12,8 @@ window.onload = function(){
     var insertpagename = "<li class='active' id='paint'><a href='/paint'>Paint</a></li>";
     $('#nav-ul').append(insertpagename);
 
-    socket = io.connect();
-    // socket = io.connect('http://'+location.host+'/');
+    //socket = io.connect();
+    socket = io.connect('http://'+location.host+'/');
     user = document.getElementById('yourname').getAttribute('value');
 
 
