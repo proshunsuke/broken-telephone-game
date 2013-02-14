@@ -36,7 +36,10 @@ ul {
     display:inline-block;
     margin: 0;
     padding: 0;
-    width: 25px;
+    width: 24px;
+    height: 14px;
+}
+#colorArea td{
     height: 14px;
 }
 #colorpick {
@@ -53,14 +56,15 @@ ul {
     width: 15px;
     height: 10px;
     border: 1px solid #000000;
+    /* margin: 0px 0px 3px 110px; */
+    margin-left: 85%
 }
 
-/* .ofclic { border:1px #FFFFFF solid } */
+.ofclic { border:1px #FFFFFF solid }
 .clic {
     border:1px #000000 solid;
-    width: 23px;
+    /* width: 0px; */
     height: 12px;
-
 }
 
 #brush1, #brush2, #brush3, #brush4, #miter, #eraser {
@@ -83,6 +87,7 @@ label {
 }
 #slider,#slider2 {
     /* margin: -18px 0px 0px 110px;*/
-    margin: -18px 0px 0px 0px;
-    width: 90px;
+    margin: -18px 0px -10px 5px;
+    /* width: 119px; */
+    width: 90%;
 }

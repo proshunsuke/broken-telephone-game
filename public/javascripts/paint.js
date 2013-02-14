@@ -30,17 +30,55 @@ window.onload = function(){
     });
 
     socket.on('login',function(data){
-        //$('#usernameArea').prepend($('<div/>').text(data.user));
-        //console.log("data.users: ",data.users);
-        //socket.emit('updateLoginUsers',data.users);
+        console.log("data:",data);
+        // 入ってきたらユーザ配列に追加
         users = data.users.concat();
-        console.log("loginの処理開始");
+        orderlist = data.orderlist.concat();
         updateLoginUsers(users);
+
+
+        //入ってきた人だけ
+        switch(data.mode){
+        case 0://準備中、または全員に関する処理
+            break;
+        case 1://設定中
+            document.getElementById("host").style.visibility="hidden";
+            var modetext = data.hostname + "さんが設定中です";
+            $('#mode').html(modetext);
+            break;
+        case 2://オーダできたら、://誰かが描いてる途中だったら
+            isDrawable = false;
+            $('#mode').html("ゲーム中");
+            $('#userslist').html('描く順番');
+            document.getElementById("host").style.visibility="hidden";
+            var drawingtext = data.nextuser + ' さんが描いています';
+            $('#drawing').html(drawingtext);
+            drawtime = data.drawtime;
+            break;
+        case 3://ゲームが終わったら
+            isGameFin = true;
+            $('#mode').html("ゲーム終了");
+            $('#drawing').html("誰も描いていません");
+            document.getElementById("host").style.visibility="hidden";
+            break;
+        case 4://newgameになったら
+            break;
+        }
+
+        if($('#mode').html() == "ゲーム中"){
+            setFinalTime(drawtime);
+        }
+
+
         if (isClickHost){
             //ホストのログインユーザを更新
             userlist.unshift(data.users[0]);
             updateUserList(userlist,"drawuserNum","canvasusernameArea");
         }
+
+
+
+
     });
 
     socket.on('disconnect',function(data){
@@ -73,8 +111,8 @@ window.onload = function(){
         updateLoginUsers(orderlist);
         context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
         isDrawable = false;
-        setFinalTime(data.drawtime);
         drawtime = data.drawtime;
+        setFinalTime(drawtime);
 
         //ホストのcanvasを復活
         if(isClickHost){
@@ -198,6 +236,7 @@ window.onload = function(){
             document.getElementById("startdraw").style.visibility="visible";
             //timelimit(data.drawtime);
             $('.progress .bar').css('width:100%');
+            console.log("drawtime:",drawtime);
             timelimit(drawtime);
         }else{
             isDrawable = false;
@@ -246,6 +285,7 @@ window.onload = function(){
 
     socket.on('newgame',function(data){
         isDrawable = true;
+        isClickHost = false;
         isGameFin = false;
         $('#finishtime').html("終了予定；");
         $('#userslist').html('ログイン中のユーザ');

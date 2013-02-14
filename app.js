@@ -65,6 +65,11 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var users = [];
+var orderlist = [];
+var mode = 0;
+var drawtime = 0;
+var hostname = "";
+var nextuser = "";
 
 var socket = require('socket.io').listen(server);
 
@@ -96,13 +101,23 @@ socket.on('connection',function(client){
     // });
 
     client.on('login',function(data){
+        console.log("users:",users);
         users.unshift(data.user);
+        if(mode == 2){
+            orderlist.unshift(data.user);
+        }
         client.user = data.user;
         client.json.emit('login',{
             users: users,
+            orderlist: orderlist,
+            mode: mode,
+            hostname: hostname,
+            nextuser: nextuser,
+            drawtime: drawtime,
         });
         client.broadcast.json.emit('login',{
             users: users,
+            orderlist: orderlist,
         });
     });
 
@@ -118,6 +133,18 @@ socket.on('connection',function(client){
         client.broadcast.json.emit('disconnect',{
             user: client.user,
         });
+
+        if(client.user == hostname){
+            mode = 0;
+            hostname = "";
+            orderlist =[];
+            drawtime = 0;
+            nextuser = "";
+
+            client.broadcast.json.emit('newgame',{
+                new: true,
+            });
+        }
     });
 
     client.on('message',function(event){
@@ -137,39 +164,43 @@ socket.on('connection',function(client){
         });
     });
 
-    var orderlist;
     client.on('order',function(data){
+        mode = 2;
         orderlist = data.list.concat();
+        drawtime = data.drawtime;
         client.json.emit('order',{
             list: data.list,
             drawtime: data.drawtime,
         });
         client.broadcast.json.emit('order',{
             list: data.list,
-            drawtime: data.drawtime,
+            drawtime: drawtime,
         });
     });
 
     var imglist;
     client.on('drawfin',function(data){
+        mode = 2;
         orderlist = data.list.concat();
         imglist = data.imglist.concat();
         console.log(orderlist);
         for(var i = 0; i < orderlist.length; i++){
             if(orderlist[i] == data.finuser){
                 var nextnum = i - 1;
+                nextuser = orderlist[nextnum];
                 client.json.emit('drawfin',{
-                    nextuser: orderlist[nextnum],
+                    nextuser: nextuser,
                     beforeimg: imglist,
                 });
                 client.broadcast.json.emit('drawfin',{
-                    nextuser: orderlist[nextnum],
+                    nextuser: nextuser,
                     beforeimg: imglist,
                 });
                 break;
             }
         }
         if(nextnum == -1 ){
+            mode = 3;
             client.json.emit('gamefin',{
                 fin: true,
             });
@@ -180,6 +211,8 @@ socket.on('connection',function(client){
     });
 
     client.on('host',function(data){
+        mode = 1;
+        hostname = data.hostname;
         client.json.emit('host',{
             isClickHost: data.isClickHost,
             hostname: data.hostname,
@@ -191,6 +224,12 @@ socket.on('connection',function(client){
     });
 
     client.on('newgame',function(data){
+        mode = 0;
+        hostname = "";
+        orderlist =[];
+        drawtime = 0;
+        nextuser = "";
+
         client.json.emit('newgame',{
             new: true,
         });
