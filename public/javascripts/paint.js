@@ -13,7 +13,8 @@ window.onload = function(){
     $('#nav-ul').append(insertpagename);
 
     //socket = io.connect();
-    socket = io.connect('http://'+location.host+'/');
+    // socket = io.connect('http://'+location.host+'/');
+    socket = io.connect('http://broken-telephone-game.herokuapp.com/');
     user = document.getElementById('yourname').getAttribute('value');
 
 
