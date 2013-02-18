@@ -237,4 +237,16 @@ socket.on('connection',function(client){
             new: true,
         });
     });
+
+    client.on('comment',function(data){
+        client.json.emit('comment',{
+            comment: data.comment,
+            user: data.user,
+        });
+        client.broadcast.json.emit('comment',{
+            comment: data.comment,
+            user: data.user,
+        });
+    });
+
 });

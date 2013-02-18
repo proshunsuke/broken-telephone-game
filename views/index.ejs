@@ -1,23 +1,17 @@
-
-<div class="span9">
-  <div class="span9">
-    <div class="hero-unit">
-      <a class="titleLink" href="/"><h1><%= title %></h1></a>
-    </div>
+<link rel="stylesheet" href="stylesheets/index.css" type="text/css" media="all">
+<div class="container">
+  <div class="hero-unit">
+    <a class="titleLink" href="/"><h1><%= title %></h1></a>
   </div>
-  <div class="span3">
-    <div class="center">
-      <form method="post" action="/paint">
-        <span class="label label-success">なまえ</span>
-        <input class="input-xlarge" name="username"
-               type="text" placeholder="なまえを入力してください"
-               class="center">
-        <button type="submit" class="btn btn-primary btn-large center">入る</button>
-      </form>
-    </div>
+<form method="post" action="/paint">
+  <div id="name">
+  <span class="label label-success">なまえ</span></br>
   </div>
-</div>
-<div class="span3">
+  <input class="input-xlarge" name="username"
+         type="text" placeholder="なまえを入力してください"
+         text-align="center"></br>
+  <button type="submit" class="btn btn-primary btn-large center">入る</button>
+</form>
 </div>
 
 

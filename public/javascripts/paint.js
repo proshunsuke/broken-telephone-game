@@ -1,12 +1,14 @@
 var user;
 var users =[];
 var imglist = [];
+var commentlist = [];
 var context;
 var canvas;
 var drawtime;
 var isClickHost = false;
 var isDrawable = true;
 var isGameFin = false;
+var isStart = false;
 
 window.onload = function(){
     var insertpagename = "<li class='active' id='paint'><a href='/paint'>Paint</a></li>";
@@ -35,7 +37,6 @@ window.onload = function(){
         users = data.users.concat();
         orderlist = data.orderlist.concat();
         updateLoginUsers(users);
-
 
         //入ってきた人だけ
         switch(data.mode){
@@ -77,9 +78,12 @@ window.onload = function(){
         }
 
 
-
+        var addcomment = users[0] + "さんがログインしました。";
+        commentlist.push(addcomment);
+        renewalComment(commentlist);
 
     });
+
 
     socket.on('disconnect',function(data){
         for(var i = 0; i < users.length; i++){
@@ -93,6 +97,11 @@ window.onload = function(){
             }
         }
         updateLoginUsers(users);
+
+        var addcomment = data.user + "さんがログアウトしました。";
+        commentlist.push(addcomment);
+        renewalComment(commentlist);
+
     });
 
     socket.on('logout',function(data){
@@ -259,6 +268,7 @@ window.onload = function(){
         console.log('ゲームが終了しました');
         $('#mode').html("ゲーム終了");
         $('#drawing').html("誰も描いていません");
+        document.getElementById("toimg").style.visibility="visible";
         if(isClickHost){
             document.getElementById("newgame").style.visibility="visible";
         }
@@ -290,6 +300,7 @@ window.onload = function(){
         $('#finishtime').html("終了予定；");
         $('#userslist').html('ログイン中のユーザ');
         $('#mode').html("待機中");
+        document.getElementById("toimg").style.visibility="hidden";
         document.getElementById("host").style.visibility="visible";
         updateLoginUsers(users);
         orderlist = [];
@@ -297,10 +308,18 @@ window.onload = function(){
         imglist = [];
     });
 
+    socket.on('comment',function(data){
+        var addcomment = data.user + "：" + data.comment;
+        commentlist.push(addcomment);
+        renewalComment(commentlist);
+
+    });
+
     //ホストの決定ボタンと描き始めるボタンを非表示に
     document.getElementById("start").style.visibility="hidden";
     document.getElementById("startdraw").style.visibility="hidden";
     document.getElementById("newgame").style.visibility="hidden";
+    document.getElementById("toimg").style.visibility="hidden";
 
 
 
@@ -630,7 +649,15 @@ $('#canvasusernameArea div').live("click",function(){
     orderlist.unshift($(this).html());
     updateUserList(orderlist,"orderuserNum","canvasordernameArea");
     updateUserList(userlist,"drawuserNum","canvasusernameArea");
-    console.log("ホストでログイン中のユーザをおしてからのusers:",users);
+    console.log("ホストでログイン中のユーザをおしてからのuserlist:",userlist);
+
+    if(userlist.length == 0　&& $('#start').hasClass('disabled')){
+        $('#start').removeClass('disabled');
+        isStart = true;
+    }else{
+    }
+    if(userlist.length == 0) console.log("kara");
+    if($('#start').hasClass('disabled')) console.log("aru");
 });
 
 // ホストで、描く順番をクリックしたら、ログイン中のユーザへ入れる
@@ -648,17 +675,27 @@ $('#canvasordernameArea div').live("click",function(){
     updateUserList(orderlist,"orderuserNum","canvasordernameArea");
     updateUserList(userlist,"drawuserNum","canvasusernameArea");
     console.log("ホストで描く順番を押してからのusers:",users);
+
+    if(userlist.length != 0 && !$('#start').hasClass('disabled')){
+        isStart = false;
+        $('#start').addClass('disabled');
+    }else{
+    }
 });
 
 // ホストがゲームスタートを押したら
 $('#start').live("click",function(){
-    var gettime = $("input[name='drawtime']:checked").attr("id");
-    socket.emit('order',{
-        list: orderlist,
-        drawtime: gettime,
-    });
-    console.log("start");
-    console.log("ホストでゲームスタート押してからのusers:",users);
+    if(isStart){
+        var gettime = $("input[name='drawtime']:checked").attr("id");
+        socket.emit('order',{
+            list: orderlist,
+            drawtime: gettime,
+        });
+        console.log("start");
+        console.log("ホストでゲームスタート押してからのusers:",users);
+        $('#start').addClass('disabled');
+        isStart = false;
+    }
 });
 
 $('#startdraw').live("click",function(){
@@ -712,8 +749,9 @@ function saveimg(){
         //console.log(img_png_src);
         //document.getElementById("image_png").src = img_png_src;
         for(var i=0; i < imglist.length; i++){
-            var insertdiv = "<img src='"+imglist[i]+"' alt='test' width='310px'/>";
-            $('#image_png').prepend(insertdiv);
+            //var insertdiv = "<img src='"+imglist[i]+"' alt='test' width='310px'/>";
+            var insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+imglist[i]+"' name='"+orderlist[i]+"'><h5>"+orderlist[i]+"さんの作品</h5></li></a>";
+            $('#image_png').prepend(insertimg);
         }
         //location.href = img_png_src;
         //document.getElementById("data_url_png").firstChild.nodeValue = img_png_src;
@@ -721,6 +759,58 @@ function saveimg(){
         console.log(e);
         document.getElementById("image_png").alt = "未対応";
     }
+    document.getElementById("toimg").style.visibility="hidden";
 }
 
+$('#imgli img').live('click',function(){
+    if($('#mode').html() != "ゲーム中"){
+        url = $(this).attr("src");
+        name = $(this).attr("name");
+
+        context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
+        var img = new Image();
+        var d = url.replace('image/png', 'image/octet-stream');
+        img.src = d;
+        img.onload = function() {
+            context.drawImage(img, 0, 0);
+        }
+
+        for(var j = 0; j < users.length ; j++){
+            if($('#userNum'+j).html() == name){
+                $('#userNum'+j).css("color","#B94A48");
+            }else{
+                $('#userNum'+j).css("color","#3a87ad");
+            }
+        }
+    }
+});
+
+$('#commentarea').live('keypress',function (e) {
+    if(e.keyCode == 13) {
+        box = $(this);
+        t_val = $(box).val();
+
+        if(t_val.length > 0) {
+            //$(this).prev().append('<div id="user">'+t_val+'</div>');
+            socket.emit('comment',{
+                comment: t_val,
+                user: user,
+            });
+            $(box).val("");
+        }
+        e.preventDefault();
+    }
+});
+
+function renewalComment(commentlist){
+    $('#textarea').val("");
+    var addcomment = "";
+    for(var i=0; i < commentlist.length; i++ ){
+        addcomment = addcomment + commentlist[i] + "\n";
+    }
+    $('#textarea').val(addcomment);
+    var dom = $('#textarea');
+    dom[0].scrollTop = dom[0].scrollHeight;
+
+}
 

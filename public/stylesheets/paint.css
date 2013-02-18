@@ -1,12 +1,27 @@
-/* body { */
+body {
 /*     margin: 20px; */
-/* } */
+    /* text-align:center; */
+}
+footer{
+    text-align: center;
+}
 canvas {
     /* top: 20px; */
     /* left: 20px; */
     border: 5px solid #ccc;
     /* margin: 0px 0px 10px 0px; */
 }
+
+textarea{
+    width: 93%;
+    height: 250px;
+    resize: none;
+}
+
+commentarea{
+
+}
+
 #button {
     position: relative;
     clear: both;
@@ -90,4 +105,8 @@ label {
     margin: -18px 0px -10px 5px;
     /* width: 119px; */
     width: 90%;
+}
+
+#imgs{
+    border: 2px solid #ccc;
 }

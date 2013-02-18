@@ -47,7 +47,7 @@
               <a class="btn" id="clear">消去</a>
               <a class="btn" id="save">画像で保存</a>
               <a class="btn btn-primary" id="startdraw">描き始める</a>
-              <a class="btn" id="start">ゲーム開始</a>
+              <a class="btn btn-warning disabled" id="start">ゲーム開始</a>
             </div>
 
 
@@ -188,11 +188,31 @@
         <span class="label label-success" id="userslist">ログイン中のユーザ</span>
         <div id="usernameArea" class="thumbnail alert alert-info">
         </div>
-        <a class="btn" onmousedown="saveimg()">キャンバスを画像化</a>
         <a class="btn" id="host" onmousedown="beHost()">ホストになる</a>
+        <a class="btn" id="toimg" onmousedown="saveimg()">キャンバスを画像化</a>
         <a class="btn btn-warning" id="newgame">NEWGAME</a>
+
+        <form class="form-vertical">
+          <div class="control-group">
+            <div class="controls">
+              <span class="label label-success" id="userslist">コメント</span>
+              <div id="usernameArea" class="thumbnail alert alert-info">
+              <textarea class="" id="textarea" readonly="readonly" style="background-color:#FFFFFF;font-size:12px;"></textarea>
+              </div>
+              <input type="text" class="span2" id="commentarea">
+            </div>
+          </div>
+        </form>
+
       </li>
       </ul>
   </div>
 </div>
-<div id="image_png"></div>
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <ul class="thumbnails" id="image_png">
+      </ul>
+    </div>
+  </div>
+</div>
