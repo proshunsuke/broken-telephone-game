@@ -1,0 +1,58 @@
+function User(){
+    this._user;
+    this._users;
+    this._user_list;
+    this._order_list;
+
+    this.init = function(){
+        this._user = $('#yourname').attr('value');
+        this._users = new Array();
+        this._user_list = new Array();
+        this._order_list = new Array();
+    }
+
+    // ログインユーザ欄更新
+    this.updateLoginUsers = function(users){
+        for(var j = 0; j < users.length + 1; j++){
+            $('#userNum'+j).remove();
+        }
+        for(var i in users){
+            var num = users.length - i -1;
+            var insertdiv = "<div id ='userNum"+num+"'>"+users[i]+"</div>";
+            $('#usernameArea').prepend(insertdiv);
+        }
+    }
+
+    // ログアウトしたら、ユーザ更新
+    this.deleteUser = function(logoutUser,users){
+        for(var i = 0; i < users.length; i++){
+            if(users[i] == logoutUser){
+                users.splice(i,1);
+
+                // ホストの処理書く時に改めて書く
+
+                // if (isClickHost){
+                //  //ホストのログインユーザを更新
+                //  userlist.splice(i,1);
+                //  updateUserList(userlist,"drawuserNum","canvasusernameArea");
+                // }
+            }
+        }
+    }
+
+    // ホストで順番決める時に、ユーザのリスト更新.引数はログインユーザの配列、挿入するID、挿入先のID
+    this.updateUserList = function(users,addidname,addprependname){
+        for(var j = 0; j < users.length + 1; j++){
+            $('#'+addidname+j).remove();
+        }
+
+        for(var i in users){
+            var num = users.length - i -1;
+            var insertdrawusername = "<div id='" + addidname + "" + num+"'>"+users[i]+"</div>";
+            var insertprependid = "#" + addprependname;
+            $(insertprependid).prepend(insertdrawusername);
+        }
+    }
+
+
+}

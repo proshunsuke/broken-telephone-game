@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,6 +7,7 @@ var express = require('express')
   , user = require('./routes/user')
   , routesD = require('./routes/draw')
   , routesP = require('./routes/paint')
+  , routesP2 = require('./routes/paint2')
   , routesE = require('./routes/enter')
   , routesA = require('./routes/about')
   , routesC = require('./routes/contact')
@@ -44,6 +44,7 @@ app.get('/users', user.list);
 app.post('/draw', routesD.draw);
 app.post('/enter',routesE.enter);
 app.post('/paint', routesP.paint);
+app.post('/paint2', routesP2.paint2);
 app.get('/about', routesA.about);
 app.get('/contact', routesC.contact);
 
@@ -101,10 +102,12 @@ socket.on('connection',function(client){
     // });
 
     client.on('login',function(data){
-        console.log("users:",users);
         users.unshift(data.user);
-        if(mode == 2){
+        console.log("users:",users);
+        if(mode == 2 || mode == 3){
+            console.log(orderlist);
             orderlist.unshift(data.user);
+            console.log(orderlist,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         }
         client.user = data.user;
         client.json.emit('login',{
@@ -123,15 +126,19 @@ socket.on('connection',function(client){
 
     client.on('disconnect',function(){
         console.log(client.id + "が切断しました");
-        console.log("切断したユーザ:"+client.user);
 
-        for(var i = 0; i < users.length; i++){
-            if(users[i] == client.user){
-                users.splice(i,1);
-            }
+        delete_user(users,client.user);
+        if(mode == 2 || mode == 3){
+            console.log("更新前orderlist:",orderlist);
+            delete_user(orderlist,client.user);
+            console.log("更新後orderlist:",orderlist);
         }
+
+
         client.broadcast.json.emit('disconnect',{
             user: client.user,
+            users: users,
+            orderlist: orderlist,
         });
 
         if(client.user == hostname){
@@ -248,5 +255,13 @@ socket.on('connection',function(client){
             user: data.user,
         });
     });
+
+    function delete_user(list,user){
+        for(var i = 0; i < list.length; i++){
+            if(list[i] == user){
+                list.splice(i,1);
+            }
+        }
+    }
 
 });

@@ -2,9 +2,7 @@ body {
 /*     margin: 20px; */
     /* text-align:center; */
 }
-footer{
-    text-align: center;
-}
+
 canvas {
     /* top: 20px; */
     /* left: 20px; */
@@ -109,4 +107,18 @@ label {
 
 #imgs{
     border: 2px solid #ccc;
+}
+
+#layerArea{
+    background-color: "#FFFFFF";
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover{
+    background-color: #999999;
+    color: #FFFFFF;
+}
+
+.nav-tabs > li > a:hover{
+    /* background-color: #FFFFFF; */
 }

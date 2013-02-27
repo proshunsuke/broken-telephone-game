@@ -3,7 +3,7 @@
  * GET home page.
  */
 
-exports.paint3 = function(req, res){
+exports.paint = function(req, res){
     var result = { title: 'お絵かき伝言ゲーム',
                    username: req.body.username,
                    pagename: 'paint'};
