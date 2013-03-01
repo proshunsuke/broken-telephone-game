@@ -493,9 +493,8 @@ var paint_room = socket.of('/room').on('connection',function(client){
         }
 
         var count = 0;
-        console.log(paint_room.clients(client_room));
         for(var i in paint_room.clients(client_room)){
-            console.log(paint_room.clients(client_room)[i].id + "disconnected:"+ paint_room.clients(client_room)[i].disconnected);
+            //console.log(paint_room.clients(client_room)[i].id + "disconnected:"+ paint_room.clients(client_room)[i].disconnected);
             count++;
         }
 

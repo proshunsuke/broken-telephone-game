@@ -60,3 +60,12 @@ function check_enter(){
         return true;
     }
 }
+
+function sleep( T ){
+   var d1 = new Date().getTime();
+   var d2 = new Date().getTime();
+   while( d2 < d1+1000*T ){    //T秒待つ
+       d2=new Date().getTime();
+   }
+   return;
+}
