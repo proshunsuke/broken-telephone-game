@@ -44,7 +44,6 @@ function check_create(){
     }else{
         var room = "/room?room=" +  $('#room').val();
         $('#toroom').attr('action',room);
-        console.log("kiteru");
         r_sync.emit_createroom(room_name,user_name);
         return true;
     }

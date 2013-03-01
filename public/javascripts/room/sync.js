@@ -30,6 +30,7 @@ function Sync(){
 
     // emit
     this.emit_createroom = function(room,name){
+        alert("saranikiteru,room:"+room+",name:"+name);
         this._socket.emit('createroom',{
             room: room,
             name: name,
