@@ -1,0 +1,23 @@
+var r_sync = new Sync();
+function toInstance_init(){
+
+    // イベント
+    mouse_event_init();
+
+    // インスタンス初期化
+    r_sync.init();
+
+}
+
+// マウスイベント
+function mouse_event_init(){
+
+    // 作る
+    $('#create').live('click',function(){
+        console.log("kiteru");
+        var room = "/room?room=" +  $('#room').val();
+        $('#toroom').attr('action',room);
+        r_sync.emit_createroom($('#room').val());
+    });
+
+}

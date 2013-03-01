@@ -1,0 +1,24 @@
+function Sync(){
+    this._socket;
+
+    this.init = function(){
+        // 接続
+        this._socket =  io.connect('http://'+location.host+'/room',
+                                  {'sync disconnect on unload' : true});
+        sync_on_init(this._socket);
+
+    }
+
+    // socket.onしたら
+    function sync_on_init(socket){
+        socket.on('connect',function(data){
+
+        });
+    }
+
+    this.emit_createroom = function(room){
+        this._socket.emit('createroom',{
+            room: room,
+        });
+    }
+}

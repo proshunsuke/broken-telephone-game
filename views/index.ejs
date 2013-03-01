@@ -1,17 +1,37 @@
-<link rel="stylesheet" href="stylesheets/index.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/paint/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/room/index.css" type="text/css" media="all">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="javascripts/paint/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="javascripts/room/sync.js"></script>
+<script type="text/javascript" src="javascripts/room/room.js"></script>
+<script type="text/javascript" src="javascripts/room/toInstance.js"></script>
+<script type="text/javascript" src="javascripts/room/onLoad.js"></script>
+
+
+
+
+
+
 <div class="container">
   <div class="hero-unit">
     <a class="titleLink" href="/"><h1><%= title %></h1></a>
   </div>
-<form method="post" action="/paint">
-  <div id="name">
-  <span class="label label-success">なまえ</span></br>
+  <div id="page" name="<%= pagename %>"></div>
+  <a href="/create" class="btn" id="enter">部屋を作る</a><br/>
+
+  <ul class="thumbnails" id="rooms">
   </div>
-  <input class="input-xlarge" name="username"
-         type="text" placeholder="なまえを入力してください"
-         text-align="center"></br>
-  <button type="submit" class="btn btn-primary btn-large center">入る</button>
-</form>
+
+  <!-- <form method="post" action="/paint"> -->
+  <!-- <div id="name"> -->
+  <!-- <span class="label label-success">なまえ</span></br> -->
+  <!-- </div> -->
+  <!-- <input class="input-xlarge" name="username" -->
+  <!--        type="text" placeholder="なまえを入力してください" -->
+  <!--        text-align="center"></br> -->
+  <!-- <button type="submit" class="btn btn-primary btn-large center">入る</button> -->
+  <!-- </form> -->
+
 <!-- <form method="post" action="/paint2"> -->
 <!--   <div id="name"> -->
 <!--   <span class="label label-success">なまえ</span></br> -->

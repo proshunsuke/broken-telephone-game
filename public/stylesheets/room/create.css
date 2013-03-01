@@ -1,0 +1,12 @@
+body{
+    text-align:center;
+}
+
+div#container{
+    margin: 0 auto;
+    width: 800px;
+}
+
+#label{
+    margin-right: 235px;
+}

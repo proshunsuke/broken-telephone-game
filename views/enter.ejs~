@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="stylesheets/paint/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/room/index.css" type="text/css" media="all">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="javascripts/paint/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="javascripts/room/sync.js"></script>
+<script type="text/javascript" src="javascripts/room/room.js"></script>
+<script type="text/javascript" src="javascripts/room/toInstance.js"></script>
+<script type="text/javascript" src="javascripts/room/onLoad.js"></script>
+
+<form method="post" action="" id="toroom">
+  <span class="label label-success">なまえ</span></br>
+  <input class="input-xlarge" name="username"
+         type="text" placeholder="なまえを入力してください"
+         text-align="center" id="name"></br>
+  <button type="submit" class="btn btn-primary btn-large center" id="enter">入る</button>
+</form>

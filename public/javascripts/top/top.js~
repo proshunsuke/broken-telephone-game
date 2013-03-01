@@ -1,0 +1,3 @@
+window.onload = function(){
+    socket = io.connect('http://'+location.host+'/top/', {'sync disconnect on unload' : true});
+}
