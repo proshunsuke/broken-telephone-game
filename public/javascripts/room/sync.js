@@ -35,6 +35,7 @@ function Sync(){
             room: room,
             name: name,
         });
+        alert("karano,room:"+room+",name:"+name);
     }
 
 
