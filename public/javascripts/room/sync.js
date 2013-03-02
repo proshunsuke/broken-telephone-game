@@ -34,8 +34,8 @@ function Sync(){
             room: room,
             name: name,
         });
-        //alert(room+"部屋が作成されました");
-        sleep(1);
+        alert(room+"部屋が作成されました");
+        //sleep(1);
     }
 
 
