@@ -13,12 +13,18 @@ function User(){
 
     // ログインユーザ欄更新
     this.updateLoginUsers = function(users){
-        for(var j = 0; j < users.length + 1; j++){
-            $('#userNum'+j).remove();
-        }
-        for(var i in users){
-            var num = users.length - i -1;
-            var insertdiv = "<div id ='userNum"+num+"'>"+users[i]+"</div>";
+        // for(var j = 0; j < users.length + 1; j++){
+        //     $('#userNum'+j).remove();
+        // }
+        $('#usernameArea').empty();
+        // for(var i in users){
+        //     var num = users.length - i -1;
+        //     var insertdiv = "<div id ='userNum"+num+"'>"+users[i]+"</div>";
+        //     $('#usernameArea').prepend(insertdiv);
+        // }
+        for(var i=0; i < users.length; i++){
+            //var num = users.length - i - 1;
+            var insertdiv = "<div id ='userNum"+i+"'>"+users[i]+"</div>";
             $('#usernameArea').prepend(insertdiv);
         }
     }

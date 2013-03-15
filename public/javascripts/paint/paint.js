@@ -213,8 +213,7 @@ function Paint(){
                     window.open(d, 'save');
                     context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
                 }else if(which == 2){// 次の人に絵を伝える
-                    b_game._img_list.unshift(d);
-                    b_sync.emit_drawfin(b_user._user,b_user._order_list,b_game._img_list);
+                    b_sync.emit_drawfin(b_user._user,b_user._order_list,d);
                     context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
                 }
             }else{

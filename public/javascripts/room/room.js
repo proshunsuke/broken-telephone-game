@@ -16,6 +16,15 @@ function Room(){
         // }
     }
 
+    this.createrooms2 = function(roomdata){
+        $('#rooms').empty();
+        for(var i=0; i < roomdata.length; i++){
+            var insertroom="<li class='span3 ' id='"+roomdata[i]['room_name']+"'><a class='thumbnail' href='/enter?room="+roomdata[i]['room_name']+"'>"+roomdata[i]['room_name']+"</a><h5>"+roomdata[i]['creater']+"</h5></li>";
+            $('#rooms').prepend(insertroom);
+            this.renewal_count(roomdata[i]['count'],roomdata[i]['room_name']);
+        }
+    }
+
     this.renewal_count = function(count,room){
         var room_name = decodeURI(room);
         var insertcount = "<h5 id='"+room_name+"_count'>"+count+"人が参加中</5>";

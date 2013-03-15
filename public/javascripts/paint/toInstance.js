@@ -6,6 +6,7 @@ var b_layer = new Layer();
 var b_chat = new Chat();
 var b_game = new Game();
 var b_room = new Room();
+var b_oekaki_list = new Oekaki_list();
 
 function toInstance_init(){
 
@@ -165,9 +166,9 @@ function mouse_event_init(){
     $('#usernameArea div').live("click",function(){
         if(b_game._mode.finish){
             var click_user = $(this).html();
-            var num = b_game.return_click_userlist_num(click_user);
+            // var num = b_game.return_click_userlist_num(click_user);
             b_paint.clear_canvas();
-            b_game.draw_img_core(b_game._img_list[num]);
+            b_game.draw_img_core(b_game._img_list.recent_user_img(click_user));
             b_game.change_drawinguser_color(click_user);
         }
     });

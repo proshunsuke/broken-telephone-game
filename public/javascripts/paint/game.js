@@ -13,7 +13,7 @@ function Game(){
         this._isHost = false;
         this._isStart = false;
         this._drawtime = 120;
-        this._img_list = new Array();
+        this._img_list = new Oekaki_list();
 
         this._mode.wait = true;
         this._mode.setting = false;
@@ -115,6 +115,7 @@ function Game(){
     }
 
     // プログレスバーを動かす
+    // 描き終わった時の処理もここ
     this.timelimit = function(drawtime){
         var downper =  100/drawtime;
         var run = function(time) {
@@ -158,6 +159,7 @@ function Game(){
         var d = show_img.replace('image/png', 'image/octet-stream');
         img.src = d;
         img.onload = function() {
+            context.globalAlpha = 1.0; // 返ってきた絵が薄くなることを防ぐ
             context.drawImage(img, 0, 0);
             b_paint._get_undo_img();
         }
@@ -183,15 +185,16 @@ function Game(){
 
     // キャンバスを画像化
     this.to_img = function(){
-        for(var i=0; i < b_game._img_list.length; i++){
-            var insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+b_game._img_list[i]+"' name='"+b_user._order_list[i]+"'><h5>"+b_user._order_list[i]+"さんの作品</h5></li></a>";
-            $('#image_png').prepend(insertimg);
+        $('#image_png').empty();
+        for(var i=0; i < b_game._img_list._imgs.length; i++){
+            var insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+b_game._img_list._imgs[i]+"' name='"+b_game._img_list._users[i]+"'><h5>"+b_game._img_list._users[i]+"さんの作品</h5></li></a>";
+            $('#image_png').append(insertimg);
         }
-
     }
 
-    // くりっくしたゆーざを返す
+    // クリックしたユーザを返す
     this.return_click_userlist_num = function(clickuser){
+        console.log(b_user._order_list);
         for(var i=0; i < b_user._order_list.length; i++){
             if(clickuser == b_user._order_list[i]){
                 var num = i;
@@ -209,6 +212,19 @@ function Game(){
         }else{
             b_game._isStart = false;
             $('#start').addClass('disabled');
+        }
+    }
+
+    // ホスト更新
+    this.renewal_host = function(hostname){
+        console.log("host:",hostname,",user:",b_user._user);
+        if(hostname == b_user._user){
+            this._isHost = true;
+            if(this._mode.wait){
+                $('#host').css({"visibility":"visible"});
+            }
+        }else{
+            this._isHost = false;
         }
     }
 

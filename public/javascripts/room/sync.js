@@ -12,19 +12,23 @@ function Sync(){
     // socket.onしたら
     function sync_on_init(socket){
         socket.on('connected',function(data){
-            r_room.createrooms(data.rooms,data.creaters,data.counts);
+            //r_room.createrooms(data.rooms,data.creaters,data.counts);
+            r_room.createrooms2(data.roomdata);
             // for(var i=0; i < data.rooms.length; i++){
             //     r_room.renewal_count(data.counts[i],data.rooms[i]);
             // }
         });
 
         socket.on('createroom',function(data){
-            r_room.createrooms(data.rooms,data.creaters,data.counts);
+            // r_room.createrooms(data.rooms,data.creaters,data.counts);
+            r_room.createrooms2(data.roomdata);
+            console.log("roomdata:",data.roomdata);
         });
 
         socket.on('room_count',function(data){
             r_room.renewal_count(data.count,data.room);
         });
+
     }
 
 

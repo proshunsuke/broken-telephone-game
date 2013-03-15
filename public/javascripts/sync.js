@@ -48,31 +48,32 @@ function Sync(){
             // var orderlist_del_num = b_user.return_deleteUser_num(data.user,b_user._order_list);
             // b_user._users.splice(users_del_num,1);
             // b_user._order_list.splice(orderlist_del_num,1);
-            b_user._users = data.users.concat();
-            if(b_game._mode.gaming || b_game._mode.finish){
-                b_user._order_list = data.orderlist.concat();
-            }
-
-            b_sync.update_login_drawing_list(data);
-
-            var addcomment = data.user + "さんがログアウトしました。";
-            b_chat.write_comment(addcomment);
-
-            if (b_game._isHost && b_game._mode.setting){ //ホストの設定中、ログインユーザを更新
-                var userlist_del_num =
-                    b_user.return_deleteUser_num(data.user,b_user._user_list);
-                if(userlist_del_num != null){
-                    b_user._user_list.splice(userlist_del_num,1);
-                    b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
-                }else{
-                    var orderlist_del_num =
-                        b_user.return_deleteUser_num(data.user,b_user._order_list);
-                    b_user._order_list.splice(orderlist_del_num,1);
-                    b_user.updateUserList(b_user._order_list,"orderuserNum","canvasordernameArea");
+            if(data.users){
+                b_user._users = data.users.concat();
+                if(b_game._mode.gaming || b_game._mode.finish){
+                    b_user._order_list = data.orderlist.concat();
                 }
-                b_game.can_start_game(b_user._user_list.length);
-            }
 
+                b_sync.update_login_drawing_list(data);
+
+                var addcomment = data.user + "さんがログアウトしました。";
+                b_chat.write_comment(addcomment);
+
+                if (b_game._isHost && b_game._mode.setting){ //ホストの設定中、ログインユーザを更新
+                    var userlist_del_num =
+                        b_user.return_deleteUser_num(data.user,b_user._user_list);
+                    if(userlist_del_num != null){
+                        b_user._user_list.splice(userlist_del_num,1);
+                        b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
+                    }else{
+                        var orderlist_del_num =
+                            b_user.return_deleteUser_num(data.user,b_user._order_list);
+                        b_user._order_list.splice(orderlist_del_num,1);
+                        b_user.updateUserList(b_user._order_list,"orderuserNum","canvasordernameArea");
+                    }
+                    b_game.can_start_game(b_user._user_list.length);
+                }
+            }
 
         });
 

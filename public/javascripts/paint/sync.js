@@ -17,26 +17,31 @@ function Sync(){
         });
 
         socket.on('firstconnect',function(data){
-            b_sync.emit_login(b_user._user);
+            console.log("data.user:",data.user,",user:",b_user._user);
+            if(data.user == b_user._user){
+                b_sync.emit_login(b_user._user);
+            }
         });
 
         // ゲーム中、途中から入ってきたときにゆーざのりすとが更新されてしまう
         // modeで分けて、ろぐいんゆーざを更新するのかかく順番で更新するのかはっきりさせる必要がある
         socket.on('login', function(data){
-            if(data.mode){
+            if(data.users[0] == b_user._user){
                 b_sync.for_newlogin_user(data);
             }
 
             b_user._users = data.users.concat();
+            console.log("サーバから送られたユーザリスト:",b_user._users);
             if(b_game._mode.gaming || b_game._mode.finish){
                 b_user._order_list = data.orderlist.concat();
             }
-
 
             b_sync.update_login_drawing_list(data);
 
             var addcomment = data.users[0] + "さんがログインしました。";
             b_chat.write_comment(addcomment);
+
+            b_game.renewal_host(data.hostname);
 
             if(b_game._isHost && b_game._mode.setting){
                 //ホストのログインユーザを更新
@@ -52,32 +57,34 @@ function Sync(){
             // var orderlist_del_num = b_user.return_deleteUser_num(data.user,b_user._order_list);
             // b_user._users.splice(users_del_num,1);
             // b_user._order_list.splice(orderlist_del_num,1);
-            b_user._users = data.users.concat();
-            if(b_game._mode.gaming || b_game._mode.finish){
-                b_user._order_list = data.orderlist.concat();
-            }
-
-            b_sync.update_login_drawing_list(data);
-
-            var addcomment = data.user + "さんがログアウトしました。";
-            b_chat.write_comment(addcomment);
-
-            if (b_game._isHost && b_game._mode.setting){ //ホストの設定中、ログインユーザを更新
-                var userlist_del_num =
-                    b_user.return_deleteUser_num(data.user,b_user._user_list);
-                if(userlist_del_num != null){
-                    b_user._user_list.splice(userlist_del_num,1);
-                    b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
-                }else{
-                    var orderlist_del_num =
-                        b_user.return_deleteUser_num(data.user,b_user._order_list);
-                    b_user._order_list.splice(orderlist_del_num,1);
-                    b_user.updateUserList(b_user._order_list,"orderuserNum","canvasordernameArea");
+            if(data.user){
+                b_user._users = data.users.concat();
+                if(b_game._mode.gaming || b_game._mode.finish){
+                    b_user._order_list = data.orderlist.concat();
                 }
-                b_game.can_start_game(b_user._user_list.length);
+
+                b_sync.update_login_drawing_list(data);
+
+                var addcomment = data.user + "さんがログアウトしました。";
+                b_chat.write_comment(addcomment);
+
+                b_game.renewal_host(data.hostname);
+
+                if (b_game._isHost && b_game._mode.setting){ //ホストの設定中、ログインユーザを更新
+                    var userlist_del_num =
+                        b_user.return_deleteUser_num(data.user,b_user._user_list);
+                    if(userlist_del_num != null){
+                        b_user._user_list.splice(userlist_del_num,1);
+                        b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
+                    }else{
+                        var orderlist_del_num =
+                            b_user.return_deleteUser_num(data.user,b_user._order_list);
+                        b_user._order_list.splice(orderlist_del_num,1);
+                        b_user.updateUserList(b_user._order_list,"orderuserNum","canvasordernameArea");
+                    }
+                    b_game.can_start_game(b_user._user_list.length);
+                }
             }
-
-
         });
 
         // コメント
@@ -105,13 +112,19 @@ function Sync(){
 
             var first_num = b_user._order_list.length - 1;
             b_game.change_drawing(b_user._order_list[first_num]);
+            b_game.change_drawinguser_color(b_user._order_list[first_num]);
         });
 
         // 誰かが描き終わる
         socket.on('drawfin',function(data){
-            b_game._img_list = data.beforeimg.concat();
+            // b_game._img_list = data.imglist.concat();
+            b_game._img_list._users = data.imglist_user.concat();
+            b_game._img_list._imgs = data.imglist_img.concat();
+            console.log(b_game._img_list);
             b_game.change_drawing(data.nextuser);
-            b_game.draw_beforeuser_img(b_game._img_list[0],data.nextuser);
+            if(!data.isFirstDeleted){
+                b_game.draw_beforeuser_img(b_game._img_list._imgs[0],data.nextuser);
+            }
             b_game.change_drawinguser_color(data.nextuser)
         });
 
@@ -129,18 +142,18 @@ function Sync(){
         // NEWGAME
         socket.on('newgame',function(data){
             b_paint._isDrawable = true;
-            b_game._isHost = false;
             b_game.change_mode("wait",null);
             b_game.change_finish_time(0,0);
             b_game.change_userlist_label();
             $('#toimg').css({"visibility":"hidden"});
-            $('#host').css({"visibility":"visible"});
             $("#canvasusernameArea").empty();
             $("#canvasordernameArea").empty();
             b_user.updateLoginUsers(b_user._users);
             b_user._order_list = [];
             b_user._user_list = [];
-            b_game._img_list = [];
+            if(b_game._isHost){
+                $('#host').css({"visibility":"visible"});
+            }
         });
 
 
@@ -186,11 +199,11 @@ function Sync(){
     }
 
     // 描き終わったことを伝える
-    this.emit_drawfin = function(finuser,list,imglist){
+    this.emit_drawfin = function(finuser,list,img){
         this._socket.emit('drawfin',{
             finuser: finuser,
             list: list,
-            imglist: imglist,
+            img: img,
         });
     }
 
@@ -221,7 +234,6 @@ function Sync(){
         case 1://設定中
             var modetext = data.hostname + "さんが設定中です";
             b_game.change_mode("setting",modetext);
-            $('#host').css({"visibility":"hidden"});
             break;
         case 2://オーダできたら、://誰かが描いてる途中だったら
             b_game.change_mode("gaming",null);
@@ -230,11 +242,9 @@ function Sync(){
             b_game.change_userlist_label();
             b_game.change_drawing(data.nextuser);
             b_game.setFinalTime(b_game._drawtime,b_user._order_list.length);
-            $('#host').css({"visibility":"hidden"});
             break;
         case 3://ゲームが終わったら
             b_game.change_mode("finish",null);
-            $('#host').css({"visibility":"hidden"});
             break;
         }
     }
@@ -246,6 +256,7 @@ function Sync(){
             b_user.updateLoginUsers(b_user._users);
         }else if(b_game._mode.gaming){ // orderlistはgaming,finishの間共通
             b_user.updateLoginUsers(b_user._order_list);
+            b_game.change_drawinguser_color(data.nextuser)
         }else if(b_game._mode.finish){
             console.log(b_user._order_list);
             b_user.updateLoginUsers(b_user._order_list);
