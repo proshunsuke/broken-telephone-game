@@ -9,15 +9,22 @@
 
 
 <div class="container">
-  <form method="post" action="" id="toroom"  onSubmit="return check_create()">
-    <span class="label label-success" id="label">部屋名</span></br>
+  <form method="post" class="form-inline" action="" id="toroom"  onSubmit="return check_create()">
+    <span class="label label-success" id="label3">部屋名</span></br>
     <input class="input-xlarge" name="roomname"
            type="text" placeholder="部屋のなまえを入力してください"
            text-align="center" id="room"></br>
-    <span class="label label-success" id="label">なまえ</span></br>
+    <span class="label label-success" id="label3">なまえ</span></br>
     <input class="input-xlarge" name="username"
            type="text" placeholder="なまえを入力してください"
            text-align="center" id="name"></br>
+    <label class="checkbox">
+      <input type="checkbox" id="passcheck">パスワードを設定する
+    </label></br>
+    <span class="label label-success" id="label5">パスワード</span></br>
+    <input class="input-xlarge disabled" name="password"
+           type="text" placeholder="パスワードを入力してください"
+           text-align="center" id="password" disabled></br>
     <button type="submit" class="btn btn-primary btn-large center" id="create">作る</button>
   </form>
 

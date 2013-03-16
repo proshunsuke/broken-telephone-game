@@ -120,6 +120,8 @@ function Sync(){
             // b_game._img_list = data.imglist.concat();
             b_game._img_list._users = data.imglist_user.concat();
             b_game._img_list._imgs = data.imglist_img.concat();
+            console.log("誰かが描き終わり");
+            console.log(data);
             console.log(b_game._img_list);
             b_game.change_drawing(data.nextuser);
             if(!data.isFirstDeleted){

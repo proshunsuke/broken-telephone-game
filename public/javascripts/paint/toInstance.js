@@ -241,10 +241,6 @@ function mouse_event_init(){
         b_user.updateUserList(b_user._order_list,"orderuserNum","canvasordernameArea");
         b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
 
-        // if(b_user._user_list.length != 0 && !$('#start').hasClass('disabled')){
-        //     b_game._isStart = false;
-        //     $('#start').addClass('disabled');
-        // }
         b_game.can_start_game(b_user._user_list.length);
     });
 }

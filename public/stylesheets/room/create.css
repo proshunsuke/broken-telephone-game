@@ -3,10 +3,23 @@ body{
 }
 
 div#container{
-    margin: 0 auto;
-    width: 800px;
+    /* margin: 0 auto; */
+    /* width: 800px; */
 }
 
-#label{
+#label3{
     margin-right: 235px;
+}
+
+#label5{
+    margin-right: 210px;
+}
+
+#passcheck{
+    /* margin-right: 100px; */
+
+}
+
+#create{
+    margin: 10px;
 }

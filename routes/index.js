@@ -4,7 +4,7 @@
  */
 
 var model = require('../model');
-
+var Room = model.Room;
 
 exports.index = function(req, res){
         res.render('index', { title: 'お絵かき伝言ゲーム',
@@ -29,7 +29,24 @@ exports.room = function(req, res){
     var result = { title: 'お絵かき伝言ゲーム',
                    username: req.body.username,
                    pagename: 'room'};
-    res.render('room',result);
+    console.log("room,req.body:",req.body);
+    Room.find({
+        'room_name': req.body.roomname
+    },function(err,roomdata){
+        console.log("roomdata:",roomdata[0]);
+        if(req.body.password){
+            roomdata[0].password = req.body.password;
+
+            roomdata[0].save(function(err){
+                if(err){}
+                else{
+                    res.render('room',result);
+                }
+            });
+        }else{
+            res.render('room',result);
+        }
+    });
 };
 
 exports.about = function(req, res){

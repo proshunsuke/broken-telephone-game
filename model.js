@@ -1,7 +1,11 @@
 const MONGO_URL = process.env.MONGOHQ_URL;
 
 var mongoose = require('mongoose');
+
+// ローカル用
 // var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
+
+// heroku用
 var db = mongoose.connect(MONGO_URL);
 
 
@@ -16,7 +20,7 @@ var Room = new mongoose.Schema({
     imglist_user: {type: Array},
     imglist_img: {type: Array},
     count: {type: Number},
-    creater: {type: String},
+    password: {type: String},
 });
 
 exports.Room = db.model('Room', Room);

@@ -191,11 +191,6 @@ function Paint(){
         for(var i=0; i < LAYER_N; i++){
             this._undo_context[i].clearRect(0, 0, $('canvas').width(), $('canvas').height());
         }
-        // var canvas_array = [b_paint._canvas1,b_paint._canvas2,b_paint._canvas3];
-        // for(var i=0; i < 2; i++){
-        //     var context = canvas_array[i].getContext("2d");
-        //     context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
-        // }
     }
 
     // キャンバス保存、またはイメージURLを返す
