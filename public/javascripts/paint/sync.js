@@ -24,43 +24,42 @@ function Sync(){
         });
 
         // ゲーム中、途中から入ってきたときにゆーざのりすとが更新されてしまう
-        // modeで分けて、ろぐいんゆーざを更新するのかかく順番で更新するのかはっきりさせる必要がある
         socket.on('login', function(data){
             if(data.users[0] == b_user._user){
                 b_sync.for_newlogin_user(data);
             }
-
             b_user._users = data.users.concat();
-            console.log("サーバから送られたユーザリスト:",b_user._users);
             if(b_game._mode.gaming || b_game._mode.finish){
                 b_user._order_list = data.orderlist.concat();
+                b_game.setFinalTime(b_game._drawtime,data.game_start_Date,b_user._order_list.length); // 誰かが入ってきたら終了時間を更新
+                // 描く時間を更新
+                // var msec =  Date.parse(data.draw_start_Date);
+                //b_game._draw_start_Date = new Date(msec);
+
+                b_game.setDrawStartTime(b_user._order_list,data.nextuser);
+                b_game.change_drawinguser_color(data.nextuser);
+            }else{
+                b_sync.update_login_drawing_list(data);
             }
-
-            b_sync.update_login_drawing_list(data);
-
             var addcomment = data.users[0] + "さんがログインしました。";
             b_chat.write_comment(addcomment);
-
             b_game.renewal_host(data.hostname);
-
             if(b_game._isHost && b_game._mode.setting){
                 //ホストのログインユーザを更新
                 b_user._user_list.unshift(data.users[0]);
                 b_user.updateUserList(b_user._user_list,"drawuserNum","canvasusernameArea");
                 b_game.can_start_game(b_user._user_list.length);
             }
-
         });
 
+        // 描いてる人が消えた時に、描く時間がおかしい
+        // 終了時間がおかしい
         socket.on('disconnect',function(data){
-            // var users_del_num = b_user.return_deleteUser_num(data.user,b_user._users);
-            // var orderlist_del_num = b_user.return_deleteUser_num(data.user,b_user._order_list);
-            // b_user._users.splice(users_del_num,1);
-            // b_user._order_list.splice(orderlist_del_num,1);
             if(data.user){
                 b_user._users = data.users.concat();
                 if(b_game._mode.gaming || b_game._mode.finish){
                     b_user._order_list = data.orderlist.concat();
+                    b_game.setFinalTime(b_game._drawtime,data.game_start_Date,b_user._order_list.length); // 誰かが抜けたら終了時間を更新
                 }
 
                 b_sync.update_login_drawing_list(data);
@@ -103,31 +102,32 @@ function Sync(){
         socket.on('order',function(data){// 右に表示されるのはorderlist
             b_game.change_userlist_label();
             b_game.change_mode("gaming",null);
+            b_game.change_userlist_label();
             b_user._order_list = data.list.concat();
             b_user.updateLoginUsers(b_user._order_list);
             b_paint.clear_canvas();
             b_paint._isDrawable = false;
             b_game._drawtime = data.drawtime;
-            b_game.setFinalTime(b_game._drawtime,b_user._order_list.length);
+            b_game.setFinalTime(b_game._drawtime,data.game_start_Date,b_user._order_list.length);
 
             var first_num = b_user._order_list.length - 1;
             b_game.change_drawing(b_user._order_list[first_num]);
+            b_game._draw_start_Date = data.draw_start_Date;
+            b_game.setDrawStartTime(b_user._order_list,b_user._order_list[b_user._order_list.length-1]);
             b_game.change_drawinguser_color(b_user._order_list[first_num]);
         });
 
         // 誰かが描き終わる
         socket.on('drawfin',function(data){
-            // b_game._img_list = data.imglist.concat();
             b_game._img_list._users = data.imglist_user.concat();
             b_game._img_list._imgs = data.imglist_img.concat();
-            console.log("誰かが描き終わり");
-            console.log(data);
-            console.log(b_game._img_list);
             b_game.change_drawing(data.nextuser);
-            if(!data.isFirstDeleted){
+            if(!data.isFirstDeleted){ // 消えたのが最初のユーザでない場合は、前の人の絵を設定
                 b_game.draw_beforeuser_img(b_game._img_list._imgs[0],data.nextuser);
             }
-            b_game.change_drawinguser_color(data.nextuser)
+            b_game._draw_start_Date = data.draw_start_Date;
+            b_game.setDrawStartTime(b_user._order_list,data.nextuser);
+            b_game.change_drawinguser_color(data.nextuser);
         });
 
         // ゲーム終了
@@ -135,6 +135,7 @@ function Sync(){
             b_paint._get_undo_img();
             b_game.change_mode("finish",null);
             b_game.change_drawing("none");
+            b_user.updateLoginUsers(b_user._order_list);
             $('#toimg').css({"visibility":"visible"});
             if(b_game._isHost){
                 $('#newgame').css({"visibility":"visible"});
@@ -197,6 +198,8 @@ function Sync(){
         this._socket.emit('order',{
             list: list,
             drawtime: drawtime,
+            // game_start_Date: game_start_Date,
+            // draw_start_Date: draw_start_Date
         });
     }
 
@@ -205,6 +208,7 @@ function Sync(){
         this._socket.emit('drawfin',{
             finuser: finuser,
             list: list,
+            //draw_start_Date: draw_start_Date,
             img: img,
         });
     }
@@ -243,7 +247,8 @@ function Sync(){
             b_game._drawtime = data.drawtime;
             b_game.change_userlist_label();
             b_game.change_drawing(data.nextuser);
-            b_game.setFinalTime(b_game._drawtime,b_user._order_list.length);
+            b_game._draw_start_Date = data.draw_start_Date;
+
             break;
         case 3://ゲームが終わったら
             b_game.change_mode("finish",null);
@@ -258,6 +263,10 @@ function Sync(){
             b_user.updateLoginUsers(b_user._users);
         }else if(b_game._mode.gaming){ // orderlistはgaming,finishの間共通
             b_user.updateLoginUsers(b_user._order_list);
+            // var msec =  Date.parse(data.draw_start_Date);
+            // b_game._draw_start_Date = new Date(msec);
+            b_game._draw_start_Date = data.draw_start_Date;
+            b_game.setDrawStartTime(b_user._order_list,data.nextuser);
             b_game.change_drawinguser_color(data.nextuser)
         }else if(b_game._mode.finish){
             console.log(b_user._order_list);

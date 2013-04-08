@@ -15,6 +15,7 @@
 <script type="text/javascript" src="javascripts/paint/chat.js"></script>
 <script type="text/javascript" src="javascripts/paint/game.js"></script>
 <script type="text/javascript" src="javascripts/paint/room.js"></script>
+<script type="text/javascript" src="javascripts/paint/audios.js"></script>
 <script type="text/javascript" src="javascripts/paint/toInstance.js"></script>
 <script type="text/javascript" src="javascripts/paint/onLoad.js"></script>
 
@@ -26,6 +27,7 @@
         <span class="badge badge-success" id="yourname" value="<%= username %>">あなたは <%= username %> さんです</span>
         <span class="badge badge-success" id="drawing">誰も描いていません</span>
         <span class="badge badge-warning" id="finishtime">終了予定：</span>
+        <span class="badge badge-inverse" id="thetime">err</span>
           <div class="progress progress-striped active">
             <div class="bar" style="width: 0%;" data-rate="0"></div>
           </div>
@@ -110,7 +112,7 @@
             </div>
         </div>
 
-                <span class="label label-warning">カラー</span>
+        <span class="label label-warning">カラー</span>
         <div id="colorArea" class="thumbnail alert alert-info">
           <div id="newcolor" style="background-color:#000000"></div>
           <table border="1" bordercolor="#FFFFFF" width="100%" style="table-layout: fixed;">
@@ -256,7 +258,7 @@
         </form>
 
       </li>
-      </ul>
+    </ul>
   </div>
 </div>
 <div class="container">

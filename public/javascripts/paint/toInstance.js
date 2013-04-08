@@ -6,6 +6,7 @@ var b_layer = new Layer();
 var b_chat = new Chat();
 var b_game = new Game();
 var b_room = new Room();
+var b_audios_start = new Audios("../../medias/start.mp3","../../medias/start.ogg");
 var b_oekaki_list = new Oekaki_list();
 
 function toInstance_init(){
@@ -22,6 +23,7 @@ function toInstance_init(){
     b_tool.init();
     b_chat.init();
     b_game.init();
+    b_audios_start.init();
 }
 
 //マウスイベント
@@ -136,6 +138,8 @@ function mouse_event_init(){
     $('#start').live("click",function(){
         if(b_game._isStart){
             var gettime = $("input[name='drawtime']:checked").attr("id");
+            //b_game._game_start_Date = new Date();
+            //b_sync.emit_order(b_user._order_list,gettime,b_game._game_start_Date,b_game._draw_start_Date);
             b_sync.emit_order(b_user._order_list,gettime);
             $('#start').addClass('disabled');
             b_game._isStart = false;

@@ -3,10 +3,10 @@ const MONGO_URL = process.env.MONGOHQ_URL;
 var mongoose = require('mongoose');
 
 // ローカル用
-// var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
+//var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
 
 // heroku用
-var db = mongoose.connect(MONGO_URL);
+ var db = mongoose.connect(MONGO_URL);
 
 
 var Room = new mongoose.Schema({
@@ -15,6 +15,8 @@ var Room = new mongoose.Schema({
     orderlist: {type: Array},
     mode: {type: Number},
     drawtime: {type: Number},
+    game_start_Date: {type: Date},
+    draw_start_Date: {type: Date},
     hostname: {type: String},
     nextuser: {type: String},
     imglist_user: {type: Array},

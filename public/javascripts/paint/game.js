@@ -2,6 +2,8 @@ function Game(){
     this._isHost;
     this._isStart;
     this._drawtime;
+    this._draw_start_Date; // 現在描いている人の描きはじめた時刻
+    //this._game_start_Date; // ゲームが始まった時刻
     this._img_list;
 
     this.wait;
@@ -13,6 +15,8 @@ function Game(){
         this._isHost = false;
         this._isStart = false;
         this._drawtime = 120;
+        this._draw_start_Date = new Date();
+        this._game_start_Date = new Date();
         this._img_list = new Oekaki_list();
 
         this._mode.wait = true;
@@ -79,8 +83,8 @@ function Game(){
             drawingtext = '誰も描いていません';
         }else if(draw_user == b_user._user){
             drawingtext = 'あなたの番です';
-            document.getElementById("startdraw").style.visibility="visible";
-            $('startdraw').css({"visibility":"visible"});
+            b_audios_start.play();
+            $('#startdraw').css({"visibility":"visible"});
             $('.progress .bar').css('width:100%');
             this.timelimit(b_game._drawtime);
         }else{
@@ -91,8 +95,11 @@ function Game(){
     }
 
     // 終了時間を記述
-    this.setFinalTime = function(drawtime,leng){
-        var Jikan= new Date();
+    this.setFinalTime = function(drawtime,date,leng){
+        var msec =  Date.parse(date);
+        // b_game._game_start_Date = new Date(msec);
+        // var Jikan = b_game._game_start_Date;
+        var Jikan = new Date(msec);
         var Hour = Jikan.getHours();
         var Minute = Jikan.getMinutes();
         var Second = Jikan.getSeconds();
@@ -112,6 +119,54 @@ function Game(){
         Hour = Hour + plusH;
         Minute += 1;
         this.change_finish_time(Hour,Minute);
+    }
+
+    // 描き始める時間設定
+    this.setDrawStartTime = function(orderlist,drawing_user){
+        for(var i=orderlist.length-1; i >= 0; i--){
+            console.log("drawuser:",drawing_user);
+            console.log("user",i,":",orderlist[i]);
+            if(orderlist[i] == drawing_user){ // 描いてる人
+                b_user._drawtime_list[i] = "now";
+                console.log(b_user._drawtime_list[i]);
+                break;
+            }else{ // 描き終わった人
+                b_user._drawtime_list[i] = "fin";
+                console.log(b_user._drawtime_list[i]);
+            }
+        }
+        for(var j=i-1; j >= 0; j--){ // これから描く人の描き始める時間を設定
+            b_user._drawtime_list[j] = this.change_drawStart_time(b_game._draw_start_Date,i-j,b_game._drawtime);
+            console.log(b_user._drawtime_list[j]);
+        }
+        b_user.updateDrawTime(orderlist,b_user._drawtime_list);
+    }
+
+    // これから描く人の描き始める時間の文字列を返す
+    this.change_drawStart_time = function(date,num,drawtime){
+        var msec =  Date.parse(date);
+        // b_game._draw_start_Date = new Date(msec);
+        // var Jikan = b_game._draw_start_Date;
+        var Jikan = new Date(msec);
+        var Minute = Jikan.getMinutes();
+        var Second = Jikan.getSeconds();
+        Second = Second + num * drawtime;
+        var plusMin = 0;
+        while(Second >= 60){
+            Second = Second - 60;
+            plusMin = plusMin + 1;
+        }
+        Minute = Minute + plusMin;
+        while(Minute >= 60){
+            Minute = Minute - 60;
+        }
+        if(Minute < 10){
+            Minute = "0" + Minute;
+        }
+        if(Second < 10){
+            Second = "0" + Second;
+        }
+        return Minute + ":" + Second;
     }
 
     // プログレスバーを動かす
@@ -174,7 +229,7 @@ function Game(){
 
     // 描いてる人の名前の色を変化させる
     this.change_drawinguser_color = function(draw_user){
-        for(var j = 0; j < b_user._users.length ; j++){
+        for(var j = 0; j < b_user._users.length; j++){
             if($('#userNum'+j).html() == draw_user){
                 $('#userNum'+j).css("color","#B94A48");
             }else{
@@ -222,6 +277,8 @@ function Game(){
             this._isHost = true;
             if(this._mode.wait){
                 $('#host').css({"visibility":"visible"});
+            }else if(this._mode.finish){
+                $('#newgame').css({"visibility":"visible"});
             }
         }else{
             this._isHost = false;
