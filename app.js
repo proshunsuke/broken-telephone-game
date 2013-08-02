@@ -105,9 +105,6 @@ var paint_room = socket.of('/room').on('connection',function(client){
             roomdata: roomdata,
         });
     });
-    Room.remove({
-            },function(err,roomdata){
-            });
 
     client.on('createroom',function(data){
 
