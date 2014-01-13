@@ -1,0 +1,16 @@
+body{
+    text-align:center;
+}
+
+div#container{
+    margin: 0 auto;
+    width: 800px;
+}
+
+#name{
+    margin-right: 235px;
+}
+
+#enter{
+    margin-bottom: 10px;
+}

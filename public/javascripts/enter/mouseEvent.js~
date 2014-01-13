@@ -1,0 +1,50 @@
+{
+    // マウスイベント
+    var mouseEvent = {
+
+        init: function(){
+
+            // パスワードのチェックボックスがクリックされたら
+            $('#toroom :checkbox').click(function(){
+                var isl = $(this).attr("id");
+                console.log($(this).attr("checked"));
+                if($(this).attr("checked") == "checked"){ // 設定する
+                    console.log("true");
+                    $('#password').removeAttr("disabled");
+
+                }else{ // 設定しない
+                    console.log("false");
+                    $('#password').attr('disabled','');
+                    $('#password').val("");
+                }
+
+            });
+
+            $('#rooms a').live('click',function(){
+                let roomname = $(this).attr("id");
+
+                if($(this).attr('value') == "password"){
+                    let passInput = prompt("パスワードを入力してください","");
+
+
+                    for(var i=0; i < room.roomData.length; i++){
+                        if(room.roomData[i].roomname == roomname){
+                            var password = room.roomData[i].password;
+                        }
+                    }
+
+                    if(password == passInput){
+                        location.href = "/enter?room=" + $(this).attr("id");
+                    }else{
+                        console.log("password:",password);
+                        console.log(passInput);
+                        alert("パスワードが間違っています");
+                    }
+
+                }else{
+                    location.href = "/enter?room=" + $(this).attr("id");
+                }
+            });
+        }
+    };
+}

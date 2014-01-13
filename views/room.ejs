@@ -1,23 +1,25 @@
-
-
-<link rel="stylesheet" href="stylesheets/paint/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
-<link rel="stylesheet" href="stylesheets/paint/paint.css" type="text/css" media="all">
+<Link rel="stylesheet" href="stylesheets/jquery/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/room/paint.css" type="text/css" media="all">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="javascripts/paint/jquery-ui-1.10.0.custom.min.js"></script>
-<script type="text/javascript" src="javascripts/paint/rgbcolor.js"></script>
-<script type="text/javascript" src="javascripts/paint/const.js"></script>
-<script type="text/javascript" src="javascripts/paint/oekaki_list.js"></script>
-<script type="text/javascript" src="javascripts/paint/paint.js"></script>
-<script type="text/javascript" src="javascripts/paint/sync.js"></script>
-<script type="text/javascript" src="javascripts/paint/user.js"></script>
-<script type="text/javascript" src="javascripts/paint/tool.js"></script>
-<script type="text/javascript" src="javascripts/paint/layer.js"></script>
-<script type="text/javascript" src="javascripts/paint/chat.js"></script>
-<script type="text/javascript" src="javascripts/paint/game.js"></script>
-<script type="text/javascript" src="javascripts/paint/room.js"></script>
-<script type="text/javascript" src="javascripts/paint/audios.js"></script>
-<script type="text/javascript" src="javascripts/paint/toInstance.js"></script>
-<script type="text/javascript" src="javascripts/paint/onLoad.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/rgbcolor.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/const.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/oekaki_list.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/paint.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/sync.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/user.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/tool.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/layer.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/chat.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/game.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/room.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/audios.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/showTheTime.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/mouseEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/keypressEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/slideEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/toInstance.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/onLoad.js"></script>
 
 <div class="container">
   <div class="row">
@@ -28,9 +30,9 @@
         <span class="badge badge-success" id="drawing">誰も描いていません</span>
         <span class="badge badge-warning" id="finishtime">終了予定：</span>
         <span class="badge badge-inverse" id="thetime">err</span>
-          <div class="progress progress-striped active">
-            <div class="bar" style="width: 0%;" data-rate="0"></div>
-          </div>
+        <div class="progress progress-striped active">
+          <div class="bar" style="width: 0%;" data-rate="0"></div>
+        </div>
         <div class="thumbnail">
           <div id="canvasbox">
             <div id="canvases">

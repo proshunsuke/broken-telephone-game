@@ -4,14 +4,6 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
-  , routesD = require('./routes/draw')
-  , routesP = require('./routes/paint')
-  , routesP2 = require('./routes/paint2')
-  , routesT = require('./routes/top')
-  , routesTC = require('./routes/top/create')
-  , routesTL = require('./routes/top/login')
-  , routesTR = require('./routes/top/room')
   , http = require('http')
   , path = require('path')
   , io = require('socket.io');
@@ -43,24 +35,11 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.post('/draw', routesD.draw);
-app.post('/paint', routesP.paint);
-app.post('/paint2', routesP2.paint2);
 app.get('/about', routes.about);
 app.get('/contact', routes.contact);
-app.get('/create',routes.create);//test
+app.get('/create',routes.create);
 app.get('/enter',routes.enter);
 app.post('/room',routes.room);
-app.get('/top', routesT.top);
-app.post('/top', routesT.top);
-app.get('/top/create', routesTC.create);
-app.post('/top/login', routesTL.login);
-app.get('/top/login', routesTL.login);
-app.post('/top/room', routesTR.room);
-app.get('/top/room', routesTR.room);
-
-
 
 var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
@@ -106,10 +85,10 @@ var paint_room = socket.of('/room').on('connection',function(client){
         });
     });
 
-    client.on('createroom',function(data){
+    client.on('createRoom',function(data){
 
         var newRoom = new Room();
-        newRoom.room_name = data.room;
+        newRoom.roomname = data.room;
         newRoom.count = 1;
         newRoom.hostname = data.name;
         newRoom.mode = 0;
@@ -119,7 +98,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
             if (err) { console.log(err); }
             else{
                 Room.find({},function(err,roomdata){
-                    client.broadcast.emit('createroom',{
+                    client.broadcast.emit('createRoom',{
                         roomdata: roomdata,
                     });
                 });
@@ -144,7 +123,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
         if(client_room){
 
             Room.find({
-                'room_name': decodeURI(client_room)
+                'roomname': decodeURI(client_room)
             },function(err,roomdata){
 
                 var isDrawinguserDeleted = false;
@@ -155,7 +134,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
                         if(roomdata[0].orderlist[i] == client.user){
                             var nextnum = i - 1;
                             roomdata[0].nextuser = roomdata[0].orderlist[nextnum];
-                            roomdata[0].draw_start_Date = new Date(); // 描き始める時間設定
+                            roomdata[0].drawStartDate = new Date(); // 描き始める時間設定
                             isDrawinguserDeleted = true;
                             break;
                         }
@@ -197,15 +176,15 @@ var paint_room = socket.of('/room').on('connection',function(client){
                             user: client.user,
                             users: roomdata[0].users,
                             orderlist: roomdata[0].orderlist,
-                            game_start_Date: roomdata[0].game_start_Date,
-                            draw_start_Date: roomdata[0].draw_start_Date,
+                            gameStartDate: roomdata[0].gameStartDate,
+                            drawStartDate: roomdata[0].drawStartDate,
                             nextuser: roomdata[0].nextuser,
                             hostname: roomdata[0].hostname,
                         });
 
                         // 描いてる人が消えたら
                         if(isDrawinguserDeleted){
-                            console.log("daraw_start_Dateが変更された,disconnect: ",roomdata[0].draw_start_Date);
+                            console.log("daraw_start_Dateが変更された,disconnect: ",roomdata[0].drawStartDate);
                             if(isLastDeleted){
                                 paint_room.to(client_room).emit('gamefin',{
                                     fin: true,
@@ -213,10 +192,10 @@ var paint_room = socket.of('/room').on('connection',function(client){
                             }else{
                                 paint_room.to(client_room).emit('drawfin',{
                                     nextuser: roomdata[0].nextuser,
-                                    imglist_user: roomdata[0].imglist_user,
-                                    imglist_img: roomdata[0].imglist_img,
+                                    imgListUser: roomdata[0].imgListUser,
+                                    imgListImg: roomdata[0].imgListImg,
                                     isFirstDeleted: isFirstDeleted,
-                                    draw_start_Date: roomdata[0].draw_start_Date
+                                    drawStartDate: roomdata[0].drawStartDate
                                 });
                             }
                         }
@@ -224,10 +203,10 @@ var paint_room = socket.of('/room').on('connection',function(client){
                         // カウント渡す
                         if(roomdata[0].count == 0){
                             Room.remove({
-                                'room_name': decodeURI(client_room)
+                                'roomname': decodeURI(client_room)
                             },function(err,roomdata){});
                         }else{
-                            client.broadcast.emit('room_count',{
+                            client.broadcast.emit('roomCount',{
                                 count: roomdata[0].count,
                                 room: client_room,
                                 hostname: roomdata[0].hostname
@@ -247,12 +226,12 @@ var paint_room = socket.of('/room').on('connection',function(client){
         // roomを消す
         if(count == 1){
             Room.remove({
-                'room_name': decodeURI(client_room)
+                'roomname': decodeURI(client_room)
             },function(err,roomdata){
             });
 
             Room.find({},function(err,roomdata){
-                client.broadcast.json.emit('createroom',{
+                client.broadcast.json.emit('createRoom',{
                     roomdata: roomdata,
                 });
             });
@@ -264,7 +243,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
         var client_room = return_client_room(client);
         client.user = data.user;
         Room.find({
-            'room_name': decodeURI(client_room)
+            'roomname': decodeURI(client_room)
         },function(err,roomdata){
             if(roomdata[0].mode == 2 || roomdata[0].mode == 3){
                 roomdata[0].orderlist.unshift(data.user);
@@ -274,7 +253,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
             roomdata[0].save(function(err) {
                 if (err) { console.log(err); }
                 else{
-                    console.log("draw_start_Dateの値,login: ",roomdata[0].draw_start_Date);
+                    console.log("drawStartDateの値,login: ",roomdata[0].drawStartDate);
                     paint_room.to(client_room).emit('login',{
                         users: roomdata[0].users,
                         orderlist: roomdata[0].orderlist,
@@ -282,14 +261,14 @@ var paint_room = socket.of('/room').on('connection',function(client){
                         hostname: roomdata[0].hostname,
                         nextuser: roomdata[0].nextuser,
                         drawtime: roomdata[0].drawtime,
-                        game_start_Date: roomdata[0].game_start_Date,
-                        draw_start_Date: roomdata[0].draw_start_Date,
+                        gameStartDate: roomdata[0].gameStartDate,
+                        drawStartDate: roomdata[0].drawStartDate,
                     });
                 }
             });
             roomdata[0].count = roomdata[0].users.length;
 
-            client.broadcast.emit('room_count',{
+            client.broadcast.emit('roomCount',{
                 count: roomdata[0].count,
                 room: client_room,
             });
@@ -299,16 +278,16 @@ var paint_room = socket.of('/room').on('connection',function(client){
     client.on('order',function(data){
         var client_room = return_client_room(client);
         Room.find({
-            'room_name': decodeURI(client_room)
+            'roomname': decodeURI(client_room)
         },function(err,roomdata){
             roomdata[0].mode = 2;
             roomdata[0].orderlist = data.list.concat();
             roomdata[0].drawtime = data.drawtime;
             var start_Date = new Date();
-            // roomdata[0].game_start_Date = data.game_start_Date;
-            // roomdata[0].draw_start_Date = data.draw_start_Date;
-            roomdata[0].game_start_Date = start_Date;
-            roomdata[0].draw_start_Date = start_Date;
+            // roomdata[0].gameStartDate = data.gameStartDate;
+            // roomdata[0].drawStartDate = data.drawStartDate;
+            roomdata[0].gameStartDate = start_Date;
+            roomdata[0].drawStartDate = start_Date;
             roomdata[0].nextuser = client.user;
             roomdata[0].save(function(err) {
                 if (err) { console.log(err); }
@@ -316,8 +295,8 @@ var paint_room = socket.of('/room').on('connection',function(client){
                     paint_room.to(client_room).emit('order',{
                         list: data.list,
                         drawtime: data.drawtime,
-                        game_start_Date: start_Date,
-                        draw_start_Date: start_Date
+                        gameStartDate: start_Date,
+                        drawStartDate: start_Date
                     });
                 }
             });
@@ -329,15 +308,16 @@ var paint_room = socket.of('/room').on('connection',function(client){
         var client_room = return_client_room(client);
 
         Room.find({
-            'room_name': decodeURI(client_room)
+            'roomname': decodeURI(client_room)
         },function(err,roomdata){
             roomdata[0].mode = 2;
             roomdata[0].orderlist = data.list.concat();
-            roomdata[0].imglist_user.unshift(data.finuser);
-            roomdata[0].imglist_img.unshift(data.img);
-            //roomdata[0].draw_start_Date = data.draw_start_Date;
-            roomdata[0].draw_start_Date = new Date();
-            console.log("daraw_start_Dateが変更された,drawfin: ",roomdata[0].draw_start_Date);
+
+            roomdata[0].imgListUser.unshift(data.finuser);
+            roomdata[0].imgListImg.unshift(data.img);
+            //roomdata[0].drawStartDate = data.drawStartDate;
+            roomdata[0].drawStartDate = new Date();
+            console.log("daraw_start_Dateが変更された,drawfin: ",roomdata[0].drawStartDate);
             for(var i = 0; i < roomdata[0].orderlist.length; i++){
                 if(roomdata[0].orderlist[i] == data.finuser){
                     var nextnum = i - 1;
@@ -355,9 +335,9 @@ var paint_room = socket.of('/room').on('connection',function(client){
                 else{
                     paint_room.to(client_room).emit('drawfin',{
                         nextuser: roomdata[0].nextuser,
-                        imglist_user: roomdata[0].imglist_user,
-                        imglist_img: roomdata[0].imglist_img,
-                        draw_start_Date: roomdata[0].draw_start_Date
+                        imgListUser: roomdata[0].imgListUser,
+                        imgListImg: roomdata[0].imgListImg,
+                        drawStartDate: roomdata[0].drawStartDate
                     });
 
                     if(nextnum == -1){
@@ -373,7 +353,7 @@ var paint_room = socket.of('/room').on('connection',function(client){
     client.on('host',function(data){
         var client_room = return_client_room(client);
         Room.find({
-            'room_name': decodeURI(client_room)
+            'roomname': decodeURI(client_room)
         },function(err,roomdata){
             roomdata[0].model = 1;
             roomdata[0].hostname = data.hostname;
@@ -392,19 +372,19 @@ var paint_room = socket.of('/room').on('connection',function(client){
     client.on('newgame',function(data){
         var client_room = return_client_room(client);
         Room.find({
-            'room_name': decodeURI(client_room)
+            'roomname': decodeURI(client_room)
         },function(err,roomdata){
             roomdata[0].mode = 0;
             roomdata[0].orderlist =[];
             roomdata[0].drawtime = 0;
-            roomdata[0].game_start_Date = 0;
-            roomdata[0].draw_start_Date = 0;
+            roomdata[0].gameStartDate = 0;
+            roomdata[0].drawStartDate = 0;
             roomdata[0].nextuser = "";
             roomdata[0].save(function(err) {
                 if (err) { console.log(err); }
                 else{
                     paint_room.to(client_room).emit('newgame',{
-                        new: true,
+                        newGame: true,
                     });
                 }
             });

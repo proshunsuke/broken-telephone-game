@@ -1,15 +1,17 @@
-<link rel="stylesheet" href="stylesheets/room/create.css" type="text/css" media="all">
-<link rel="stylesheet" href="stylesheets/paint/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/create/create.css" type="text/css" media="all">
+<link rel="stylesheet" href="stylesheets/jquery/jquery-ui-1.10.0.custom.css" type="text/css" media="all">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="javascripts/paint/jquery-ui-1.10.0.custom.min.js"></script>
-<script type="text/javascript" src="javascripts/room/sync.js"></script>
-<script type="text/javascript" src="javascripts/room/room.js"></script>
-<script type="text/javascript" src="javascripts/room/toInstance.js"></script>
-<script type="text/javascript" src="javascripts/room/onLoad.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/sync.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/room.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/mouseEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/checkCreate.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/toInstance.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/create/onLoad.js"></script>
 
 
 <div class="container">
-  <form method="post" class="form-inline" action="" id="toroom"  onSubmit="return check_create()">
+  <form method="post" class="form-inline" action="" id="toroom"  onSubmit="return checkCreate.init()">
     <span class="label label-success" id="label3">部屋名</span></br>
     <input class="input-xlarge" name="roomname"
            type="text" placeholder="部屋のなまえを入力してください"

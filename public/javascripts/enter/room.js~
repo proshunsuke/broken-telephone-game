@@ -1,0 +1,48 @@
+{
+
+    let roomData;
+    let isGetRoomData;
+
+    let renewalCount = function(count,room,hostname){
+        var roomname = decodeURI(room);
+        var insertcount = "<h5 id='"+roomname+"_count'>"+count+"人が参加中</5>";
+        $('#'+roomname+'_count').empty();
+        $('#'+roomname+'_li').append(insertcount);
+
+        if(hostname){
+            $('#'+roomname+'_hostname').html(hostname);
+        }
+    };
+
+    var Room = {
+
+        init: function(){
+            roomData = new Array();
+            isGetRoomData = false;
+        },
+
+        createRooms: function(roomdata){
+            $('#rooms').empty();
+            for(var i=0; i < roomdata.length; i++){
+                var insertroom="<li class='span3 ' id='"+roomdata[i].roomname+"_li'><a id='"+roomdata[i].roomname+"' class='thumbnail' href='javascript:void(0)'>"+roomdata[i].roomname+"</a><h5 id='"+roomdata[i].roomname+"_hostname'>"+roomdata[i].hostname+"</h5></li>";
+                $('#rooms').prepend(insertroom);
+                if(roomdata[i].password){
+                    $('#'+roomdata[i].roomname).css("background-color","#FFFFB0");
+                    $('#'+roomdata[i].roomname).attr('value','password');
+                }
+                renewalCount(roomdata[i]['count'],roomdata[i]['roomname']);
+            }
+        },
+
+        getQuerystring: function(key, default_){
+            if (default_==null) default_="";
+            key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+            var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+            var qs = regex.exec(window.location.href);
+            if(qs == null)
+                return default_;
+            else
+                return qs[1];
+        }
+    };
+}

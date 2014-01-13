@@ -1,5 +1,6 @@
 window.onload = function(){
-    var pagename = $('#page').attr('name');
-    $('#'+pagename).addClass("active");
-    toInstance_init();
+    var insertpagename = "<li class='active' id='paint'><a href='/paint'>Paint</a></li>";
+    $('#nav-ul').append(insertpagename);
+
+    toInstance();
 }

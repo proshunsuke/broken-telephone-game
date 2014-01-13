@@ -1,0 +1,33 @@
+{
+    var checkEnter = {
+        var init: function(){
+            var username = $('#nameArea').val();
+            var roomname = decodeURI(room.getQuerystring('room'));
+            var isOriginalName = true;
+
+            for(var i=0; i < room.roomData.length; i++){
+                if(room.roomData[i].roomname = roomname){
+                    for(var j=0; j < room.roomData[i].users.length; j++){
+                        if(room.roomData[i].users[j] == username){
+                            isOriginalName = false;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            if(username == ""){
+                alert("入力されていません");
+                return false;
+            }else if(!isOriginalName){
+                alert("同じ名前のユーザーがいます");
+                return false;
+            }else{
+                var room = "/room?room=" + room.getQuerystring('room');
+                $('#toroom').attr('action',room);
+                return true;
+            }
+        }
+    };
+}

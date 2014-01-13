@@ -1,0 +1,76 @@
+function toInstance(){
+
+    // イベント
+    mouseEvent.init();
+
+    // インスタンス初期化
+    sync.init();
+    room.init();
+
+}
+
+function checkCreate(){
+    var roomname = $('#room').val();
+    var username = $('#name').val();
+    var password = $('#password').val();
+    var isOriginalName = true;
+
+    for(var i=0; i < room.roomData.length; i++){
+        console.log("roomdata:",room.roomData[i]);
+        if(room.roomData[i].roomname == roomname){
+            isOriginalName = false;
+        }
+    }
+
+    if(roomname == "" || username == ""){
+        alert("入力されていません");
+        return false;
+    }if(!isOriginalName){
+        alert("同じ名前の部屋があります");
+        return false;
+    }else{
+        var room = "/room?room=" +  $('#room').val();
+        $('#toroom').attr('action',room);
+        sync.emitCreateRoom(roomname,username,password);
+        return true;
+    }
+}
+
+function checkEnter(){
+    var username = $('#nameArea').val();
+    var roomname = decodeURI(room.getQuerystring('room'));
+    var isOriginalName = true;
+
+    for(var i=0; i < room.roomData.length; i++){
+        if(room.roomData[i].roomname = roomname){
+            for(var j=0; j < room.roomData[i].users.length; j++){
+                if(room.roomData[i].users[j] == username){
+                    isOriginalName = false;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+    if(username == ""){
+        alert("入力されていません");
+        return false;
+    }else if(!isOriginalName){
+        alert("同じ名前のユーザーがいます");
+        return false;
+    }else{
+        var room = "/room?room=" + room.getQuerystring('room');
+        $('#toroom').attr('action',room);
+        return true;
+    }
+}
+
+function sleep( T ){
+   var d1 = new Date().getTime();
+   var d2 = new Date().getTime();
+   while( d2 < d1+1000*T ){    //T秒待つ
+       d2=new Date().getTime();
+   }
+   return;
+}

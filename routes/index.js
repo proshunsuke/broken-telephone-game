@@ -31,7 +31,7 @@ exports.room = function(req, res){
                    pagename: 'room'};
     console.log("room,req.body:",req.body);
     Room.find({
-        'room_name': req.body.roomname
+        'roomname': req.body.roomname
     },function(err,roomdata){
         console.log("roomdata:",roomdata[0]);
         if(req.body.password){

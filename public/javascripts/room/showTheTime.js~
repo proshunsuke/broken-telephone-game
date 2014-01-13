@@ -1,0 +1,16 @@
+{
+    var showTheTime = function(){
+        let Jikan = new Date();
+        let Hour = Jikan.getHours();
+        let Minute = Jikan.getMinutes();
+        let Second = Jikan.getSeconds();
+        if(Minute < 10){
+            Minute = "0" + Minute;
+        }
+        if(Second < 10){
+            Second = "0" + Second;
+        }
+        $('#thetime').html(Hour + ":" + Minute + ":" + Second);
+        setTimeout("show_the_time()",1000);
+    }
+}

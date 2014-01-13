@@ -1,0 +1,3 @@
+window.onload = function(){
+    toInstance_init();
+}
