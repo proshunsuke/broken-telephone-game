@@ -3,16 +3,25 @@
     let mOffset;
     let mStartX;
     let mStartY;
+
     let mCanvas1;
     let mCanvas2;
     let mCanvas3;
+
+    let mTargetCanvas; //test
+    let mCanDrawing; //test
+
     let mDrawFlag;
     let mIsDrawable;
+
     let mBrushSize;
     let mAlphaSize;
+
     let mCanvasSave;
+
     let mUndoImage;
     let mRestoreImage;
+
     let mUndoContext;
 
     var paint = {
@@ -70,6 +79,7 @@
             mCanvas1 = $('canvas').get(0);
             mCanvas2 = $('canvas').get(1);
             mCanvas3 = $('canvas').get(2);
+            mTargetCanvas = mCanvas1;
             mCanvasSave = $('canvas').get(3);
             mUndoImage = new Array(LAYER_N);
             mRestoreImage = new Array(LAYER_N);
@@ -132,6 +142,10 @@
             paint.getUndoImg();
             mDrawFlag = true;
 
+            mCanDrawing = this.getLayerNum(); //test
+            mTargetCanvas = mCanDrawing; //test
+            mCanDrawing.style.opacity = mAlphaSize; //test
+
             mStartX = e.pageX - x - mOffset;
             mStartY = e.pageY - y - mOffset;
             return false; // for chrome
@@ -141,8 +155,10 @@
             let endX = e.pageX - x - mOffset;
             let endY = e.pageY - y - mOffset;
 
-            paint.drawCore(this.getLayerNum(),endX,endY,this.getColor(),
-                           mBrushSize,mAlphaSize,tool.mTools);
+            // this.drawCore(this.getLayerNum(),endX,endY,this.getColor(),
+            //                mBrushSize,mAlphaSize,tool.mTools);
+            this.drawCore(mTargetCanvas,endX,endY,this.getColor(),
+                           mBrushSize,mAlphaSize,tool.mTools); //test
 
             mStartX = endX;
             mStartY = endY;
@@ -169,7 +185,7 @@
                 context.globalAlpha = 1;
                 context.strokeStyle = "#FFFFFF";
             }else{
-                context.globalAlpha = alpha;
+                // context.globalAlpha = alpha; //test
                 context.strokeStyle = color;
             }
 
