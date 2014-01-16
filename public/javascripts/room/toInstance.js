@@ -12,6 +12,7 @@ function toInstance(){
     sync.init();
     user.init();
     paint.init();
+    layer.init();
     tool.init();
     chat.init();
     game.init();

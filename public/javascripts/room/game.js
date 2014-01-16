@@ -262,7 +262,7 @@
         // canvasに絵を映す
         drawImgCore: function(show_img){
             let img = new Image();
-            let context = paint.getMcanvas1().getContext("2d");
+            let context = leyer.getMcanvas1().getContext("2d");
             let d = show_img.replace('image/png', 'image/octet-stream');
             img.src = d;
             img.onload = function() {
