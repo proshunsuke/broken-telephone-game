@@ -4,6 +4,7 @@
     let mCanvas3;
 
     let mTargetCanvas; //test
+    let mTargetCanvas2; //test
 
     let mCanvasSave;
 
