@@ -50,8 +50,6 @@
                 tool.changeTool(mToolName);
             });
 
-
-
             // color
             $('#colorArea td').click(function() {
                 let mClickColor = new RGBColor($(this).css('background-color'));
@@ -71,7 +69,6 @@
                     }
                 });
             });
-
 
             // キャンバスボタン
             // 戻る

@@ -93,9 +93,13 @@
         mouseDown: function(e,x,y){
             layer.getUndoImg();
             mDrawFlag = true;
-
             mStartX = e.pageX - x - mOffset;
             mStartY = e.pageY - y - mOffset;
+
+            layer.setMcanvasTarget(layer.getLayerNum());
+            layer.setLayerOpacity(mAlphaSize);
+            console.log("layer.getMcanvasTarget()",layer.getMcanvasTarget());
+            console.log("layer.getMcanvasDrawing()",layer.getMcanvasDrawing());
             return false; // for chrome
         },
 
@@ -103,7 +107,7 @@
             let endX = e.pageX - x - mOffset;
             let endY = e.pageY - y - mOffset;
 
-            this.drawCore(layer.getLayerNum(),endX,endY,this.getColor(),
+            this.drawCore(layer.getMcanvasDrawing(),endX,endY,this.getColor(),
                           mBrushSize,mAlphaSize,tool.mTools);
 
             mStartX = endX;
@@ -112,6 +116,14 @@
 
         mouseUp: function(){
             layer.getRestoreImg();
+
+            layer.getMcanvasDrawing().getContext("2d").globalCompositeOperation="source-over";
+            layer.getMcanvasDrawing().getContext("2d").globalAlpha=1.0;
+
+            layer.getLayerNum().getContext("2d").globalAlpha = mAlphaSize;
+            layer.getLayerNum().getContext("2d").drawImage(layer.getMcanvasDrawing(),0,0);
+            layer.getLayerNum().getContext("2d").globalAlpha = 1;
+
             mDrawFlag = false;
         },
 

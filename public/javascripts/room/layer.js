@@ -1,10 +1,10 @@
 { // test
+    let mCanvasDrawing;
     let mCanvas1;
     let mCanvas2;
     let mCanvas3;
 
-    let mTargetCanvas; //test
-    let mTargetCanvas2; //test
+    let mCanvasTarget;
 
     let mCanvasSave;
 
@@ -16,6 +16,10 @@
     var layer = {
 
         // getter
+
+        getMcanvasDrawing: function(){
+            return mCanvasDrawing;
+        },
 
         getMcanvas1: function(){
             return mCanvas1;
@@ -29,18 +33,35 @@
             return mCanvas3;
         },
 
+        getMcanvasTarget: function(){
+            return mCanvasTarget;
+        },
+
         // setter
 
+        setMcanvasTarget: function(canvasTarget){
+            mCanvasTarget = canvasTarget;
+        },
+
+        setMcanvasDrawing: function(canvasDrawing){
+            mCanvasDrawing = canvasDrawing;
+        },
+
         init: function(){
-            mCanvas1 = $('canvas').get(0);
-            mCanvas2 = $('canvas').get(1);
-            mCanvas3 = $('canvas').get(2);
-            mTargetCanvas = mCanvas1;
-            mCanvasSave = $('canvas').get(3);
+            mCanvasDrawing = $('canvas').get(0);
+            mCanvas1 = $('canvas').get(1);
+            mCanvas2 = $('canvas').get(2);
+            mCanvas3 = $('canvas').get(3);
+            mCanvasTarget = mCanvas1;
+            mCanvasSave = $('canvas').get(4);
             mUndoImage = new Array(LAYER_N);
             mRestoreImage = new Array(LAYER_N);
             mUndoContext = new Array(LAYER_N);
             this.getUndoImg();
+        },
+
+        setLayerOpacity: function(alphaSize){
+            mCanvasDrawing.style.opacity = alphaSize;
         },
 
         //レイヤー、描くキャンバスを返す
@@ -50,17 +71,21 @@
                 if ($(this).hasClass('active')){
                     switch($(this).attr("id")){
                     case "1":
-                        select_canvas = mCanvas1;
+                        select_canvas = mCanvasDrawing;
                         break;
                     case "2":
-                        select_canvas = mCanvas2;
+                        select_canvas = mCanvas1;
                         break;
                     case "3":
+                        select_canvas = mCanvas2;
+                        break;
+                    case "4":
                         select_canvas = mCanvas3;
                         break;
                     }
                 }
             });
+            console.log("layernum: ", select_canvas);
             return select_canvas;
         },
 
