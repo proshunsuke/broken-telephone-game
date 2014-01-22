@@ -74,35 +74,32 @@
             // 戻る
             $('#undo').click(function(e) {
                 for(var i=0; i < LAYER_N; i++){
-                    paint.mUndoContext[i].putImageData(paint._undoImage[i],0,0);
+                    layer.putImageDataToUndoContext(layer.getMundoImg(),i);
                 }
             });
 
             // 復元
             $('#restore').click(function(e) {
                 for(var i=0; i < LAYER_N; i++){
-                    paint.mUndoContext[i].putImageData(paint.mRestoreImg[i],0,0);
+                    layer.putImageDataToUndoContext(layer.getRestoreImg(),i);
                 }
             });
 
             // 消去
             $('#clear').click(function(e) {
                 e.preventDefault();
-                paint.clearCanvas();
+                layer.clearCanvas();
             });
 
             // 画像で保存
             $('#save').click(function() {
-                var canvas = paint.mCanvasSave;
-                var context = canvas.getContext("2d");
-                var canvas_array = [paint.mCanvas1,paint.mCanvas2,paint.mCanvas3];
-                paint.saveOrSendImg(LAYER_N,1);
+                layer.saveOrSendImg(LAYER_N,1);
             });
 
             // 描き始める
             $('#startdraw').live("click",function(){
-                paint.clearCanvas();
-                paint.setMisDrawable(true);
+                layer.clearCanvas();
+                layer.setMisDrawable(true);
                 $('#startdraw').css({"visibility":"hidden"});
             });
 
@@ -142,7 +139,7 @@
                 if(game.mode.finish){
                     let mClickUser = $(this).html();
                     let imgList = game.getMimgList();
-                    paint.clearCanvas();
+                    layer.clearCanvas();
                     game.drawImgCore(imgList.recentUserImg(mClickUser));
                     game.changeDrawingUserColor(mClickUser);
                 }
@@ -153,7 +150,7 @@
                 if(!game.mode.gaming){
                     let url = $(this).attr("src");
                     let name = $(this).attr("name");
-                    paint.clearCanvas();
+                    layer.clearCanvas();
                     game.drawImgCore(url);
                     game.changeDrawingUserColor(name);
                 }

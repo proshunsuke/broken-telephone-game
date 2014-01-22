@@ -8,8 +8,8 @@
 
     let mCanvasSave;
 
-    let mUndoImage;
-    let mRestoreImage;
+    let mUndoImg;
+    let mRestoreImg;
 
     let mUndoContext;
 
@@ -37,6 +37,19 @@
             return mCanvasTarget;
         },
 
+        getMundoImage: function(){
+            return mUndoImg;
+        },
+
+        getMrestoreImg: function(){
+            return mRestoreImg;
+        },
+
+        getMundoContext: function(){
+            return mUndoContext;
+        },
+
+
         // setter
 
         setMcanvasTarget: function(canvasTarget){
@@ -54,10 +67,14 @@
             mCanvas3 = $('canvas').get(3);
             mCanvasTarget = mCanvas1;
             mCanvasSave = $('canvas').get(4);
-            mUndoImage = new Array(LAYER_N);
-            mRestoreImage = new Array(LAYER_N);
+            mUndoImg = new Array(LAYER_N);
+            mRestoreImg = new Array(LAYER_N);
             mUndoContext = new Array(LAYER_N);
             this.getUndoImg();
+        },
+
+        putImageDataToUndoContext: function(img,i){
+            mUndoContext[i].putImageData(mUndoImg[i],0,0);
         },
 
         setLayerOpacity: function(alphaSize){
@@ -70,16 +87,16 @@
             $('#layerul li:nth-child(n)').each(function(){
                 if ($(this).hasClass('active')){
                     switch($(this).attr("id")){
-                    case "1":
+                    case "0":
                         select_canvas = mCanvasDrawing;
                         break;
-                    case "2":
+                    case "1":
                         select_canvas = mCanvas1;
                         break;
-                    case "3":
+                    case "2":
                         select_canvas = mCanvas2;
                         break;
-                    case "4":
+                    case "3":
                         select_canvas = mCanvas3;
                         break;
                     }
@@ -114,7 +131,7 @@
             let canvas_array = [mCanvas1,mCanvas2,mCanvas3];
             for(var i=0; i < LAYER_N; i++){
                 mUndoContext[i] = canvas_array[i].getContext('2d');
-                mUndoImage[i] =
+                mUndoImg[i] =
                     mUndoContext[i].getImageData(0, 0, $('canvas').width(), $('canvas').height());
             }
         },
@@ -122,7 +139,7 @@
         // redo
         getRestoreImg: function(){
             for(var i=0; i < LAYER_N; i++){
-                mRestoreImage[i] =
+                mRestoreImg[i] =
                     mUndoContext[i].getImageData(0, 0, $('canvas').width(), $('canvas').height());
             }
         },
