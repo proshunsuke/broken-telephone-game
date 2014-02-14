@@ -60,10 +60,6 @@
             mIsDrawable = isDrawable;
         },
 
-        setMisDrawable: function(isDrawable){
-            mIsDrawable = isDrawable;
-        },
-
         setMbrushSize: function(brushSize){
             mBrushSize = brushSize;
         },
@@ -98,8 +94,6 @@
 
             layer.setMcanvasTarget(layer.getLayerNum());
             layer.setLayerOpacity(mAlphaSize);
-            console.log("layer.getMcanvasTarget()",layer.getMcanvasTarget());
-            console.log("layer.getMcanvasDrawing()",layer.getMcanvasDrawing());
             return false; // for chrome
         },
 
@@ -115,14 +109,16 @@
         },
 
         mouseUp: function(){
-            layer.getRestoreImg();
+            // layer.getRestoreImg(); 必要な処理だけど、今はコメントアウト。レイヤーの処理が終わったら外す
 
             layer.getMcanvasDrawing().getContext("2d").globalCompositeOperation="source-over";
-            layer.getMcanvasDrawing().getContext("2d").globalAlpha=1.0;
+            layer.getMcanvasDrawing().getContext("2d").globalAlpha = 1.0;
 
-            layer.getLayerNum().getContext("2d").globalAlpha = mAlphaSize;
-            layer.getLayerNum().getContext("2d").drawImage(layer.getMcanvasDrawing(),0,0);
-            layer.getLayerNum().getContext("2d").globalAlpha = 1;
+            layer.getMcanvasTarget().getContext("2d").globalAlpha = mAlphaSize;
+            layer.getMcanvasTarget().getContext("2d").drawImage(layer.getMcanvasDrawing(),0,0);
+            layer.getMcanvasTarget().getContext("2d").globalAlpha = 1.0;
+
+            layer.getMcanvasDrawing().getContext("2d").clearRect(0, 0, $('canvas').width(), $('canvas').height());
 
             mDrawFlag = false;
         },
@@ -143,7 +139,7 @@
                 context.globalAlpha = 1;
                 context.strokeStyle = "#FFFFFF";
             }else{
-                // context.globalAlpha = alpha; //test
+//                context.globalAlpha = alpha; //test
                 context.strokeStyle = color;
             }
 

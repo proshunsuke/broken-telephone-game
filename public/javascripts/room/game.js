@@ -96,19 +96,19 @@
         },
 
         changeMode: function(mode,username){
-            for(var i in game.mode){
-                game.mode[i] = false;
+            for(var i in this.mode){
+                this.mode[i] = false;
             }
-            game.mode[mode] = true;
+            this.mode[mode] = true;
 
             let modetext;
-            if(game.mode.wait){
+            if(this.mode.wait){
                 modetext = "待機中";
-            }else if(game.mode.setting){
+            }else if(this.mode.setting){
                 modetext = username + "さんが設定中です";
-            }else if(game.mode.gaming){
+            }else if(this.mode.gaming){
                 modetext = "ゲーム中";
-            }else if(game.mode.finish){
+            }else if(this.mode.finish){
                 modetext = "ゲーム終了";
             }
             $('#mode').html(modetext);
@@ -116,20 +116,20 @@
 
         },
 
-        changeFinishTime: function(Hour,Minute){
+        changeFinishTime: function(Hour,Minute,Second){
             let finishTimeText;
-            if(mode.wait){
+            if(this.mode.wait){
                 finishTimeText = "終了予定：";
             }else{
-                finishTimeText = "終了予定：" + Hour + "時" + Minute + "分";
+                finishTimeText = "終了予定：" + Hour + "時" + Minute + "分" + Second + "秒";
             }
-            $('#Finishtime').html(finishTimeText);
+            $('#finishtime').html(finishTimeText);
         },
 
         changeUserListLabel: function(){
-            if(game.mode.gaming || game.mode.finish){
+            if(this.mode.gaming || this.mode.finish){
                 $('#userslist').html('描く順番');
-            }else if(game.mode.wait || game.mode.setting){
+            }else if(this.mode.wait || this.mode.setting){
                 $('#userslist').html('ログイン中のユーザ');
             }
         },
@@ -139,12 +139,18 @@
             var drawingtext;
             if(drawmUser == "none"){
                 drawingtext = '誰も描いていません';
-            }else if(drawmUser == user.getMuser()){
+            }else if(drawmUser == user.getMuser()){ // 自分が描く番
                 drawingtext = 'あなたの番です';
                 audios.play();
-                $('#startdraw').css({"visibility":"visible"});
+                if(user.getMorderList()[user.getMorderList().length-1] == drawmUser){ // 一番最初の人は書き始めるボタン押さなくても良い
+                    layer.clearCanvas();
+                    paint.setMisDrawable(true);
+                    $('#startdraw').css({"visibility":"hidden"});
+                }else{
+                    $('#startdraw').css({"visibility":"visible"});
+                }
                 $('.progress .bar').css('width:100%');
-                this.timelimit(game.getMdrawTime());
+                this.timelimit(this.getMdrawTime());
             }else{
                 drawingtext = drawmUser + ' さんが描いています';
             }
@@ -174,7 +180,7 @@
             }
             Hour = Hour + plusH;
             Minute += 1;
-            this.changeFinishTime(Hour,Minute);
+            this.changeFinishTime(Hour,Minute,Second);
         },
 
         // 描き始める時間設定
@@ -241,7 +247,7 @@
                             $this.css('width','0%');
                             clearInterval(progress);
                             paint.setMisDrawable(false);
-                            paint.saveOrSendImg(LAYER_N,2);
+                            layer.saveOrSendImg(LAYER_N,2);
                         } else {
                             current -= downper;
                             currentsec -= 1;
@@ -262,13 +268,13 @@
         // canvasに絵を映す
         drawImgCore: function(show_img){
             let img = new Image();
-            let context = leyer.getMcanvas1().getContext("2d");
+            let context = layer.getMcanvas1().getContext("2d");
             let d = show_img.replace('image/png', 'image/octet-stream');
             img.src = d;
             img.onload = function() {
                 context.globalAlpha = 1.0; // 返ってきた絵が薄くなることを防ぐ
                 context.drawImage(img, 0, 0);
-                paint.getUndoImg();
+                layer.getUndoImg();
             }
         },
 
@@ -327,9 +333,9 @@
         renewalHost: function(hostname){
             if(hostname == user.getMuser()){
                 mIsHost = true;
-                if(mode.wait){
+                if(this.mode.wait){
                     $('#host').css({"visibility":"visible"});
-                }else if(mode.finish){
+                }else if(this.mode.finish){
                     $('#newgame').css({"visibility":"visible"});
                 }
             }else{

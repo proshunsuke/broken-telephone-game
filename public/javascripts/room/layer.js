@@ -1,4 +1,4 @@
-{ // test
+{
     let mCanvasDrawing;
     let mCanvas1;
     let mCanvas2;
@@ -37,7 +37,7 @@
             return mCanvasTarget;
         },
 
-        getMundoImage: function(){
+        getMundoImg: function(){
             return mUndoImg;
         },
 
@@ -63,10 +63,10 @@
         init: function(){
             mCanvasDrawing = $('canvas').get(0);
             mCanvas1 = $('canvas').get(1);
-            mCanvas2 = $('canvas').get(2);
-            mCanvas3 = $('canvas').get(3);
+            mCanvas2 = $('canvas').get(3);
+            mCanvas3 = $('canvas').get(5);
             mCanvasTarget = mCanvas1;
-            mCanvasSave = $('canvas').get(4);
+            mCanvasSave = $('canvas').get(6);
             mUndoImg = new Array(LAYER_N);
             mRestoreImg = new Array(LAYER_N);
             mUndoContext = new Array(LAYER_N);
@@ -83,27 +83,26 @@
 
         //レイヤー、描くキャンバスを返す
         getLayerNum: function(){
-            let select_canvas;
+            let selectCanvas;
             $('#layerul li:nth-child(n)').each(function(){
                 if ($(this).hasClass('active')){
                     switch($(this).attr("id")){
-                    case "0":
-                        select_canvas = mCanvasDrawing;
-                        break;
                     case "1":
-                        select_canvas = mCanvas1;
+                        selectCanvas = mCanvas1;
+                        mCanvasDrawing = $("canvas").get(0);
                         break;
                     case "2":
-                        select_canvas = mCanvas2;
+                        selectCanvas = mCanvas2;
+                        mCanvasDrawing = $("canvas").get(2);
                         break;
                     case "3":
-                        select_canvas = mCanvas3;
+                        selectCanvas = mCanvas3;
+                        mCanvasDrawing = $("canvas").get(4);
                         break;
                     }
                 }
             });
-            console.log("layernum: ", select_canvas);
-            return select_canvas;
+            return selectCanvas;
         },
 
         getSpuitColor: function(x,y){
@@ -183,6 +182,5 @@
                 }
             }
         }
-
     };
 }

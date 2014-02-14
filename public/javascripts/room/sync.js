@@ -109,7 +109,7 @@
                 orderList = data.list.concat();
                 user.setMorderList(orderList);
                 user.updateLoginUsers(orderList);
-                paint.clearCanvas();
+                layer.clearCanvas();
                 paint.setMisDrawable(false);
                 game.setMdrawTime(data.drawtime);
                 game.setFinalTime(game.getMdrawTime(),data.gameStartDate,orderList.length);
@@ -136,7 +136,7 @@
 
             // ゲーム終了
             socket.on('gamefin',function(data){
-                paint.getUndoImg();
+                layer.getUndoImg();
                 game.changeMode("finish",null);
                 game.changeDrawing("none");
                 user.updateLoginUsers(user.getMorderList());

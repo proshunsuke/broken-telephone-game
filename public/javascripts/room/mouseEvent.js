@@ -99,7 +99,7 @@
             // 描き始める
             $('#startdraw').live("click",function(){
                 layer.clearCanvas();
-                layer.setMisDrawable(true);
+                paint.setMisDrawable(true);
                 $('#startdraw').css({"visibility":"hidden"});
             });
 
