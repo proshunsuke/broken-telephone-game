@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/footer.ejs" afterPath="$PROJECT_DIR$/views/footer.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/game.js" afterPath="$PROJECT_DIR$/public/javascripts/room/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/layer.js" afterPath="$PROJECT_DIR$/public/javascripts/room/layer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" afterPath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/paint.js" afterPath="$PROJECT_DIR$/public/javascripts/room/paint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/room.ejs" afterPath="$PROJECT_DIR$/views/room.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/room/sync.js" />
-    </list>
+    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="" />
     <ignored path="brokenTerephoneGame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,7 +44,7 @@
       <file leaf-file-name="room.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/room.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="12" selection-start="2742" selection-end="2742" vertical-scroll-proportion="0.7184874" vertical-offset="324" max-vertical-offset="4572">
+            <state line="29" column="19" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.4159664" vertical-offset="324" max-vertical-offset="4572">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#canvas#0;n#div#0;n#div#0;n#div#1;n#li#0;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -787,7 +777,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/room.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="12" selection-start="2742" selection-end="2742" vertical-scroll-proportion="0.7184874" vertical-offset="324" max-vertical-offset="4572">
+        <state line="29" column="19" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.4159664" vertical-offset="324" max-vertical-offset="4572">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#canvas#0;n#div#0;n#div#0;n#div#1;n#li#0;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
