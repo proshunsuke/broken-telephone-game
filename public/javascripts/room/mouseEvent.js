@@ -58,6 +58,22 @@
                 $("#newcolor").css("background-color",mClickColor.toHex());
             });
 
+            // brush
+            $('#blushBox td').click(function(){
+                $('#blushBox td').removeClass('clicb');
+                $(this).removeClass('ofclicb');
+                $(this).addClass('clicb');
+                paint.setMbrushSize($(this).attr("value"));
+            });
+
+            // 透明度
+            $('#alphaBox td').click(function(){
+                $('#alphaBox td').removeClass('clica');
+                $(this).removeClass('ofclica');
+                $(this).addClass('clica');
+                paint.setMalphaSize($(this).attr("value"));
+            });
+
             // レイヤー
             $('#layerArea li').live('click',function(){
                 let clickli = $(this);
@@ -81,7 +97,7 @@
             // 復元
             $('#restore').click(function(e) {
                 for(var i=0; i < LAYER_N; i++){
-                    layer.putImageDataToUndoContext(layer.getRestoreImg(),i);
+                    layer.putImageDataToUndoContext(layer.getMrestoreImg(),i);
                 }
             });
 

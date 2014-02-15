@@ -74,7 +74,7 @@
         },
 
         putImageDataToUndoContext: function(img,i){
-            mUndoContext[i].putImageData(mUndoImg[i],0,0);
+            mUndoContext[i].putImageData(img[i],0,0);
         },
 
         setLayerOpacity: function(alphaSize){

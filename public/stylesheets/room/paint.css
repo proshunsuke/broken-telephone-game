@@ -10,15 +10,25 @@ canvas {
     /* margin: 0px 0px 10px 0px; */
 }
 
-textarea{
-    width: 93%;
-    height: 250px;
+#textarea{
+    width: 97%;
+    height: 65px;
     resize: none;
 }
 
-commentarea{
+#commentArea{
+    margin-left: -20px;
 
 }
+
+#commentGetArea{
+    width: 100%;
+}
+
+#commentPushArea{
+    width: 100%;
+}
+
 
 #button {
     position: relative;
@@ -80,6 +90,41 @@ ul {
     height: 12px;
 }
 
+.ofclicb {
+    border:1px #ccc solid
+}
+.clicb{
+    border: 1px #000000 solid;
+}
+
+.brushTable{
+    width: 90px;
+}
+
+.brushTable td{
+    table-layout: fixed;
+    width: 15px;
+    height: 15px;
+}
+
+.ofclica {
+    border:1px #ccc solid
+}
+.clica{
+    border: 1px #000000 solid;
+}
+
+.alphaTable{
+    width: 90px;
+}
+
+.alphaTable td{
+    table-layout: fixed;
+    width: 15px;
+    height: 15px;
+}
+
+
 #brush1, #brush2, #brush3, #brush4, #miter, #eraser {
     cursor:pointer;
     cursor:hand;
@@ -88,7 +133,7 @@ label {
     cursor:pointer;
     cursor:hand;
 }
-#bwbox {
+#blushBox {
     margin: 20px 0px 20px 0px;
     font-size:13px;
 }

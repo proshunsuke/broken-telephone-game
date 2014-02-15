@@ -18,6 +18,7 @@
 <script type="application/javascript;version=1.7" src="javascripts/room/mouseEvent.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/keypressEvent.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/slideEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/jscolor/jscolor.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/toInstance.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/onLoad.js"></script>
 
@@ -69,6 +70,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="span1">
+                    <a class="btn btn-warning disabled" id="start" style="visibility:hidden;">ゲーム開始</a>
+                </div>
             </div>
 
             <div id="button">
@@ -76,16 +80,42 @@
                     <a class="btn" id="undo">戻る</a>
                     <a class="btn" id="restore">復元</a>
                     <a class="btn" id="clear">消去</a>
-                    <a class="btn" id="save">画像で保存</a>
+                    <a class="btn" id="save">絵を保存</a>
+                </div>
+                <div id="hostTool" style="display:inline-block;">
+                    <a class="btn btn-warning" id="host" style="visibility:hidden;">設定</a>
+                    <a class="btn btn-warning" id="newgame" style="visibility:hidden;">NEWGAME</a>
                 </div>
                 <div id="gameTool" style="display:inline-block;">
                     <a class="btn btn-primary" id="startdraw" style="visibility:hidden;">描き始める</a>
-                    <a class="btn btn-warning disabled" id="start" style="visibility:hidden;">ゲーム開始</a>
+                    <a class="btn btn-primary" id="toimg" style="visibility:hidden;">絵の一覧</a>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div class="container">
+        <form class="form-vertical">
+            <div class="control-group">
+                <div class="controls">
+                    <div id="commentArea">
+                        <li class="span4">
+                            <span class="label label-success" id="commentList">コメント</span></br>
+                            <input type="text" id="commentPushArea"/>
+                            </il>
+                        <li class="span4">
+                            <div id="commentGetArea">
+                                <textarea class="" id="textarea"
+                                          readonly="readonly" style="background-color:#FFFFFF;font-size:12px;"></textarea>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </li>
 
 <li class="span2">
@@ -100,103 +130,172 @@
 
     <span class="label label-warning">カラー</span>
     <div id="colorArea" class="thumbnail alert alert-info">
-        <div id="newcolor" style="background-color:#000000"></div>
+        <input id="newcolor" class="color" style="background-color:#000000">
+
         <table border="1" bordercolor="#FFFFFF" width="100%" style="table-layout: fixed;">
             <tr>
                 <!-- 黒 -->
                 <td class="ofclic" id="colorlist"  style="background-color:#FFFFFF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#999999"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#666666"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#333333"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#000000"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#b9b9b9"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#757575"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#363636"></td>
+                <td class="clic" id="colorlist"  style="background-color:#000000"></td>
             </tr>
             <tr>
                 <!-- 水青 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#C0FFFF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#61CCFF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#0099FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#004CA3"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#000047"></td>
-
+                <td class="ofclic" id="colorlist"  style="background-color:#a6d4ec"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#53abda"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#667799"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#4444ff"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#222244"></td>
             </tr>
             <tr>
                 <!-- 緑 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#A0FFA0"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#50B250"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#006600"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#004700"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#002600"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#b8d7b8"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#73AF72"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#30862F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#1E531D"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#0D250D"></td>
             </tr>
             <tr>
                 <!-- 黄緑 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#A0FFA0"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#50FF50"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#00FF00"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#009B00"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#003700"></td>
-
+                <td class="ofclic" id="colorlist"  style="background-color:#D2E2AD"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#A5C45E"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#79A514"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#4A660D"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#222E06"></td>
             </tr>
             <tr>
                 <!-- 黄色 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#FFFFA0"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FFFF4E"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FFFF00"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#A5A500"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#494900"></td>
-
+                <td class="ofclic" id="colorlist"  style="background-color:#F4E4A3"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#E8C84C"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#DDAC00"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#886A00"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#3E3000"></td>
             </tr>
             <tr>
                 <!-- オレンジ -->
-                <td class="ofclic" id="colorlist"  style="background-color:#FFB986"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FF8F43"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FF6600"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#BB4B00"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#562300"></td>
-
+                <td class="ofclic" id="colorlist"  style="background-color:#F9CBA4"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#F4994F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#EE6602"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#933F02"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#421C00"></td>
+            </tr>
+            <tr>
+                <!-- 濃いオレンジ -->
+                <td class="ofclic" id="colorlist"  style="background-color:#F7BAA6"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#F07852"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#E83606"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#902204"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#400F02"></td>
             </tr>
             <tr>
                 <!-- 赤 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#FFB9FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FF5C80"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#FF0000"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#BD0000"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#7C0000"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#F3A3A3"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#E64C4C"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#DA0000"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#860000"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#3D0000"></td>
+
+            </tr>
+            <tr>
+                <!-- 濃い赤 -->
+                <td class="ofclic" id="colorlist"  style="background-color:#E7A3B5"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#CF4C6F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#CF4C6F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#70001B"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#33000C"></td>
 
             </tr>
             <tr>
                 <!-- 紫 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#FFC0FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#CC60CC"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#990099"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#520052"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#290029"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#DBA5D2"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#B750A5"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#920478"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#5A024A"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#290122"></td>
 
             </tr>
             <tr>
-                <!-- 青 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#D0D0FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#6969FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#0000FF"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#00009F"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#00003F"></td>
+                <!-- 青紫 -->
+                <td class="ofclic" id="colorlist"  style="background-color:#CAAEDD"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#9761BC"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#631899"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#3E0F5F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#1C062B"></td>
             </tr>
-
+            <tr>
+                <!-- 青 -->
+                <td class="ofclic" id="colorlist"  style="background-color:#B4B9E8"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#6B73D2"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#2631BB"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#171E73"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#0B0E34"></td>
+            </tr>
         </table>
-
     </div>
+</li>
+
+<li class="span2">
 
     <span class="label label-warning">ライン</span>
     <div id="toolArea" class="thumbnail alert alert-info">
-        <div id="bwbox">
-            ブラシ幅&nbsp;<input type="text" id="bw" value="10" readonly="readonly" /></br></br>
-            <div id="slider">
-            </div>
+        <div id="blushBox">
+            ブラシ幅<br/>
+            <table class="brushTable" border="1" bordercolor="#FFFFFF" width="100%" style="table-layout: fixed;">
+                <tr>
+                    <td class="ofclicb" id="brushList" value="1"><img src="medias/images/brush2.png" alt="見えません"></td>
+                    <td class="clicb" id="brushList" value="10"><img src="medias/images/brush3.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="19"><img src="medias/images/brush4.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="28"><img src="medias/images/brush5.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="37"><img src="medias/images/brush6.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="46"><img src="medias/images/brush7.png" alt="見えません"></td>
+                </tr>
+                <tr>
+                    <td class="ofclicb" id="brushList" value="55"><img src="medias/images/brush8.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="64"><img src="medias/images/brush9.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="73"><img src="medias/images/brush10.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="82"><img src="medias/images/brush11.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="91"><img src="medias/images/brush12.png" alt="見えません"></td>
+                    <td class="ofclicb" id="brushList" value="100"><img src="medias/images/brush13.png" alt="見えません"></td>
+                </tr>
+            </table>
         </div>
-        <div id="bwbox">
-            透明度　&nbsp;<input type="text" id="alpha" value="100" readonly="readonly" /></br></br>
-            <div id="slider2"></div>
+        <div id="alphaBox">
+            透明度<br/>
+            <table class="alphaTable" border="1" bordercolor="#FFFFFF" width="100%" style="table-layout: fixed;">
+                <tr>
+                    <td class="ofclica" id="alphaList" value="0.01"><img src="medias/images/alpha1.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.10"><img src="medias/images/alpha10.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.19"><img src="medias/images/alpha19.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.28"><img src="medias/images/alpha28.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.37"><img src="medias/images/alpha37.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.46"><img src="medias/images/alpha46.png" alt="見えません"></td>
+                </tr>
+                <tr>
+                    <td class="ofclica" id="alphaList" value="0.55"><img src="medias/images/alpha55.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.64"><img src="medias/images/alpha64.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.73"><img src="medias/images/alpha73.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.82"><img src="medias/images/alpha82.png" alt="見えません"></td>
+                    <td class="ofclica" id="alphaList" value="0.91"><img src="medias/images/alpha91.png" alt="見えません"></td>
+                    <td class="clica" id="alphaList" value="1.00"><img src="medias/images/alpha100.png" alt="見えません"></td>
+                </tr>
+            </table>
         </div>
     </div>
+
+    <!--<span class="label label-warning">ライン</span>-->
+    <!--<div id="toolArea" class="thumbnail alert alert-info">-->
+        <!--<div id="blushBox">-->
+            <!--ブラシ幅&nbsp;<input type="text" id="bw" value="10" readonly="readonly" /></br></br>-->
+            <!--<div id="slider">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div id="blushBox">-->
+            <!--透明度　&nbsp;<input type="text" id="alpha" value="100" readonly="readonly" /></br></br>-->
+            <!--<div id="slider2"></div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <span class="label label-warning" id="layers">レイヤー</span>
     <div id="layerArea" class="thumbnail alert alert-info">
@@ -213,26 +312,9 @@
         </ul>
     </div>
 
-</li>
-<li class="span2">
     <span class="label label-success" id="userslist">ログイン中のユーザ</span>
     <div id="usernameArea" class="thumbnail alert alert-info">
     </div>
-    <a class="btn" id="host" style="visibility:hidden;">設定する</a>
-    <a class="btn" id="toimg" style="visibility:hidden;">キャンバスを画像化</a>
-    <a class="btn btn-warning" id="newgame" style="visibility:hidden;">NEWGAME</a>
-
-    <form class="form-vertical">
-        <div class="control-group">
-            <div class="controls">
-                <span class="label label-success" id="userslist">コメント</span>
-                <div id="usernameArea" class="thumbnail alert alert-info">
-                    <textarea class="" id="textarea" readonly="readonly" style="background-color:#FFFFFF;font-size:12px;"></textarea>
-                </div>
-                <input type="text" class="span2" id="commentarea"/>
-            </div>
-        </div>
-    </form>
 
 </li>
 </ul>

@@ -109,7 +109,7 @@
         },
 
         mouseUp: function(){
-            // layer.getRestoreImg(); 必要な処理だけど、今はコメントアウト。レイヤーの処理が終わったら外す
+            layer.getRestoreImg();
 
             layer.getMcanvasDrawing().getContext("2d").globalCompositeOperation="source-over";
             layer.getMcanvasDrawing().getContext("2d").globalAlpha = 1.0;
