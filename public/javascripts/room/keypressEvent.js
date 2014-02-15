@@ -4,7 +4,7 @@
 
         init: function(){
 
-            $('#commentarea').live('keypress',function (e) {
+            $('#commentPushArea').live('keypress',function (e) {
                 if(e.keyCode == 13) {
                     box = $(this);
                     let t_val = $(box).val();

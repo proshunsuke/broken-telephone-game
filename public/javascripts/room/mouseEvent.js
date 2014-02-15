@@ -9,7 +9,7 @@
             // スポイト
             $('canvas').click(function(e) {
                 if(paint.getMisDrawable()){
-                    if(tool.mTools.spuit){
+                    if(tool.getMtools()["spuit"]){
                         paint.mouseClick(e,$(this).offset().left,$(this).offset().top);
                     }
                 }
@@ -18,7 +18,7 @@
             // マウスダウン
             $('canvas').mousedown(function(e) {
                 if(paint.getMisDrawable()){
-                    if(!tool.mTools.spuit){
+                    if(!tool.getMtools()["spuit"]){
                         paint.mouseDown(e,$(this).offset().left,$(this).offset().top);
                     }
                 }
@@ -58,6 +58,22 @@
                 $("#newcolor").css("background-color",mClickColor.toHex());
             });
 
+            // brush
+            $('#blushBox td').click(function(){
+                $('#blushBox td').removeClass('clicb');
+                $(this).removeClass('ofclicb');
+                $(this).addClass('clicb');
+                paint.setMbrushSize($(this).attr("value"));
+            });
+
+            // 透明度
+            $('#alphaBox td').click(function(){
+                $('#alphaBox td').removeClass('clica');
+                $(this).removeClass('ofclica');
+                $(this).addClass('clica');
+                paint.setMalphaSize($(this).attr("value"));
+            });
+
             // レイヤー
             $('#layerArea li').live('click',function(){
                 let clickli = $(this);
@@ -73,22 +89,36 @@
             // キャンバスボタン
             // 戻る
             $('#undo').click(function(e) {
-                for(var i=0; i < LAYER_N; i++){
-                    layer.putImageDataToUndoContext(layer.getMundoImg(),i);
+                if(!$("#undo").hasClass("disabled")){
+                    for(var i=0; i < LAYER_N; i++){
+                        layer.putImageDataToUndoContext(layer.getMundoImg(),layer.getMcanUndoNum(),i);
+                    }
+                    layer.canUndoNumMinus();
                 }
             });
 
             // 復元
             $('#restore').click(function(e) {
-                for(var i=0; i < LAYER_N; i++){
-                    layer.putImageDataToUndoContext(layer.getRestoreImg(),i);
+                if(!$('#restore').hasClass("disabled")){
+                    layer.canUndoNumPlus();
+                    for(var i=0; i < LAYER_N; i++){
+                        if(layer.getMundoImg().length <= layer.getMcanRestoreNum()){
+                            layer.putImageDataToRestoreContext(layer.getMrestoreImg(),i);
+                        }else{
+                            layer.putImageDataToUndoContext(layer.getMundoImg(),layer.getMcanRestoreNum(),i);
+                        }
+                    }
                 }
             });
 
             // 消去
             $('#clear').click(function(e) {
-                e.preventDefault();
-                layer.clearCanvas();
+                if(!$('#clear').hasClass("disabled")){
+                    e.preventDefault();
+                    layer.clearCanvas();
+                    $('#clear').addClass("disabled");
+                    layer.canUndoNumMinus();
+                }
             });
 
             // 画像で保存

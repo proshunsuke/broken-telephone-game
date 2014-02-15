@@ -1,6 +1,8 @@
 { // scope
 
     let mCommentList;
+    let kCommentSize;
+    let mIsSizeOver;
 
     let renewalComments = function(commentList){ // private
         $('#textarea').val("");
@@ -16,10 +18,17 @@
     var chat = { // gloval namespace object
 
         init: function(){ // public
-            mCommentList = new Array();
+            mCommentList = [];
+            kCommentSize = 50; // コメントは最大５０個
+            mIsSizeOver = false;
         },
 
         writeComment: function(addComment){ // public
+            if(mIsSizeOver){
+                mCommentList.shift();
+            }else if (mCommentList.length > kCommentSize){
+                mIsSizeOver = true;
+            }
             mCommentList.push(addComment);
             renewalComments(mCommentList);
         }

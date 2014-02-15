@@ -87,13 +87,12 @@
 
 
         mouseDown: function(e,x,y){
-            layer.getUndoImg();
+
             mDrawFlag = true;
             mStartX = e.pageX - x - mOffset;
             mStartY = e.pageY - y - mOffset;
 
             layer.setMcanvasTarget(layer.getLayerNum());
-            layer.setLayerOpacity(mAlphaSize);
             return false; // for chrome
         },
 
@@ -101,15 +100,15 @@
             let endX = e.pageX - x - mOffset;
             let endY = e.pageY - y - mOffset;
 
-            this.drawCore(layer.getMcanvasDrawing(),endX,endY,this.getColor(),
-                          mBrushSize,mAlphaSize,tool.mTools);
+            this.drawCore(layer.getMcanvasDrawing(),endX,endY);
 
             mStartX = endX;
             mStartY = endY;
         },
 
         mouseUp: function(){
-            // layer.getRestoreImg(); 必要な処理だけど、今はコメントアウト。レイヤーの処理が終わったら外す
+            layer.getRestoreImg();
+            layer.getUndoImg();
 
             layer.getMcanvasDrawing().getContext("2d").globalCompositeOperation="source-over";
             layer.getMcanvasDrawing().getContext("2d").globalAlpha = 1.0;
@@ -128,25 +127,25 @@
             mDrawFlag = false;
         },
 
-        drawCore: function(canvas,x,y,color,size,alpha,tool){
+        drawCore: function(canvas,x,y){
             let context;
-            if (canvas.getContext) {
-                context = canvas.getContext('2d');
+            if(canvas.getContext){
+                context = canvas.getContext("2d");
             }
             context.beginPath();
-            context.globalCompositeOperation = 'source-over';
-            if(tool.eraser == true){
-                context.globalAlpha = 1;
+
+            if(tool.getMtools()["eraser"]){
                 context.strokeStyle = "#FFFFFF";
             }else{
-//                context.globalAlpha = alpha; //test
-                context.strokeStyle = color;
+                context.strokeStyle = this.getColor();
+                layer.setLayerOpacity(mAlphaSize);
             }
-
-            context.lineWidth = size;
+            context.globalCompositeOperation = 'source-over';
+            context.lineWidth = mBrushSize;
             context.lineJoin= 'round';
             context.lineCap = 'round';
             context.shadowBlur = 0;
+
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(mStartX, mStartY);
             context.lineTo(x, y);

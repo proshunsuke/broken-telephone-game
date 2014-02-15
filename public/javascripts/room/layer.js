@@ -13,6 +13,45 @@
 
     let mUndoContext;
 
+    let kUndoNum;
+    let mCanUndoNum;
+    let mCanRestoreNum;
+
+    // mCanUndoNum以降のmUndoImg配列を消す
+    // mUndoImg[0]〜[40]まである時, mCanUndoNumが20だと
+    // mUndoImg[21]〜[40]を削除
+    let deleteUndoImgAfterCanUndoNum = function(){
+        // 消す必要があるときだけ消す
+        if(mUndoImg.length != mCanUndoNum+1){
+            mUndoImg.splice(mCanUndoNum+1,mUndoImg.length-mCanUndoNum);
+        }
+    }
+
+    let showOrHideUndoRestoreBtn = function(){
+        //undo
+        if(mCanUndoNum == 0 || $('#clear').hasClass("disabled")){
+            $('#undo').addClass('disabled');
+        }else{
+            $('#undo').removeClass('disabled');
+        }
+
+        // restore
+        if(mCanRestoreNum >= mUndoImg.length || mUndoImg.length <= 1){
+            $('#restore').addClass('disabled');
+        }else{
+            $('#restore').removeClass('disabled');
+        }
+    }
+
+    let showOrHideClearBtn = function(){
+        // clear
+        if(mUndoImg.length <= 0){
+            $('#clear').addClass("disabled");
+        }else{
+            $('#clear').removeClass("disabled");
+        }
+    }
+
     var layer = {
 
         // getter
@@ -49,6 +88,13 @@
             return mUndoContext;
         },
 
+        getMcanUndoNum: function(){
+            return mCanUndoNum;
+        },
+
+        getMcanRestoreNum: function(){
+            return mCanRestoreNum;
+        },
 
         // setter
 
@@ -60,6 +106,10 @@
             mCanvasDrawing = canvasDrawing;
         },
 
+        setMcanUndoNum: function(canUndoNum){
+            mCanUndoNum = canUndoNum;
+        },
+
         init: function(){
             mCanvasDrawing = $('canvas').get(0);
             mCanvas1 = $('canvas').get(1);
@@ -67,14 +117,12 @@
             mCanvas3 = $('canvas').get(5);
             mCanvasTarget = mCanvas1;
             mCanvasSave = $('canvas').get(6);
-            mUndoImg = new Array(LAYER_N);
-            mRestoreImg = new Array(LAYER_N);
-            mUndoContext = new Array(LAYER_N);
+            mUndoImg = [];
+            mRestoreImg = [];
+            mUndoContext = [];
+            kUndoNum = 33;
+            mCanUndoNum = -1;
             this.getUndoImg();
-        },
-
-        putImageDataToUndoContext: function(img,i){
-            mUndoContext[i].putImageData(mUndoImg[i],0,0);
         },
 
         setLayerOpacity: function(alphaSize){
@@ -126,13 +174,38 @@
         },
 
         //undo 描いた絵のキャンバスとイメージを取得
+        // キャンバスにmouseDownする毎に呼び出される
         getUndoImg: function(){
             let canvas_array = [mCanvas1,mCanvas2,mCanvas3];
+            let mTempUndoImg = [];
             for(var i=0; i < LAYER_N; i++){
                 mUndoContext[i] = canvas_array[i].getContext('2d');
-                mUndoImg[i] =
+                mTempUndoImg[i] =
                     mUndoContext[i].getImageData(0, 0, $('canvas').width(), $('canvas').height());
             }
+
+            if(mUndoImg.length > kUndoNum){
+                mUndoImg.splice(1,1);
+            }else{
+                this.canUndoNumPlus();
+            }
+
+            mUndoImg.push(mTempUndoImg);
+            deleteUndoImgAfterCanUndoNum();
+        },
+
+        // mCanUndoNumをプラス１する, mCanRestoreNumは常にmCanUndoNum+1の値になるので連動させる
+        canUndoNumPlus: function(){
+            mCanUndoNum++;
+            mCanRestoreNum = mCanUndoNum+1 ;
+            showOrHideClearBtn();
+            showOrHideUndoRestoreBtn();
+        },
+
+        canUndoNumMinus: function(){
+            mCanUndoNum--;
+            mCanRestoreNum = mCanUndoNum+1 ;
+            showOrHideUndoRestoreBtn();
         },
 
         // redo
@@ -141,6 +214,14 @@
                 mRestoreImg[i] =
                     mUndoContext[i].getImageData(0, 0, $('canvas').width(), $('canvas').height());
             }
+        },
+
+        putImageDataToUndoContext: function(img,canNum,layerNum){
+            mUndoContext[layerNum].putImageData(img[canNum][layerNum],0,0);
+        },
+
+        putImageDataToRestoreContext: function(img,layerNum){
+            mUndoContext[layerNum].putImageData(img[layerNum],0,0);
         },
 
         // 描いている絵を全消去

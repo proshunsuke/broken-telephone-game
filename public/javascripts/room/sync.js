@@ -217,7 +217,6 @@
 
         // roomと名前を伝える
         emitInit :function(){
-            console.log("user.getMuser(): "+user.getMuser());
             mSocket.emit('init',{
                 room: room.getQuerystring('room'),
                 name: user.getMuser()
