@@ -5,11 +5,11 @@
 <script type="application/javascript;version=1.7" src="javascripts/room/rgbcolor.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/const.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/oekaki_list.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/room/layer.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/paint.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/sync.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/user.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/tool.js"></script>
-<script type="application/javascript;version=1.7" src="javascripts/room/layer.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/chat.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/game.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/room/room.js"></script>
@@ -77,9 +77,9 @@
 
             <div id="button">
                 <div id="canvasTool" style="display:inline-block;">
-                    <a class="btn" id="undo">戻る</a>
-                    <a class="btn" id="restore">復元</a>
-                    <a class="btn" id="clear">消去</a>
+                    <a class="btn disabled" id="undo">戻る</a>
+                    <a class="btn disabled" id="restore">復元</a>
+                    <a class="btn disabled" id="clear">消去</a>
                     <a class="btn" id="save">絵を保存</a>
                 </div>
                 <div id="hostTool" style="display:inline-block;">
@@ -143,15 +143,15 @@
             </tr>
             <tr>
                 <!-- 水青 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#a6d4ec"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#53abda"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#667799"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#4444ff"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#222244"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#A6D4EC"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#53ABDA"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#0680C6"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#044F7B"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#022437"></td>
             </tr>
             <tr>
                 <!-- 緑 -->
-                <td class="ofclic" id="colorlist"  style="background-color:#b8d7b8"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#B8D7B8"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#73AF72"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#30862F"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#1E531D"></td>
@@ -202,7 +202,7 @@
                 <!-- 濃い赤 -->
                 <td class="ofclic" id="colorlist"  style="background-color:#E7A3B5"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#CF4C6F"></td>
-                <td class="ofclic" id="colorlist"  style="background-color:#CF4C6F"></td>
+                <td class="ofclic" id="colorlist"  style="background-color:#B5002B"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#70001B"></td>
                 <td class="ofclic" id="colorlist"  style="background-color:#33000C"></td>
 

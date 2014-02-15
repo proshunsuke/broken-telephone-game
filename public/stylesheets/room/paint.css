@@ -99,6 +99,7 @@ ul {
 
 .brushTable{
     width: 90px;
+    /*margin-left: 10%;*/
 }
 
 .brushTable td{
@@ -134,9 +135,20 @@ label {
     cursor:hand;
 }
 #blushBox {
-    margin: 20px 0px 20px 0px;
+    /*margin: 20px 0px 20px 0px;*/
     font-size:13px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
 }
+
+#alphaBox{
+    font-size:13px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
 #bw,#alpha {
     display:inline-block;
     width: 25px;
