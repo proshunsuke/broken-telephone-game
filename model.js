@@ -2,11 +2,11 @@ const MONGO_URL = process.env.MONGOHQ_URL;
 
 var mongoose = require('mongoose');
 
-// ローカル用
-var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
-
-// heroku用
-// var db = mongoose.connect(MONGO_URL);
+if(MONGO_URL){// heroku用
+    var db = mongoose.connect(MONGO_URL);
+}else{// ローカル用
+    var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
+}
 
 
 var Room = new mongoose.Schema({
