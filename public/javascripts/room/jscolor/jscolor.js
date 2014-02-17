@@ -954,7 +954,6 @@ var jscolor = {
                 abortBlur = false;
             }
         });
-
         // valueElement
         if(valueElement) {
             var updateField = function() {
