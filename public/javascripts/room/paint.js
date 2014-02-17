@@ -74,6 +74,7 @@
             mIsDrawable = true;
             mBrushSize = 10;
             mAlphaSize = 1;
+            setTimeout(function(){paint.setColor("#000000");},500);// jscolorが初期値を勝手に変えてしまうから仕方なく
         },
 
         mouseClick: function(e,x,y){
@@ -92,7 +93,9 @@
             mStartX = e.pageX - x - mOffset;
             mStartY = e.pageY - y - mOffset;
 
-            layer.setMcanvasTarget(layer.getLayerNum());
+            let targetCanvas = layer.getLayerNum();
+            layer.setMcanvasTarget(targetCanvas);
+            layer.setMcanvasDrawingFromTargetCanvas(targetCanvas);
             return false; // for chrome
         },
 
@@ -109,8 +112,15 @@
         mouseUp: function(){
             layer.getRestoreImg();
             layer.getUndoImg();
+            mDrawFlag = false;
 
             layer.getMcanvasDrawing().getContext("2d").globalCompositeOperation="source-over";
+
+            // 消しゴムを選択しているのならこの先の処理行わない
+            if(tool.getMtools()["eraser"]){
+                return;
+            }
+
             layer.getMcanvasDrawing().getContext("2d").globalAlpha = 1.0;
 
             layer.getMcanvasTarget().getContext("2d").globalAlpha = mAlphaSize;
@@ -118,8 +128,6 @@
             layer.getMcanvasTarget().getContext("2d").globalAlpha = 1.0;
 
             layer.getMcanvasDrawing().getContext("2d").clearRect(0, 0, $('canvas').width(), $('canvas').height());
-
-            mDrawFlag = false;
         },
 
         mouseLeave: function(){
@@ -135,12 +143,13 @@
             context.beginPath();
 
             if(tool.getMtools()["eraser"]){
-                context.strokeStyle = "#FFFFFF";
+                context.strokeStyle = "#000000";
+                context.globalCompositeOperation = 'destination-out';
             }else{
                 context.strokeStyle = this.getColor();
                 layer.setLayerOpacity(mAlphaSize);
+                context.globalCompositeOperation = 'source-over';
             }
-            context.globalCompositeOperation = 'source-over';
             context.lineWidth = mBrushSize;
             context.lineJoin= 'round';
             context.lineCap = 'round';
@@ -157,5 +166,9 @@
         getColor: function(){
             return $("#newcolor").css("background-color");
         },
+
+        setColor: function(hex){
+            $("#newcolor").css("background-color",hex);
+        }
     };
 }

@@ -131,26 +131,45 @@
 
         //レイヤー、描くキャンバスを返す
         getLayerNum: function(){
-            let selectCanvas;
+            let targetCanvas;
             $('#layerul li:nth-child(n)').each(function(){
                 if ($(this).hasClass('active')){
                     switch($(this).attr("id")){
                     case "1":
-                        selectCanvas = mCanvas1;
-                        mCanvasDrawing = $("canvas").get(0);
+                        targetCanvas = mCanvas1;
                         break;
                     case "2":
-                        selectCanvas = mCanvas2;
-                        mCanvasDrawing = $("canvas").get(2);
+                        targetCanvas = mCanvas2;
                         break;
                     case "3":
-                        selectCanvas = mCanvas3;
-                        mCanvasDrawing = $("canvas").get(4);
+                        targetCanvas = mCanvas3;
                         break;
                     }
                 }
             });
-            return selectCanvas;
+            return targetCanvas;
+        },
+
+        // 描くキャンバスを設定
+        setMcanvasDrawingFromTargetCanvas: function(targetCanvas){
+
+            // 消しゴム選択している時は,targetCanvasに直接描く
+            if(tool.getMtools()["eraser"]){
+                mCanvasDrawing = targetCanvas;
+                return;
+            }
+
+            switch(targetCanvas){
+                case mCanvas1:
+                    mCanvasDrawing = mCanvasDrawing = $("canvas").get(0);
+                    break;
+                case mCanvas2:
+                    mCanvasDrawing = mCanvasDrawing = $("canvas").get(2);
+                    break;
+                case mCanvas3:
+                    mCanvasDrawing = mCanvasDrawing = $("canvas").get(4);
+                    break;
+            }
         },
 
         getSpuitColor: function(x,y){

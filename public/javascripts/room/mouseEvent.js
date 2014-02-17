@@ -45,17 +45,21 @@
 
 
             //ツール クリックしたツールをtrueに
-            $("[name='tool']").click(function(){
-                let mToolName = $(this).attr("id");
-                tool.changeTool(mToolName);
+            $('#toolBox td').click(function(){
+                $('#toolBox td').removeClass('clict');
+                $('#toolBox td').addClass('ofclict');
+                $(this).removeClass('ofclict');
+                $(this).addClass('clict');
+                tool.changeTool($(this).attr("value"));
             });
+
 
             // color
             $('#colorArea td').click(function() {
                 let mClickColor = new RGBColor($(this).css('background-color'));
                 $('#colorArea td').removeClass('clic');
                 $(this).addClass('clic');
-                $("#newcolor").css("background-color",mClickColor.toHex());
+                paint.setColor(mClickColor.toHex());
             });
 
             // brush
@@ -142,10 +146,13 @@
                     $('#start').addClass('disabled');
                     isStart = false;
                     game.setMisStart(isStart);
-                    $("#canvases").css({"display":"block"});
-                    $("#start").css({"visibility":"hidden"});
+//                    $("#canvases").css({"display":"block"});
+//                    $("#start").css({"visibility":"hidden"});
+//                    $("#hostSettingArea").css({"display":"none"});
+//                    $("#canvasTool").css({"visibility":"visible"});
                     $("#hostSettingArea").css({"display":"none"});
-                    $("#canvasTool").css({"visibility":"visible"});
+                    $("#canvasbox").css({"display":"block"});
+
 
 
                 }
@@ -194,10 +201,11 @@
                 game.setMisHost(true);
                 sync.emitHost(true,user.getMuser());
 
-                $("#canvases").css({"display":"none"});
-                $("#start").css({"visibility":"visible"});
+//                $("#canvases").css({"display":"none"});
+//                $("#start").css({"visibility":"visible"});
+                $("#canvasbox").css({"display":"none"});
                 $("#hostSettingArea").css({"display":"block"});
-                $("#canvasTool").css({"visibility":"hidden"});
+//                $("#canvasTool").css({"visibility":"hidden"});
 
                 user.setMuserList(user.getMusers().concat());
                 user.updateUserList(user.getMuserList(),"drawuserNum","canvasusernameArea");

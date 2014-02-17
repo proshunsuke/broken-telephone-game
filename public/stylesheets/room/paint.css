@@ -29,7 +29,6 @@ canvas {
     width: 100%;
 }
 
-
 #button {
     position: relative;
     clear: both;
@@ -90,41 +89,42 @@ ul {
     height: 12px;
 }
 
-.ofclicb {
+.ofclicb, .ofclica {
     border:1px #ccc solid
 }
-.clicb{
+.clicb, .clica{
     border: 1px #000000 solid;
 }
 
-.brushTable{
-    width: 90px;
-    /*margin-left: 10%;*/
+.ofclict {
+    border: 1px #000000 solid;
+    background-color: #FFFFFF;
 }
 
-.brushTable td{
+.clict{
+    border: 1px #000000 solid;
+    background-color: #999999;
+}
+
+.brushTable, .alphaTable{
+    width: 90px;
+}
+
+.toolTable{
+    width: 92px;
+}
+
+.brushTable td, .alphaTable td{
     table-layout: fixed;
     width: 15px;
     height: 15px;
 }
 
-.ofclica {
-    border:1px #ccc solid
-}
-.clica{
-    border: 1px #000000 solid;
-}
-
-.alphaTable{
-    width: 90px;
-}
-
-.alphaTable td{
+.toolTable td{
     table-layout: fixed;
-    width: 15px;
-    height: 15px;
+    width: 23px;
+    height: 23px;
 }
-
 
 #brush1, #brush2, #brush3, #brush4, #miter, #eraser {
     cursor:pointer;
