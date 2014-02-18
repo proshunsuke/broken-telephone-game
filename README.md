@@ -2,7 +2,11 @@ broken-telephone-game
 =====================
 「お絵かき伝言ゲーム」です。
 
-URLはこちら：http://broken-telephone-game.herokuapp.com/
+URLはこちら：
+
+http://broken-telephone-game.herokuapp.com/
+
+http://www15181ui.sakura.ne.jp:3000/
 
 お絵かき伝言ゲームとは
 ----------------------
@@ -12,7 +16,7 @@ URLはこちら：http://broken-telephone-game.herokuapp.com/
 
 前の人の絵を見て、その絵をたよりに絵を描いて、そしてその絵を伝えていく・・・。
 
-とっても簡単なゲームです。気軽に遊んでください！ 
+とっても簡単なゲームです。気軽に遊んでください！
 
 ローカルでの動かし方
 --------------------
@@ -28,9 +32,9 @@ URLはこちら：http://broken-telephone-game.herokuapp.com/
 mongoDBを起動します。
 
     $ mongoDBのパス/bin/gongod --nojournal --noprealloc --dbpath mongoDBのパス/db/
-    
+
 node.jsを起動します。
 
     $ node app.js
-    
+
 [http://localhost:3000/](http://localhost:3000/) にアクセスします。
