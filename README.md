@@ -27,7 +27,6 @@ http://www15181ui.sakura.ne.jp:3000/
 予めインストールしておいてください。
 
 ### 手順 ###
-`model.js`のheroku用をローカル用に切り替えてください。
 
 mongoDBを起動します。
 
