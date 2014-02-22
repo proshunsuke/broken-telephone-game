@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="" />
+    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Node_js_Dependencies_for_brokenTerephoneGame.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/room/imgListClass.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/sync.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/room/oekaki_list.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/brokenTerephoneGame.iml" afterPath="$PROJECT_DIR$/.idea/brokenTerephoneGame.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/game.js" afterPath="$PROJECT_DIR$/public/javascripts/room/game.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model.js" afterPath="$PROJECT_DIR$/model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" afterPath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/room.ejs" afterPath="$PROJECT_DIR$/views/room.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/index/room.js" afterPath="$PROJECT_DIR$/public/javascripts/index/room.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/create/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/create/sync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/enter/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/enter/sync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/index/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/index/sync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/room/sync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/user.js" afterPath="$PROJECT_DIR$/public/javascripts/room/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="brokenTerephoneGame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,94 +46,88 @@
       <file leaf-file-name="sync.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/room/sync.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="0" selection-start="8137" selection-end="8137" vertical-scroll-proportion="0.0" vertical-offset="3402" max-vertical-offset="4896">
+            <state line="129" column="0" selection-start="5400" selection-end="5400" vertical-scroll-proportion="0.0" vertical-offset="2140" max-vertical-offset="4950">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="room.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/room.ejs">
+      <file leaf-file-name="game.js" pinned="true" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="300" column="50" selection-start="18506" selection-end="18506" vertical-scroll-proportion="-4.296296" vertical-offset="5284" max-vertical-offset="5994">
-              <folding>
-                <element signature="n#style#0;n#input#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state line="84" column="0" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="6372">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sync.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/index/sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="70" selection-start="896" selection-end="896" vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="810">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="room.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/index/room.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="0" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1008">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sync.js" pinned="true" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="163" column="26" selection-start="4532" selection-end="4532" vertical-scroll-proportion="-5.4" vertical-offset="2799" max-vertical-offset="6858">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sync.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/create/sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="0" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="900">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="true" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="7" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0" vertical-offset="686" max-vertical-offset="1170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sync.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/enter/sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="0" selection-start="762" selection-end="762" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="702">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="true" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="25" selection-start="1494" selection-end="1494" vertical-scroll-proportion="0.5555556" vertical-offset="684" max-vertical-offset="1170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.js" pinned="true" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="0.15" vertical-offset="0" max-vertical-offset="630">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jscolor.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/jscolor/jscolor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="21" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="17964">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="chat.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/chat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="28" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="774">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="paint.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/stylesheets/room/paint.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="30" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.0" vertical-offset="2790" max-vertical-offset="3366">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mouseEvent.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/mouseEvent.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="0" selection-start="1877" selection-end="1877" vertical-scroll-proportion="0.0" vertical-offset="814" max-vertical-offset="4788">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="paint.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="0" selection-start="1753" selection-end="1753" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="3240">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="toInstance.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/toInstance.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="67" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="504">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tool.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/room/tool.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="558">
+            <state line="93" column="30" selection-start="2583" selection-end="2583" vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="1962">
               <folding />
             </state>
           </provider>
@@ -128,25 +142,39 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/public/javascripts/room/toInstance.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/room/game.js" />
         <option value="$PROJECT_DIR$/views/footer.ejs" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/room/chat.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/room/sync.js" />
         <option value="$PROJECT_DIR$/public/javascripts/room/layer.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/room/paint.css" />
         <option value="$PROJECT_DIR$/public/javascripts/room/tool.js" />
         <option value="$PROJECT_DIR$/public/javascripts/room/jscolor/jscolor.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" />
         <option value="$PROJECT_DIR$/public/javascripts/room/paint.js" />
-        <option value="$PROJECT_DIR$/views/room.ejs" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/model.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/oekaki_list.js" />
+        <option value="$PROJECT_DIR$/views/room.ejs" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/imgListClass.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/game.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/user.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/create/sync.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/enter/sync.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/room/sync.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/index/sync.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/index/room.js" />
+        <option value="$PROJECT_DIR$/routes/sync.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -163,7 +191,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -182,7 +210,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -225,6 +252,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -287,16 +328,57 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="room" />
+              <option name="myItemId" value="index" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jscolor" />
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brokenTerephoneGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="create" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,19 +470,19 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39970502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890856" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2020649" sideWeight="0.5003796" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20273349" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.124525435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39970502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2020649" sideWeight="0.5003796" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32890856" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25516224" sideWeight="0.49962035" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14806378" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24631268" sideWeight="0.49962035" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -445,18 +527,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="21" selection-start="3930" selection-end="3943" vertical-scroll-proportion="0.0" vertical-offset="2502" max-vertical-offset="3474">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="233" column="53" selection-start="6684" selection-end="6684" vertical-scroll-proportion="0.0" vertical-offset="3966" max-vertical-offset="6210">
-          <folding />
-        </state>
+        <state line="183" column="58" selection-start="4939" selection-end="4939" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
@@ -466,23 +539,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096">
-          <folding />
-        </state>
+        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="58" selection-start="4939" selection-end="4939" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210">
-          <folding />
-        </state>
+        <state line="184" column="44" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
@@ -492,75 +559,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096">
-          <folding />
-        </state>
+        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="58" selection-start="4939" selection-end="4939" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7506" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="44" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7506" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="16" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="3096">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="55" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210">
-          <folding />
-        </state>
+        <state line="148" column="55" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="6210" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
@@ -575,24 +584,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108018">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108018" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/footer.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="20" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="306" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="49" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
@@ -640,11 +637,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="516" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="64" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="7506" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/slideEvent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="44" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828" />
@@ -660,37 +652,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.18848167" vertical-offset="108" max-vertical-offset="792" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/chat.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="28" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0" vertical-offset="121" max-vertical-offset="774">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="321" column="8" selection-start="10087" selection-end="10087" vertical-scroll-proportion="0.0" vertical-offset="5592" max-vertical-offset="6318">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/sync.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="0" selection-start="8137" selection-end="8137" vertical-scroll-proportion="0.0" vertical-offset="3402" max-vertical-offset="4896">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1155" column="38" selection-start="19315" selection-end="19315" vertical-scroll-proportion="0.33333334" vertical-offset="20630" max-vertical-offset="39240" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/layer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="0" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.0" vertical-offset="2580" max-vertical-offset="5238">
-          <folding />
-        </state>
+        <state line="158" column="0" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.0" vertical-offset="2580" max-vertical-offset="5238" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/favicon.ico">
@@ -698,64 +662,142 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/tool.js">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/room/paint.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-          <folding />
-        </state>
+        <state line="100" column="30" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.0" vertical-offset="2790" max-vertical-offset="3366" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/jscolor/jscolor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="21" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="17964">
-          <folding />
-        </state>
+        <state line="28" column="21" selection-start="688" selection-end="688" vertical-scroll-proportion="-0.87731093" vertical-offset="1026" max-vertical-offset="17964" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="28" selection-start="801" selection-end="801" vertical-scroll-proportion="0.5462185" vertical-offset="179" max-vertical-offset="774" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.WebStorm7/system/extLibs/nodejs-v0.8.15-src/core-modules-sources/lib/events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="0" selection-start="2640" selection-end="2640" vertical-scroll-proportion="1.3411216" vertical-offset="631" max-vertical-offset="4320" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/stores/memory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.51859504" vertical-offset="1549" max-vertical-offset="2682" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/tool.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="406" selection-end="406" vertical-scroll-proportion="0.6280992" vertical-offset="74" max-vertical-offset="558" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/index/mouseEvent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="666" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1268" column="44" selection-start="22160" selection-end="22169" vertical-scroll-proportion="0.33333334" vertical-offset="22700" max-vertical-offset="39240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="58" selection-start="3347" selection-end="3347" vertical-scroll-proportion="0.31234258" vertical-offset="2144" max-vertical-offset="3240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/room.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="84" selection-start="690" selection-end="690" vertical-scroll-proportion="-4.0" vertical-offset="0" max-vertical-offset="5994" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/toInstance.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="67" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="504">
+        <state line="18" column="67" selection-start="348" selection-end="348" vertical-scroll-proportion="0.6289308" vertical-offset="24" max-vertical-offset="504" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="7" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/room/paint.css">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="30" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.0" vertical-offset="2790" max-vertical-offset="3366">
+        <state line="84" column="0" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="6372">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/room/mouseEvent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="1877" selection-end="1877" vertical-scroll-proportion="0.0" vertical-offset="814" max-vertical-offset="4788">
-          <folding />
-        </state>
+        <state line="207" column="28" selection-start="7138" selection-end="7138" vertical-scroll-proportion="-8.28" vertical-offset="3519" max-vertical-offset="4734" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/room/paint.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/imgListClass.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="1753" selection-end="1753" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="3240">
-          <folding />
-        </state>
+        <state line="16" column="31" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/room.ejs">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="300" column="50" selection-start="18506" selection-end="18506" vertical-scroll-proportion="-4.296296" vertical-offset="5284" max-vertical-offset="5994">
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#div#1;n#li#2;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
+        <state line="90" column="65" selection-start="2416" selection-end="2416" vertical-scroll-proportion="0.0" vertical-offset="1464" max-vertical-offset="1962" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="0.15" vertical-offset="0" max-vertical-offset="630">
+        <state line="93" column="30" selection-start="2583" selection-end="2583" vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="1962">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/enter/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="762" selection-end="762" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/create/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="0" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0" vertical-offset="282" max-vertical-offset="900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/room/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="129" column="0" selection-start="5400" selection-end="5400" vertical-scroll-proportion="0.0" vertical-offset="2140" max-vertical-offset="4950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/index/room.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="604" selection-end="604" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1008">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/index/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="70" selection-start="896" selection-end="896" vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="26" selection-start="4532" selection-end="4532" vertical-scroll-proportion="-5.4" vertical-offset="2799" max-vertical-offset="6858">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="25" selection-start="1494" selection-end="1494" vertical-scroll-proportion="0.5555556" vertical-offset="684" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>

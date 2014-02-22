@@ -201,13 +201,10 @@
                 game.setMisHost(true);
                 sync.emitHost(true,user.getMuser());
 
-//                $("#canvases").css({"display":"none"});
-//                $("#start").css({"visibility":"visible"});
                 $("#canvasbox").css({"display":"none"});
                 $("#hostSettingArea").css({"display":"block"});
-//                $("#canvasTool").css({"visibility":"hidden"});
 
-                user.setMuserList(user.getMusers().concat());
+                user.setMuserList(user.getMusers());
                 user.updateUserList(user.getMuserList(),"drawuserNum","canvasusernameArea");
             });
 

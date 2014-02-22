@@ -12,7 +12,12 @@
 
         // socket.onしたら
         syncOnInit: function(socket){
-            socket.on('connected',function(data){
+
+            socket.on('connect', function(data){
+                sync.emitInitIndex();
+            });
+
+            socket.on('roomInfo',function(data){
                 room.createRooms(data.roomdata);
                 room.setMroomData(data.roomdata);
             });
@@ -20,12 +25,15 @@
             socket.on('createRoom',function(data){
                 room.createRooms(data.roomdata);
                 room.setMroomData(data.roomdata);
-                console.log("roomdata:",data.roomdata);
             });
 
             socket.on('roomCount',function(data){
-                room.renewalCount(data.count,data.room,data.hostname);
+                room.renewalCount(data.count,data.room,data.hostName);
             });
+        },
+
+        emitInitIndex: function(){
+            mSocket.emit('initIndex');
         }
     };
 }
