@@ -17,11 +17,15 @@
             });
 
             socket.on('roomInfo',function(data){
-                room.setMroomData(data.roomdata);
+                room.setMroomLength(data.roomLength);
+                room.setMroomName(data.roomName);
+                room.setMusers(data.users);
             });
 
             socket.on('createRoom',function(data){
-                room.setMroomData(data.roomdata);
+                room.setMroomLength(data.roomLength);
+                room.setMroomName(data.roomName);
+                room.setMusers(data.users);
             });
         },
 
