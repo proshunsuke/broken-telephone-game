@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for brokenTerephoneGame}" />
-    <file url="file://$PROJECT_DIR$/public/javascripts/room/layer.js" libraries="{HTML5 / EcmaScript 5}" />
-    <file url="PROJECT" libraries="{Node.js v0.8.15 Core Modules}" />
-  </component>
-</project>
-
