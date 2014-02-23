@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/room/imgListClass.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/sync.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/javascripts/room/oekaki_list.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/brokenTerephoneGame.iml" afterPath="$PROJECT_DIR$/.idea/brokenTerephoneGame.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/game.js" afterPath="$PROJECT_DIR$/public/javascripts/room/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model.js" afterPath="$PROJECT_DIR$/model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" afterPath="$PROJECT_DIR$/public/javascripts/room/mouseEvent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/room.ejs" afterPath="$PROJECT_DIR$/views/room.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/index/room.js" afterPath="$PROJECT_DIR$/public/javascripts/index/room.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/create/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/create/sync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/enter/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/enter/sync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/index/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/index/sync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/sync.js" afterPath="$PROJECT_DIR$/public/javascripts/room/sync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/room/user.js" afterPath="$PROJECT_DIR$/public/javascripts/room/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="07c16d4d-7003-4243-9953-220ed0de293a" name="Default" comment="" />
     <ignored path="brokenTerephoneGame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
