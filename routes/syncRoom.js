@@ -34,6 +34,26 @@
         }
     }
 
+    var addImageDB = function(imgList){
+        var date = new Date();
+        var mYear = date.getFullYear(); // 年
+        var mMonth = date.getMonth() + 1; // 月
+        var mDate = date.getDate(); // 日
+        for(var i=0; i < imgList.length; i++){
+            var newImage = new Image();
+
+            newImage.img = imgList[i].img;
+            newImage.user = imgList[i].user;
+            newImage.title = imgList[i].title;
+            newImage.year = mYear;
+            newImage.month = mMonth;
+            newImage.date = mDate;
+            newImage.save(function(err) {
+                if (err) { console.log(err); }
+            });
+        }
+    }
+
     // emit
 
     var emitRoomInfo = function(paintRoom, client){
@@ -178,7 +198,7 @@
         });
     }
 
-    sync = {
+    syncRoom = {
 
         init: function(){
             // db
@@ -250,7 +270,6 @@
 
                         var isEmptyRoom = false;
                         // 部屋が空になったかどうか
-                        // 空だったら部屋を消す
                         if(roomData[0].users.length == 0){
                             isEmptyRoom = true;
                         }
@@ -296,7 +315,13 @@
                         roomData[0].save(function(err){
                             if(err){}
                             else{
+                                // 部屋消す
                                 if(isEmptyRoom){
+                                    // 部屋を消す前に, 描いた絵をDBに保存
+                                    addImageDB(roomData[0].imgList);
+                                    Image.find({},function(err,imageData){
+                                        console.log("Image:\n"+imageData);
+                                    });
                                     Room.remove({
                                         'roomName': decodeURI(clientRoom)
                                     },function(err,roomdata){});

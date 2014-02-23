@@ -37,11 +37,17 @@ var imgListAllObj = new mongoose.Schema({
     title: {type: String}, // ドラえもん
     year: {type: Number}, // 2014
     Month: {type: Number}, // 2
-    Day: {type: Number} // 22
+    Date: {type: Number} // 22
 });
 
 var Image = new mongoose.Schema({ // 今まで描いた絵のDB
-    imgListAll:[imgListAllObj] // [{1.png, プロ, ドラえもん, 2014, 2, 22},{2.png, すずき, ドラえもん, 2014, 2, 23}, ...]
+    //imgListAll:[imgListAllObj] // [{1.png, プロ, ドラえもん, 2014, 2, 22},{2.png, すずき, ドラえもん, 2014, 2, 23}, ...]
+    img: {type: String}, // 1.png
+    user: {type: String}, // プロ
+    title: {type: String}, // ドラえもん
+    year: {type: Number}, // 2014
+    month: {type: Number}, // 2
+    date: {type: Number} // 22
 });
 
 Array.prototype.imgListUnshift = function (img, user, title){ // 配列にハッシュを入れてくれるやつ

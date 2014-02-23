@@ -146,15 +146,8 @@
                     $('#start').addClass('disabled');
                     isStart = false;
                     game.setMisStart(isStart);
-//                    $("#canvases").css({"display":"block"});
-//                    $("#start").css({"visibility":"hidden"});
-//                    $("#hostSettingArea").css({"display":"none"});
-//                    $("#canvasTool").css({"visibility":"visible"});
                     $("#hostSettingArea").css({"display":"none"});
                     $("#canvasbox").css({"display":"block"});
-
-
-
                 }
             });
 

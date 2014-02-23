@@ -37,6 +37,7 @@ app.get('/contact', routes.contact);
 app.get('/create',routes.create);
 app.get('/enter',routes.enter);
 app.post('/room',routes.room);
+app.get('/gallery', routes.gallery);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
@@ -44,17 +45,17 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 var socket = require('socket.io').listen(server);
 
-// assuming io is the Socket.IO server object
-// for Heroku. 今はとりあえずコメントアウト
-//socket.configure(function () {
-//  socket.set("transports", ["xhr-polling"]);
-//  socket.set("polling duration", 10);
-//});
+require('./routes/syncRoom');
+syncRoom.init();
+require('./routes/syncGallery');
+syncGallery.init();
 
-require('./routes/sync');
-sync.init();
-
-//room アクセスした時に呼び出される
+// roomにアクセスした時に呼び出される
 var paintRoom = socket.of('/room').on('connection', function(client){
-    sync.syncOnInit(client, paintRoom);
+    syncRoom.syncOnInit(client, paintRoom);
+});
+
+// galleryにアクセスした時に呼び出される
+var galleryRoom = socket.of('/gallery').on('connection', function(client){
+    syncGallery.syncOnInit(client, galleryRoom);
 });
