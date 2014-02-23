@@ -41,7 +41,7 @@
             return mImgList.mUsers;
         },
 
-        getMimgListMimgs: function(){
+        getMimgListImg: function(){
             return mImgList.mImgs;
         },
 
@@ -65,6 +65,7 @@
 
         setMimgList: function(imgList){
             mImgList = imgList.concat();
+            console.log(imgList);
         },
 
         setMimgListMusers: function(imgListUsers){
@@ -80,7 +81,7 @@
             mIsStart = false;
             mDrawTime = 120;
             mDrawStartDate = new Date();
-            mImgList = new Oekaki_list();
+            mImgList = new ImgListClass();
 
             mode.wait = true;
             mode.setting = false;
@@ -279,9 +280,9 @@
         },
 
         // 前の人の絵をcanvasに映す
-        drawBeforeUserImg: function(before_img,drawmUser){
+        drawBeforeUserImg: function(beforeImgList,drawmUser){
             if(drawmUser == user.getMuser()){
-                this.drawImgCore(before_img);
+                this.drawImgCore(beforeImgList.img);
             }
         },
 
@@ -299,8 +300,10 @@
         // キャンバスを画像化
         toImg: function(){
             $('#image_png').empty();
-            for(var i=0; i < mImgList.mImgs.length; i++){
-                let insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+mImgList.mImgs[i]+"' name='"+mImgList.mUsers[i]+"'><h5>"+mImgList.mUsers[i]+"さんの作品</h5></li></a>";
+            console.log(mImgList);
+            for(var i=0; i < mImgList.length; i++){
+
+                let insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+mImgList[i].img+"' name='"+mImgList[i].user+"'><h5>"+mImgList[i].user+"さんの作品</h5></li></a>";
                 $('#image_png').append(insertimg);
             }
         },

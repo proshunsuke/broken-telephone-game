@@ -9,21 +9,95 @@ if(MONGO_URL){// heroku用
 }
 
 
-var Room = new mongoose.Schema({
-    roomname: {type: String},
-    users: {type: Array},
-    orderlist: {type: Array},
-    mode: {type: Number},
-    drawtime: {type: Number},
-    gameStartDate: {type: Date},
-    drawStartDate: {type: Date},
-    hostname: {type: String},
-    nextuser: {type: String},
-    imgListUser: {type: Array},
-    imgListImg: {type: Array},
-    count: {type: Number},
-    password: {type: String}
+//var Room = new mongoose.Schema({
+//    roomname: {type: String},
+//    users: {type: Array},
+//    orderlist: {type: Array},
+//    mode: {type: Number},
+//    drawtime: {type: Number},
+//    gameStartDate: {type: Date},
+//    drawStartDate: {type: Date},
+//    hostname: {type: String},
+//    nextuser: {type: String},
+//    imgListUser: {type: Array},
+//    imgListImg: {type: Array},
+//    count: {type: Number},
+//    password: {type: String}
+//});
+//
+//var Room = new mongoose.Schema({
+//    id: {type: Number},
+//    roomName: {type: String},
+//    hostName: {type: String},
+//    password: {type: String}
+//});
+//
+//var Game = new mongoose.Schema({
+//    id: {type: Number},
+//    mode: {type: Number},
+//    drawTime: {type: Number},
+//    gameStartDate: {type: Date},
+//    drawStartDate: {type: Date},
+//    nextUser: {type: String}
+//});
+//
+//var User = new mongoose.Schema({
+//    id: {type: Number},
+//    users: {type: Array},
+//    orderList: {type: Array}
+//});
+//
+//var Image = new mongoose.Schema({
+//    id: {type: Number},
+//    imgList: {type: Array}
+//});
+//
+
+var imgListObj = new mongoose.Schema({
+    img: {type: String}, // 1.png
+    user: {type: String}, // プロ
+    title: {type: String} // ドラえもん
 });
 
-exports.Room = db.model('Room', Room);
+var Room = new mongoose.Schema({
+    roomName: {type: String}, // 部屋
+    hostName: {type: String}, // プロ
+    password: {type: String}, // 1111
 
+    mode: {type: Number}, // 0 // 0:wait, 1:setting, 2:gaming, 3:finish
+    drawTime: {type: Number}, // 5
+    gameStartDate: {type: Date},
+    drawStartDate: {type: Date},
+    nextUser: {type: String}, // すずき
+
+    users: {type: Array}, // {プロ, すずき, たなか, さとう}
+    orderList: {type: Array}, // {すずき, プロ, さとう, たなか}
+
+    imgList:[imgListObj] // [{1.png, プロ, ドラえもん}, {2.png, すずき, ドラえもん}, ...]
+});
+
+var imgListAllObj = new mongoose.Schema({
+    img: {type: String}, // 1.png
+    user: {type: String}, // プロ
+    title: {type: String}, // ドラえもん
+    year: {type: Number}, // 2014
+    Month: {type: Number}, // 2
+    Day: {type: Number} // 22
+});
+
+var Image = new mongoose.Schema({ // 今まで描いた絵のDB
+    imgListAll:[imgListAllObj] // [{1.png, プロ, ドラえもん, 2014, 2, 22},{2.png, すずき, ドラえもん, 2014, 2, 23}, ...]
+});
+
+Array.prototype.imgListUnshift = function (img, user, title){ // 配列にハッシュを入れてくれるやつ
+    var imgListHash = {img: img, user: user, title: title};
+    this.unshift(imgListHash);
+}
+
+
+exports.Room = db.model('Room', Room);
+exports.Image = db.model('Image', Image);
+//exports.Game = db.model('Game', Game);
+//exports.User = db.model('User', User);
+//exports.Image = db.model('Image', Image);
+//

@@ -13,10 +13,12 @@
         //socket.onしたら
         syncOnInit: function(socket){
             socket.on('connect', function(data) {
+                console.log("connect");
                 sync.emitInit();
             });
 
             socket.on('firstconnect',function(data){
+                console.log("firstconnect");
                 if(data.user == user.getMuser()){
                     sync.emitLogin(user.getMuser());
                 }
@@ -24,24 +26,25 @@
 
             // ゲーム中、途中から入ってきたときにゆーざのりすとが更新されてしまう
             socket.on('login', function(data){
+                console.log("login");
                 if(data.users[0] == user.getMuser()){
                     sync.forNewLoginUser(data);
                 }
-                user.setMusers(data.users.concat());
+                user.setMusers(data.users);
 
                 if(game.mode.gaming || game.mode.finish){
-                    user.setMorderList(data.orderlist.concat());
+                    user.setMorderList(data.orderList.concat());
                     game.setFinalTime(game.getMdrawTime(),data.gameStartDate,user.getMorderList().length); // 誰かが入ってきたら終了時間を更新
 
-                    game.setDrawStartTime(user.getMorderList(),data.nextuser);
-                    game.changeDrawingUserColor(data.nextuser);
+                    game.setDrawStartTime(user.getMorderList(),data.nextUser);
+                    game.changeDrawingUserColor(data.nextUser);
                 }else{
                     sync.updateLoginDrawingList(data);
                 }
                 let addcomment = data.users[0] + "さんがログインしました。";
                 let userList = user.getMuserList().concat();
                 chat.writeComment(addcomment);
-                game.renewalHost(data.hostname);
+                game.renewalHost(data.hostName);
                 if(game.getMisHost() && game.mode.setting){
                     //ホストのログインユーザを更新
                     userList.unshift(data.users[0]);
@@ -54,10 +57,11 @@
             // 描いてる人が消えた時に、描く時間がおかしい
             // 終了時間がおかしい
             socket.on('disconnect',function(data){
+                console.log("dissconnect");
                 if(data.user){
                     user.setMusers(data.users.concat())
                     if(game.mode.gaming || game.mode.finish){
-                        user.setMorderList(data.orderlist.concat());
+                        user.setMorderList(data.orderList.concat());
                         game.setFinalTime(game.getMdrawTime(),data.gameStartDate,user.getMorderList().length); // 誰かが抜けたら終了時間を更新
                     }
 
@@ -66,7 +70,7 @@
                     let addcomment = data.user + "さんがログアウトしました。";
                     chat.writeComment(addcomment);
 
-                    game.renewalHost(data.hostname);
+                    game.renewalHost(data.hostName);
 
                     if (game.getMisHost() && game.mode.setting){ //ホストの設定中、ログインユーザを更新
                         let userList = user.getMuserList().concat();
@@ -78,9 +82,9 @@
                             user.updateUserList(userList,"drawuserNum","canvasusernameArea");
                         }else{
                             let orderList = user.getMorderList().concat();
-                            var mOrderListDelNum =
+                            var morderListDelNum =
                                 user.returnDeleteUserNum(data.user,orderList);
-                            orderList.splice(mOrderListDelNum,1);
+                            orderList.splice(morderListDelNum,1);
                             user.setMorderList(orderList);
                             user.updateUserList(orderList(),"orderuserNum","canvasordernameArea");
                         }
@@ -98,20 +102,20 @@
             // ホスト
             socket.on('host',function(data){
                 $('#host').css({"visibility":"hidden"});
-                game.changeMode("setting",data.hostname);
+                game.changeMode("setting",data.hostName);
             });
 
             // ゲーム開始
-            socket.on('order',function(data){// 右に表示されるのはorderlist
+            socket.on('order',function(data){// 右に表示されるのはorderList
                 let orderList = user.getMorderList().concat();
                 game.changeMode("gaming",null);
                 game.changeUserListLabel();
-                orderList = data.list.concat();
+                orderList = data.orderList.concat();
                 user.setMorderList(orderList);
                 user.updateLoginUsers(orderList);
                 layer.clearCanvas();
                 paint.setMisDrawable(false);
-                game.setMdrawTime(data.drawtime);
+                game.setMdrawTime(data.drawTime);
                 game.setFinalTime(game.getMdrawTime(),data.gameStartDate,orderList.length);
 
                 let firstNum = orderList.length - 1;
@@ -123,19 +127,18 @@
 
             // 誰かが描き終わる
             socket.on('drawfin',function(data){
-                game.setMimgListMusers(data.imgListUser);
-                game.setMimgListMimgs(data.imgListImg);
-                game.changeDrawing(data.nextuser);
+                game.setMimgList(data.imgList);
+                game.changeDrawing(data.nextUser);
                 if(!data.isFirstDeleted){ // 消えたのが最初のユーザでない場合は、前の人の絵を設定
-                    game.drawBeforeUserImg(game.getMimgListMimgs()[0],data.nextuser);
+                    game.drawBeforeUserImg(game.getMimgList()[0],data.nextUser);
                 }
                 game.setMdrawStartDate(data.drawStartDate);
-                game.setDrawStartTime(user.getMorderList(),data.nextuser);
-                game.changeDrawingUserColor(data.nextuser);
+                game.setDrawStartTime(user.getMorderList(),data.nextUser);
+                game.changeDrawingUserColor(data.nextUser);
             });
 
             // ゲーム終了
-            socket.on('gamefin',function(data){
+            socket.on('gamefin',function(){
                 layer.getUndoImg();
                 game.changeMode("finish",null);
                 game.changeDrawing("none");
@@ -147,7 +150,7 @@
             });
 
             // NEWGAME
-            socket.on('newgame',function(data){
+            socket.on('newgame',function(){
                 paint.setMisDrawable(true);
                 game.changeMode("wait",null);
                 game.changeFinishTime(0,0);
@@ -182,26 +185,26 @@
         },
 
         // ホストを伝える
-        emitHost :function(isClickHost,hostname){
+        emitHost :function(isClickHost,hostName){
             mSocket.emit('host',{
                 isClickHost: isClickHost,
-                hostname: hostname,
+                hostName: hostName,
             });
         },
 
         // 描く順番を伝える
-        emitOrder :function(list,drawtime){
+        emitOrder :function(orderList,drawTime){
             mSocket.emit('order',{
-                list: list,
-                drawtime: drawtime,
+                orderList: orderList,
+                drawTime: drawTime,
             });
         },
 
         // 描き終わったことを伝える
-        emitDrawFin :function(finuser,list,img){
+        emitDrawFin :function(finuser,orderList,img){
             mSocket.emit('drawfin',{
                 finuser: finuser,
-                list: list,
+                orderList: orderList,
                 img: img,
             });
         },
@@ -232,15 +235,15 @@
                 game.changeMode("wait",null);
                 break;
             case 1://設定中
-                let modetext = data.hostname + "さんが設定中です";
+                let modetext = data.hostName + "さんが設定中です";
                 game.changeMode("setting",modetext);
                 break;
             case 2://オーダできたら、://誰かが描いてる途中だったら
                 game.changeMode("gaming",null);
                 paint.setMisDrawable(false);
-                game.setMdrawTime(data.drawtime);
+                game.setMdrawTime(data.drawTime);
                 game.changeUserListLabel();
-                game.changeDrawing(data.nextuser);
+                game.changeDrawing(data.nextUser);
                 game.setMdrawStartDate(data.drawStartDate);
                 break;
             case 3://ゲームが終わったら
@@ -254,11 +257,11 @@
                 user.updateLoginUsers(user.getMusers());
             }else if(game.mode.setting){
                 user.updateLoginUsers(user.getMusers());
-            }else if(game.mode.gaming){ // orderlistはgaming,finishの間共通
+            }else if(game.mode.gaming){ // orderListはgaming,finishの間共通
                 user.updateLoginUsers(user.getMorderList());
                 game.setMdrawStartDate(data.drawStartDate);
-                game.setDrawStartTime(user.getMorderList(),data.nextuser);
-                game.changeDrawingUserColor(data.nextuser)
+                game.setDrawStartTime(user.getMorderList(),data.nextUser);
+                game.changeDrawingUserColor(data.nextUser)
             }else if(game.mode.finish){
                 user.updateLoginUsers(user.getMorderList());
             }

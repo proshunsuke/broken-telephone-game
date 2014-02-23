@@ -12,13 +12,22 @@
 
         // socket.onしたら
         syncOnInit: function(socket){
-            socket.on('connected',function(data){
+            socket.on('connect', function(data){
+                sync.emitInitIndex();
+            });
+
+            socket.on('roomInfo',function(data){
                 room.setMroomData(data.roomdata);
             });
 
             socket.on('createRoom',function(data){
                 room.setMroomData(data.roomdata);
             });
+        },
+
+        emitInitIndex: function(){
+            mSocket.emit('initIndex');
         }
+
     };
 }

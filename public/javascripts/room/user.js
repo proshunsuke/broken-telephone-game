@@ -93,13 +93,12 @@
                 $('#'+addidname+j).remove();
             }
 
-            for(var i in users){
+            for(var i = 0; i < users.length; i++){
                 var num = users.length - i -1;
                 var insertdrawusername = "<div id='" + addidname + "" + num+"'>"+users[i]+"</div>";
                 var insertprependid = "#" + addprependname;
                 $(insertprependid).prepend(insertdrawusername);
             }
         }
-
     };
 }
