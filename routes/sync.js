@@ -9,6 +9,8 @@
     var Image;
     var kIndexRoom;
 
+    var sechash;
+
     var getClientName = function(client){
         client.get('name',function(err,name){
             return name;
@@ -36,17 +38,63 @@
 
     var emitRoomInfo = function(paintRoom, client){
         Room.find({},function(err,roomData){
+            // 各部屋のそれぞれの情報ごとに配列を作る
+            var tempRoomLength = roomData.length;
+            var tempRoomName = [];
+            var tempHostName = [];
+            var tempUsers = [];
+            var tempIsPassword = [];
+            for(var i=0; i < tempRoomLength; i++){
+                tempRoomName.push(roomData[i].roomName);
+                tempHostName.push(roomData[i].hostName);
+                tempUsers.push(roomData[i].users);
+                if(roomData[i].password){
+                    tempIsPassword[i] = true;
+                }else{
+                    tempIsPassword[i] = false;
+                }
+            }
             paintRoom.socket(client.id).emit('roomInfo',{
-                roomdata: roomData
+                roomLength: tempRoomLength,
+                roomName: tempRoomName,
+                hostName: tempHostName,
+                users: tempUsers,
+                isPassword: tempIsPassword
             });
         });
     }
 
     var emitCreateRoom = function(paintRoom){
-        Room.find({},function(err,roomdata){
+        // 各部屋のそれぞれの情報ごとに配列を作る
+        Room.find({},function(err,roomData){
+            var tempRoomLength = roomData.length;
+            var tempRoomName = [];
+            var tempHostName = [];
+            var tempUsers = [];
+            var tempIsPassword = [];
+            for(var i=0; i < tempRoomLength; i++){
+                tempRoomName.push(roomData[i].roomName);
+                tempHostName.push(roomData[i].hostName);
+                tempUsers.push(roomData[i].users);
+                if(roomData[i].password){
+                    tempIsPassword[i] = true;
+                }else{
+                    tempIsPassword[i] = false;
+                }
+            }
             paintRoom.to(kIndexRoom).emit('createRoom',{
-                roomdata: roomdata
+                roomLength: tempRoomLength,
+                roomName: tempRoomName,
+                hostName: tempHostName,
+                users: tempUsers,
+                isPassword: tempIsPassword
             });
+        });
+    }
+
+    var emitCanEnterRoom = function(paintRoom, client, canEnter){
+        paintRoom.socket(client.id).emit('canEnterRoom',{
+            canEnter: canEnter
         });
     }
 
@@ -140,6 +188,8 @@
             Room = model.Room;
             Image = model.Image;
 
+            sechash = require('sechash');
+
             kIndexRoom = "indexRoom";
         },
 
@@ -164,6 +214,18 @@
                 newRoom.save(function(err) {
                     if (err) { console.log(err); }
                     else{ emitCreateRoom(paintRoom); }
+                });
+            });
+
+            client.on('passwordInfo', function(data){
+                Room.find({
+                    'roomName': data.roomName
+                },function(err,roomData){
+                    if(sechash.testHashSync(data.password, roomData[0].password)){
+                        emitCanEnterRoom(paintRoom, client, true);
+                    }else{
+                        emitCanEnterRoom(paintRoom, client, false);
+                    }
                 });
             });
 

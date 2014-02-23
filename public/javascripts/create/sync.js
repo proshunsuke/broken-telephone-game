@@ -18,11 +18,13 @@
             });
 
             socket.on('roomInfo',function(data){
-                room.setMroomData(data.roomdata);
+                room.setMroomLength(data.roomLength);
+                room.setMroomName(data.roomName);
             });
 
             socket.on('createRoom',function(data){
-                room.setMroomData(data.roomdata);
+                room.setMroomLength(data.roomLength);
+                room.setMroomName(data.roomName);
             });
         },
 
@@ -31,9 +33,10 @@
             mSocket.emit('createRoom',{
                 room: room,
                 name: name,
-                password: password,
+                password: password
             });
 //            alert(room+"部屋が作成されました");
+
         },
 
         emitInitIndex: function(){

@@ -1,23 +1,33 @@
 {
 
-    let mRoomData;
+    let mRoomLength;
+    let mRoomName;
 
     var room = {
 
         //getter
 
-        getMroomData: function(){
-            return mRoomData;
+        getMroomLength: function(){
+            return mRoomLength;
+        },
+
+        getMroomName: function(){
+            return mRoomName;
         },
 
         // setter
 
-        setMroomData: function(roomData){
-            mRoomData = roomData.concat();
+        setMroomLength: function(roomLength){
+            mRoomLength = roomLength;
+        },
+
+        setMroomName: function(roomName){
+            mRoomName = roomName.concat();
         },
 
         init: function(){
-            mRoomData = new Array();
+            mRoomLength = 0;
+            mRoomName = [];
         }
     };
 }

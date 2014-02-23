@@ -1,5 +1,7 @@
 {
+
     var checkCreate = {
+
 
         init: function(){
 
@@ -8,13 +10,11 @@
             var password = $('#password').val();
             var isOriginalName = true;
 
-            for(var i=0; i < room.getMroomData().length; i++){
-                alert(room.getMroomData());
-                if(room.getMroomData()[i].roomname == roomname){
+            for(var i=0; i < room.getMroomLength(); i++){
+                if(room.getMroomName()[i] == roomname){
                     isOriginalName = false;
                 }
             }
-
 
             if(roomname == "" || username == ""){
                 alert("入力されていません");

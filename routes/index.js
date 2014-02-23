@@ -6,6 +6,8 @@
 var model = require('../model');
 var Room = model.Room;
 
+var sechash = require('sechash');
+
 exports.index = function(req, res){
         res.render('index', { title: 'お絵かき伝言ゲーム',
                               pagename: 'index'});
@@ -33,7 +35,13 @@ exports.room = function(req, res){
         'roomName': req.body.roomname
     },function(err,roomdata){
         if(req.body.password){
-            roomdata[0].password = req.body.password;
+            var opts = {
+                algorithm: 'sha1',
+                iterations: 2000,
+                salt: 'some salt string'
+            };
+
+            roomdata[0].password = sechash.strongHashSync(req.body.password,opts);
 
             roomdata[0].save(function(err){
                 if(err){}

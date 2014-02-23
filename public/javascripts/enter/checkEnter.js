@@ -6,12 +6,12 @@
             var roomname = decodeURI(room.getQuerystring('room'));
             var isOriginalName = true;
 
-            for(var i=0; i < room.getMroomData().length; i++){
-                if(room.getMroomData()[i].roomname != roomname){
+            for(var i=0; i < room.getMroomLength; i++){
+                if(room.getMroomName[i] != roomname){
                     continue;
                 }
-                for(var j=0; j < room.getMroomData()[i].users.length; j++){
-                    if(room.getMroomData()[i].users[j] == username){
+                for(var j=0; j < room.getMusers()[i].length; j++){
+                    if(room.getMusers()[i][j] == username){
                         isOriginalName = false;
                         break;
                     }
