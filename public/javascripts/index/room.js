@@ -26,7 +26,6 @@
             $('#'+roomname+'_count').empty();
             $('#'+roomname+'_li').append(insertcount);
 
-            console.log("hostName: "+hostName);
             if(hostName){
                 $('#'+roomname+'_hostName').html(hostName);
             }

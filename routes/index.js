@@ -29,11 +29,9 @@ exports.room = function(req, res){
     var result = { title: 'お絵かき伝言ゲーム',
                    username: req.body.username,
                    pagename: 'room'};
-    console.log("room,req.body:",req.body);
     Room.find({
         'roomName': req.body.roomname
     },function(err,roomdata){
-        console.log("roomdata:",roomdata[0]);
         if(req.body.password){
             roomdata[0].password = req.body.password;
 

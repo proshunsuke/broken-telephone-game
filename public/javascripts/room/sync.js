@@ -13,12 +13,10 @@
         //socket.onしたら
         syncOnInit: function(socket){
             socket.on('connect', function(data) {
-                console.log("connect");
                 sync.emitInit();
             });
 
             socket.on('firstconnect',function(data){
-                console.log("firstconnect");
                 if(data.user == user.getMuser()){
                     sync.emitLogin(user.getMuser());
                 }
@@ -26,7 +24,6 @@
 
             // ゲーム中、途中から入ってきたときにゆーざのりすとが更新されてしまう
             socket.on('login', function(data){
-                console.log("login");
                 if(data.users[0] == user.getMuser()){
                     sync.forNewLoginUser(data);
                 }
@@ -57,7 +54,6 @@
             // 描いてる人が消えた時に、描く時間がおかしい
             // 終了時間がおかしい
             socket.on('disconnect',function(data){
-                console.log("dissconnect");
                 if(data.user){
                     user.setMusers(data.users.concat())
                     if(game.mode.gaming || game.mode.finish){
@@ -172,7 +168,7 @@
         // ログインを伝える
         emitLogin :function(user){
             mSocket.emit('login',{
-                user: user,
+                user: user
             });
         },
 

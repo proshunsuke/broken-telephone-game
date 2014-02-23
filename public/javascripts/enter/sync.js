@@ -28,6 +28,5 @@
         emitInitIndex: function(){
             mSocket.emit('initIndex');
         }
-
     };
 }
