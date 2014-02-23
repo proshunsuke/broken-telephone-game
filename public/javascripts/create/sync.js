@@ -33,7 +33,7 @@
                 name: name,
                 password: password,
             });
-            alert(room+"部屋が作成されました");
+//            alert(room+"部屋が作成されました");
         },
 
         emitInitIndex: function(){

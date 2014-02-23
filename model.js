@@ -8,51 +8,6 @@ if(MONGO_URL){// heroku用
     var db = mongoose.connect('mongodb://localhost/brokenTerephoneGame');
 }
 
-
-//var Room = new mongoose.Schema({
-//    roomname: {type: String},
-//    users: {type: Array},
-//    orderlist: {type: Array},
-//    mode: {type: Number},
-//    drawtime: {type: Number},
-//    gameStartDate: {type: Date},
-//    drawStartDate: {type: Date},
-//    hostname: {type: String},
-//    nextuser: {type: String},
-//    imgListUser: {type: Array},
-//    imgListImg: {type: Array},
-//    count: {type: Number},
-//    password: {type: String}
-//});
-//
-//var Room = new mongoose.Schema({
-//    id: {type: Number},
-//    roomName: {type: String},
-//    hostName: {type: String},
-//    password: {type: String}
-//});
-//
-//var Game = new mongoose.Schema({
-//    id: {type: Number},
-//    mode: {type: Number},
-//    drawTime: {type: Number},
-//    gameStartDate: {type: Date},
-//    drawStartDate: {type: Date},
-//    nextUser: {type: String}
-//});
-//
-//var User = new mongoose.Schema({
-//    id: {type: Number},
-//    users: {type: Array},
-//    orderList: {type: Array}
-//});
-//
-//var Image = new mongoose.Schema({
-//    id: {type: Number},
-//    imgList: {type: Array}
-//});
-//
-
 var imgListObj = new mongoose.Schema({
     img: {type: String}, // 1.png
     user: {type: String}, // プロ
@@ -97,7 +52,3 @@ Array.prototype.imgListUnshift = function (img, user, title){ // 配列にハッ
 
 exports.Room = db.model('Room', Room);
 exports.Image = db.model('Image', Image);
-//exports.Game = db.model('Game', Game);
-//exports.User = db.model('User', User);
-//exports.Image = db.model('Image', Image);
-//
