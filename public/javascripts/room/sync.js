@@ -101,12 +101,27 @@
                 game.changeMode("setting",data.hostName);
             });
 
+            // 一番最初に描く人がタイトルを決める
+            socket.on('order', function(data){
+                let orderList = data.orderList.concat();
+                user.setMorderList(orderList);
+                user.updateLoginUsers(orderList);
+
+                let firstNum = orderList.length - 1;
+                let drawUser = orderList[firstNum];
+                if( drawUser == user.getMuser() ){ // 一番最初に描く人だったら
+                    game.setGameTitle();
+                }
+                let modeText = drawUser+"さんがタイトルを決めています";
+                $('#mode').html(modeText);
+                chat.writeComment(modeText);
+            });
+
             // ゲーム開始
-            socket.on('order',function(data){// 右に表示されるのはorderList
-                let orderList = user.getMorderList().concat();
+            socket.on('gameStart',function(data){// 右に表示されるのはorderList
+                let orderList = data.orderList.concat();
                 game.changeMode("gaming",null);
                 game.changeUserListLabel();
-                orderList = data.orderList.concat();
                 user.setMorderList(orderList);
                 user.updateLoginUsers(orderList);
                 layer.clearCanvas();
@@ -115,16 +130,19 @@
                 game.setFinalTime(game.getMdrawTime(),data.gameStartDate,orderList.length);
 
                 let firstNum = orderList.length - 1;
-                game.changeDrawing(orderList[firstNum]);
+                let drawUser = orderList[firstNum];
+                game.setDrawingInfo(drawUser); // ここで誰が描くか判断
                 game.setMdrawStartDate(data.drawStartDate);
-                game.setDrawStartTime(orderList,orderList[firstNum]);
-                game.changeDrawingUserColor(orderList[firstNum]);
+                game.setDrawStartTime(orderList,drawUser);
+                game.changeDrawingUserColor(drawUser);
             });
 
             // 誰かが描き終わる
             socket.on('drawfin',function(data){
                 game.setMimgList(data.imgList);
-                game.changeDrawing(data.nextUser);
+                let drawUser = data.nextUser;
+                game.setDrawingInfo(drawUser);
+
                 if(!data.isFirstDeleted){ // 消えたのが最初のユーザでない場合は、前の人の絵を設定
                     game.drawBeforeUserImg(game.getMimgList()[0],data.nextUser);
                 }
@@ -134,15 +152,16 @@
             });
 
             // ゲーム終了
-            socket.on('gamefin',function(){
+            socket.on('gamefin',function(data){
                 layer.getUndoImg();
                 game.changeMode("finish",null);
-                game.changeDrawing("none");
+                game.setDrawingInfo("none");
                 user.updateLoginUsers(user.getMorderList());
                 $('#toimg').css({"visibility":"visible"});
                 if(game.getMisHost()){
                     $('#newgame').css({"visibility":"visible"});
                 }
+                game.setMtitle(data.title);
             });
 
             // NEWGAME
@@ -196,6 +215,12 @@
             });
         },
 
+        emitGameStart: function(title){
+            mSocket.emit('gameStart', {
+                title: title
+            });
+        },
+
         // 描き終わったことを伝える
         emitDrawFin :function(finuser,orderList,img){
             mSocket.emit('drawfin',{
@@ -239,7 +264,7 @@
                 paint.setMisDrawable(false);
                 game.setMdrawTime(data.drawTime);
                 game.changeUserListLabel();
-                game.changeDrawing(data.nextUser);
+                game.startDrawing(data.nextUser);
                 game.setMdrawStartDate(data.drawStartDate);
                 break;
             case 3://ゲームが終わったら

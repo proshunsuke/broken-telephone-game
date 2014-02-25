@@ -158,10 +158,16 @@
 
     }
 
-    var emitOrder = function(paintRoom, clientRoom, data, startDate){
-        paintRoom.to(clientRoom).emit('order',{
-            orderList: data.orderList,
-            drawTime: data.drawTime,
+    var emitOrder = function(paintRoom, clientRoom, data){
+        paintRoom.to(clientRoom).emit('order', {
+            orderList: data.orderList
+        });
+    }
+
+    var emitGameStart = function(paintRoom, clientRoom, orderList, drawTime, startDate){
+        paintRoom.to(clientRoom).emit('gameStart',{
+            orderList: orderList,
+            drawTime: drawTime,
             gameStartDate: startDate,
             drawStartDate: startDate
         });
@@ -185,8 +191,10 @@
         });
     }
 
-    var emitGameFin = function(paintRoom, clientRoom){
-        paintRoom.to(clientRoom).emit('gamefin');
+    var emitGameFin = function(paintRoom, clientRoom, title){
+        paintRoom.to(clientRoom).emit('gamefin',{
+            title: title
+        });
     }
 
     var emitDrawFin = function(paintRoom, clientRoom, roomData, isFirstDeleted){
@@ -371,21 +379,37 @@
                 });
             });
 
-            client.on('order',function(data){
+            // hostが設定を終えたら呼ばれる. 一番最初に描く人にタイトルを決めてもらうので
+            // それをemit
+            client.on('order', function(data){
+                var clientRoom = getClientRoom(client);
+                Room.find({
+                    'roomName': decodeURI(clientRoom)
+                }, function(err, roomData){
+                    roomData[0].nextUser = client.user;
+                    roomData[0].orderList = data.orderList.concat();
+                    roomData[0].drawTime = data.drawTime;
+                    roomData[0].save(function(err) {
+                        if (err) { console.log(err); }
+                        else{ emitOrder(paintRoom, clientRoom, data); }
+                    });
+                });
+            });
+
+            client.on('gameStart',function(data){
                 var clientRoom = getClientRoom(client);
                 Room.find({
                     'roomName': decodeURI(clientRoom)
                 },function(err,roomData){
                     var startDate = new Date();
                     roomData[0].mode = 2;
-                    roomData[0].drawTime = data.drawTime;
                     roomData[0].nextUser = client.user;
                     roomData[0].gameStartDate = startDate;
                     roomData[0].drawStartDate = startDate;
-                    roomData[0].orderList = data.orderList.concat();
+                    roomData[0].title = data.title;
                     roomData[0].save(function(err) {
                         if (err) { console.log(err); }
-                        else{ emitOrder(paintRoom,clientRoom,data,startDate); }
+                        else{ emitGameStart(paintRoom,clientRoom,roomData[0].orderList, roomData[0].drawTime,startDate); }
                     });
                 });
             });
@@ -399,7 +423,7 @@
                     roomData[0].drawStartDate = new Date();
                     roomData[0].orderList = data.orderList.concat();
 
-                    roomData[0].imgList.imgListUnshift(data.img, data.finuser, "imahanasi");
+                    roomData[0].imgList.imgListUnshift(data.img, data.finuser, roomData[0].title);
 
                     for(var i = 0; i < roomData[0].orderList.length; i++){ // nextUser決める
                         if(roomData[0].orderList[i] == data.finuser){
@@ -415,7 +439,7 @@
                             emitDrawFin(paintRoom, clientRoom, roomData[0], false);
                             if(nextnum == -1){ // ゲーム終了
                                 roomData[0].mode = 3;
-                                emitGameFin(paintRoom, clientRoom);
+                                emitGameFin(paintRoom, clientRoom, roomData[0].title);
                             }
                         }
                     });
