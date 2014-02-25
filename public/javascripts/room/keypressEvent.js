@@ -16,6 +16,20 @@
                     e.preventDefault();
                 }
             });
+
+            // タイトルモーダルウィンドウ
+            $('#setTitleModal').on('hidden.bs.modal', function (e) {
+                sync.emitGameStart($("#inputTitle").val()); // タイトル送信
+                $("#inputTitle").val("");
+            })
+
+            $('#inputTitle').live('keypress',function (e) {
+                if(e.keyCode == 13) {
+                    e.preventDefault();
+                    $('#setTitleModal').modal('hide');
+                }
+            });
+
         }
     };
 }

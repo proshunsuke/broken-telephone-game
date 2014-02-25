@@ -155,6 +155,7 @@
             $('#toimg').live("click",function(){
                 game.toImg();
                 $('#toimg').css({"visibility":"hidden"});
+                chat.writeComment("この絵のタイトルは「"+game.getMtitle()+"」です");
             });
 
             // NEWGAME

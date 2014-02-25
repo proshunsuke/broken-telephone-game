@@ -6,12 +6,65 @@
     let mDrawStartDate; // 現在描いている人の描きはじめた時刻
     //_game_start_Date; // ゲームが始まった時刻
     let mImgList;
+    let mTitle;
 
     // この4つは特別 ゲームのモード
     let wait;
     let setting;
     let gaming;
     let finish;
+
+    // プログレスバーを動かす
+    // 描き終わった時の処理もここ
+    let timelimit = function(drawtime){
+        let downper =  100/drawtime;
+        let run = function(time) {
+            return $.Deferred(function(dfd) {
+                setTimeout(dfd.resolve, time)
+            }).promise();
+        }
+        run(300).then(function() {
+            $('.progress .bar').each(function() {
+                let $this = $(this)
+                    , rate = $this.attr('data-rate') // ここでエラー $attr is not defined
+                    , current = 100
+                    , currentsec = drawtime;
+                let progress = setInterval(function() {
+                    if(current <= rate) {
+                        $this.css('width','0%');
+                        clearInterval(progress);
+                        paint.setMisDrawable(false);
+                        layer.saveOrSendImg(LAYER_N,2);
+                    } else {
+                        current -= downper;
+                        currentsec -= 1;
+                        $this.css('width', (current)+ '%');
+                    }
+                    let sec = currentsec
+                        , min = 0;
+                    while(sec > 60){
+                        sec -= 60;
+                        min += 1;
+                    }
+                    $this.text((min)+'分'+(sec)+ '秒');
+                }, 1000);
+            });
+        });
+    }
+
+    // 自分が描く番だったときの処理
+    let startDrawing = function(drawUser, orderList){
+        audios.play();
+        if(orderList[orderList.length-1] == drawUser){ // 一番最初の人は書き始めるボタン押さなくても良い
+            layer.clearCanvas();
+            paint.setMisDrawable(true);
+            $('#startdraw').css({"visibility":"hidden"});
+        }else{
+            $('#startdraw').css({"visibility":"visible"});
+        }
+        $('.progress .bar').css('width:100%');
+        timelimit(mDrawTime);
+    }
 
     var game = {
 
@@ -35,6 +88,10 @@
 
         getMimgList: function(){
             return mImgList;
+        },
+
+        getMtitle: function(){
+            return mTitle;
         },
 
         getMimgListMusers: function(){
@@ -65,7 +122,10 @@
 
         setMimgList: function(imgList){
             mImgList = imgList.concat();
-            console.log(imgList);
+        },
+
+        setMtitle: function(title){
+            mTitle = title;
         },
 
         setMimgListMusers: function(imgListUsers){
@@ -135,29 +195,26 @@
             }
         },
 
-        // 描いている人の状況
-        changeDrawing: function(drawmUser){
-            var drawingtext;
-            if(drawmUser == "none"){
+        // 描くもののタイトルを決める
+        setGameTitle: function(){
+            $('#setTitleModal').modal("show");
+        },
+
+        // ゲームの情報をセットする
+        setDrawingInfo: function(drawUser){
+            let drawingtext;
+            if(drawUser == "none"){
                 drawingtext = '誰も描いていません';
-            }else if(drawmUser == user.getMuser()){ // 自分が描く番
+            }else if(drawUser == user.getMuser()){ // 自分が描く番
                 drawingtext = 'あなたの番です';
-                audios.play();
-                if(user.getMorderList()[user.getMorderList().length-1] == drawmUser){ // 一番最初の人は書き始めるボタン押さなくても良い
-                    layer.clearCanvas();
-                    paint.setMisDrawable(true);
-                    $('#startdraw').css({"visibility":"hidden"});
-                }else{
-                    $('#startdraw').css({"visibility":"visible"});
-                }
-                $('.progress .bar').css('width:100%');
-                this.timelimit(this.getMdrawTime());
+                startDrawing(drawUser, user.getMorderList());
             }else{
-                drawingtext = drawmUser + ' さんが描いています';
+                drawingtext = drawUser + ' さんが描いています';
             }
             $('#drawing').html(drawingtext);
             chat.writeComment(drawingtext);
         },
+
 
         // 終了時間を記述
         setFinalTime: function(drawtime,date,leng){
@@ -228,44 +285,6 @@
             return Minute + ":" + Second;
         },
 
-        // プログレスバーを動かす
-        // 描き終わった時の処理もここ
-        timelimit: function(drawtime){
-            let downper =  100/drawtime;
-            let run = function(time) {
-                return $.Deferred(function(dfd) {
-                    setTimeout(dfd.resolve, time)
-                }).promise();
-            }
-            run(300).then(function() {
-                $('.progress .bar').each(function() {
-                    let $this = $(this)
-                    , rate = $this.attr('data-rate') // ここでエラー $attr is not defined
-                    , current = 100
-                    , currentsec = drawtime;
-                    let progress = setInterval(function() {
-                        if(current <= rate) {
-                            $this.css('width','0%');
-                            clearInterval(progress);
-                            paint.setMisDrawable(false);
-                            layer.saveOrSendImg(LAYER_N,2);
-                        } else {
-                            current -= downper;
-                            currentsec -= 1;
-                            $this.css('width', (current)+ '%');
-                        }
-                        let sec = currentsec
-                        , min = 0;
-                        while(sec > 60){
-                            sec -= 60;
-                            min += 1;
-                        }
-                        $this.text((min)+'分'+(sec)+ '秒');
-                    }, 1000);
-                });
-            });
-        },
-
         // canvasに絵を映す
         drawImgCore: function(show_img){
             let img = new Image();
@@ -300,9 +319,7 @@
         // キャンバスを画像化
         toImg: function(){
             $('#image_png').empty();
-            console.log(mImgList);
             for(var i=0; i < mImgList.length; i++){
-
                 let insertimg="<li class='span3' id='imgli'><a href='javascript:void(0)' class='thumbnail'><img id='imgs' border='2px solid #ccc' src='"+mImgList[i].img+"' name='"+mImgList[i].user+"'><h5>"+mImgList[i].user+"さんの作品</h5></li></a>";
                 $('#image_png').append(insertimg);
             }

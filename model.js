@@ -24,6 +24,7 @@ var Room = new mongoose.Schema({
     gameStartDate: {type: Date},
     drawStartDate: {type: Date},
     nextUser: {type: String}, // すずき
+    title: {type: String}, // ドラえもん
 
     users: {type: Array}, // {プロ, すずき, たなか, さとう}
     orderList: {type: Array}, // {すずき, プロ, さとう, たなか}
@@ -31,17 +32,7 @@ var Room = new mongoose.Schema({
     imgList:[imgListObj] // [{1.png, プロ, ドラえもん}, {2.png, すずき, ドラえもん}, ...]
 });
 
-var imgListAllObj = new mongoose.Schema({
-    img: {type: String}, // 1.png
-    user: {type: String}, // プロ
-    title: {type: String}, // ドラえもん
-    year: {type: Number}, // 2014
-    Month: {type: Number}, // 2
-    Date: {type: Number} // 22
-});
-
 var Image = new mongoose.Schema({ // 今まで描いた絵のDB
-    //imgListAll:[imgListAllObj] // [{1.png, プロ, ドラえもん, 2014, 2, 22},{2.png, すずき, ドラえもん, 2014, 2, 23}, ...]
     img: {type: String}, // 1.png
     user: {type: String}, // プロ
     title: {type: String}, // ドラえもん
