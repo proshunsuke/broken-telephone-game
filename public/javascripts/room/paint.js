@@ -72,7 +72,7 @@
             mOffset = 5;
             mDrawFlag = false;
             mIsDrawable = true;
-            mBrushSize = 10;
+            mBrushSize = 2;
             mAlphaSize = 1;
             setTimeout(function(){paint.setColor("#000000");},500);// jscolorが初期値を勝手に変えてしまうから仕方なく
         },
