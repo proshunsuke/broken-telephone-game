@@ -1,0 +1,27 @@
+#galleryTitle{
+    margin: 10px;
+    text-align:center;
+}
+
+#searchBtn{
+    text-align:center;
+}
+
+.btn-group, #titleSearch, #userSearch{
+    display: inline-block;
+    margin: 0px 5px 0px 5px;
+}
+
+.btn-group{
+    padding-top: 0px;
+}
+
+.dropdown-menu {
+    max-height: 220px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.btn-group{
+
+}

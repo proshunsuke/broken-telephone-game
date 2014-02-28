@@ -14,7 +14,7 @@
         syncOnInit: function(socket){
 
             socket.on('connect', function(data){
-                sync.emitInitIndex();
+                sync.emitReqShowImgs();
             });
 
             socket.on('roomInfo',function(data){
@@ -39,7 +39,7 @@
 
         },
 
-        emitInitIndex: function(){
+        emitReqShowImgs: function(){
             mSocket.emit('initIndex');
         }
 

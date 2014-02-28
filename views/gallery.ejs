@@ -1,14 +1,135 @@
+<link rel="stylesheet" href="stylesheets/gallery/gallery.css" type="text/css" media="all">
 <script type="application/javascript;version=1.7" src="javascripts/gallery/sync.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/gallery/dropdown.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/gallery/gallery.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/gallery/mouseEvent.js"></script>
+<script type="application/javascript;version=1.7" src="javascripts/gallery/keypressEvent.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/gallery/toInstance.js"></script>
 <script type="application/javascript;version=1.7" src="javascripts/gallery/onLoad.js"></script>
+<div id="galleryTitle">
+    <h1>Gallery</h1>
+</div>
 
-<h1>Gallery テストページ</h1>
+<div class="container">
+    <div class="row">
+        <div class="span12" id="searchBtn">
+            <div class="btn-group" id="yearTop">
+                <button type="button" class="btn"><span id="visibleValueYear">&nbsp;</span>年</button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" hiddenTag="#hiddenValueYear" visibleTag="#visibleValueYear">
+                    <li><a href="javascript:void(0)" value="&nbsp;">&nbsp;</a></li>
+                    <li><a href="javascript:void(0)" value="2014">2014</a></li>
+                    <li><a href="javascript:void(0)" value="2013">2013</a></li>
+                </ul>
+                <input type="hidden" id="hiddenValueYear" value="">
+            </div>
+
+            <div class="btn-group" id="monthTop">
+                <button type="button" class="btn"><span id="visibleValueMonth">&nbsp;</span>月</button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" hiddenTag="#hiddenValueMonth" visibleTag="#visibleValueMonth">
+                    <li><a href="javascript:void(0)" value="&nbsp;">&nbsp;</a></li>
+                    <li><a href="javascript:void(0)" value="1">1</a></li>
+                    <li><a href="javascript:void(0)" value="2">2</a></li>
+                    <li><a href="javascript:void(0)" value="3">3</a></li>
+                    <li><a href="javascript:void(0)" value="4">4</a></li>
+                    <li><a href="javascript:void(0)" value="5">5</a></li>
+                    <li><a href="javascript:void(0)" value="6">6</a></li>
+                    <li><a href="javascript:void(0)" value="7">7</a></li>
+                    <li><a href="javascript:void(0)" value="8">8</a></li>
+                    <li><a href="javascript:void(0)" value="9">9</a></li>
+                    <li><a href="javascript:void(0)" value="10">10</a></li>
+                    <li><a href="javascript:void(0)" value="11">11</a></li>
+                    <li><a href="javascript:void(0)" value="12">12</a></li>
+                </ul>
+                <input type="hidden" id="hiddenValueMonth" value="">
+            </div>
+
+            <div class="btn-group" id="dateTop">
+                <button type="button" class="btn"><span id="visibleValueDate">&nbsp;</span>日</button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" hiddenTag="#hiddenValueDate" visibleTag="#visibleValueDate">
+                    <li><a href="javascript:void(0)" value="&nbsp;">&nbsp;</a></li>
+                    <li><a href="javascript:void(0)" value="1">1</a></li>
+                    <li><a href="javascript:void(0)" value="2">2</a></li>
+                    <li><a href="javascript:void(0)" value="3">3</a></li>
+                    <li><a href="javascript:void(0)" value="4">4</a></li>
+                    <li><a href="javascript:void(0)" value="5">5</a></li>
+                    <li><a href="javascript:void(0)" value="6">6</a></li>
+                    <li><a href="javascript:void(0)" value="7">7</a></li>
+                    <li><a href="javascript:void(0)" value="8">8</a></li>
+                    <li><a href="javascript:void(0)" value="9">9</a></li>
+                    <li><a href="javascript:void(0)" value="10">10</a></li>
+                    <li><a href="javascript:void(0)" value="11">11</a></li>
+                    <li><a href="javascript:void(0)" value="12">12</a></li>
+                    <li><a href="javascript:void(0)" value="13">13</a></li>
+                    <li><a href="javascript:void(0)" value="14">14</a></li>
+                    <li><a href="javascript:void(0)" value="15">15</a></li>
+                    <li><a href="javascript:void(0)" value="16">16</a></li>
+                    <li><a href="javascript:void(0)" value="17">17</a></li>
+                    <li><a href="javascript:void(0)" value="18">18</a></li>
+                    <li><a href="javascript:void(0)" value="19">19</a></li>
+                    <li><a href="javascript:void(0)" value="20">20</a></li>
+                    <li><a href="javascript:void(0)" value="21">21</a></li>
+                    <li><a href="javascript:void(0)" value="22">22</a></li>
+                    <li><a href="javascript:void(0)" value="23">23</a></li>
+                    <li><a href="javascript:void(0)" value="24">24</a></li>
+                    <li><a href="javascript:void(0)" value="25">25</a></li>
+                    <li><a href="javascript:void(0)" value="26">26</a></li>
+                    <li><a href="javascript:void(0)" value="27">27</a></li>
+                    <li><a href="javascript:void(0)" value="28">28</a></li>
+                    <li><a href="javascript:void(0)" value="29">29</a></li>
+                    <li><a href="javascript:void(0)" value="30">30</a></li>
+                    <li><a href="javascript:void(0)" value="31">31</a></li>
+                </ul>
+                <input type="hidden" id="hiddenValueDate" value="">
+            </div>
+
+            <br>
+
+            <div class="form-search" id="titleSearch">
+                <div class="input-prepend">
+                    <button type="submit" class="btn">タイトル</button>
+                    <input type="text" class="span2 search-query" id="titleText" value="" placeholder="タイトルの入力">
+                </div>
+            </div>
+
+            <form class="form-search" id="userSearch">
+                <div class="input-prepend">
+                    <button type="submit" class="btn">ユーザ名</button>
+                    <input type="text" class="span2 search-query" id="userText" value="" placeholder="ユーザ名の入力">
+                </div>
+            </form>
+
+            <button class="btn btn-primary" id="searchStartBtn">検索</button>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+<br><hr>
+
+
+
 <div class="container">
     <div class="row">
         <div class="span12">
             <ul class="thumbnails" id="image_png">
             </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+
+            <div class="pagination pagination-right" id="pagination">
+                <ul id="paginationUl">
+                </ul>
+            </div>
         </div>
     </div>
 </div>
