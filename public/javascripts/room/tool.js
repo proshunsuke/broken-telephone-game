@@ -14,6 +14,7 @@
             mTools["brush1"] = true;
             mTools["eraser"] = false;
             mTools["spuit"] = false;
+            mTools["fillDraw"] = false;
         },
 
         changeTool :function(tool){

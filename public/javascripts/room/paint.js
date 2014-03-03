@@ -30,6 +30,22 @@
         mAlphaSize = a / 100;
     };
 
+    let getFillColor =  function(){
+        let colorString = paint.getColor().toString(),
+            colorsOnly = colorString.substring(colorString.indexOf('(') + 1, colorString.lastIndexOf(')')).split(/,\s*/),
+            red = colorsOnly[0],
+            green = colorsOnly[1],
+            blue = colorsOnly[2],
+            alpha = 255*mAlphaSize;
+
+        return (
+            (red   << 24) |
+                (green << 16) |
+                (blue  <<  8) |
+                (alpha      )
+            ) >>> 0;
+    }
+
     var paint = {
 
         // getter
@@ -121,6 +137,12 @@
                 return;
             }
 
+            if(tool.getMtools()["fillDraw"]){ // 塗りつぶし選んだら
+                var cfa = new CanvasFillAlgorithm(layer.getMcanvasTarget());
+                cfa.paint(mStartX, mStartY, getFillColor());
+                return
+            }
+
             layer.getMcanvasDrawing().getContext("2d").globalAlpha = 1.0;
 
             layer.getMcanvasTarget().getContext("2d").globalAlpha = mAlphaSize;
@@ -170,5 +192,5 @@
         setColor: function(hex){
             $("#newcolor").css("background-color",hex);
         }
-    };
+    }
 }

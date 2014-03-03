@@ -27,7 +27,7 @@
             // マウスを動かした時
             $('canvas').mousemove(function(e) {
                 if(paint.getMisDrawable()){
-                    if(paint.getMdrawFlag()){
+                    if(paint.getMdrawFlag() && !tool.getMtools()["fillDraw"]){
                         paint.mouseMove(e,$(this).offset().left,$(this).offset().top);
                     }
                 }
