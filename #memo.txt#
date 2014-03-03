@@ -1,5 +1,0 @@
-ローカルでの作業
-	model.jsのURLを変更
-	~/mongodb-linux-x86_64-2.2.3/bin/mongod --nojournal --noprealloc --dbpath ~/mongodb-linux-x86_64-2.2.3/db/
-	としてmongodを起動させておく
-	
