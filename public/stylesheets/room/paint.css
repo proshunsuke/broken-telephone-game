@@ -79,7 +79,8 @@ ul {
     height: 10px;
     border: 1px solid #000000;
     /* margin: 0px 0px 3px 110px; */
-    margin-left: 85%
+    margin-left: 85%;
+    margin-bottom: 2px;
 }
 
 .ofclic { border:1px #FFFFFF solid }
