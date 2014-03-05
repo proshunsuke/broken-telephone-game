@@ -254,6 +254,11 @@
         saveOrSendImg: function(layer_n,which){
             let canvas = mCanvasSave;
             let context = canvas.getContext("2d");
+
+            // 背景がデフォルトで透明なので, 渡す時とか保存する時に背景を白にする
+            context.fillStyle = 'rgb(255,255,255)';
+            context.fillRect(0, 0, $('canvas').width(), $('canvas').height());
+
             let canvas_array = [mCanvas1,mCanvas2,mCanvas3];
             innerRec(layer_n);
 
